@@ -16,10 +16,13 @@ class CreateComprobantesTable extends Migration
         Schema::create('comprobantes', function (Blueprint $table) {
             $table->id("id_comprobantes");
             $table->string("id_simple_comprobante");
-            $table->bigInteger("id_camionero");
-            $table->foreign("id_camionero")->references("id_camionero")->on("camineros");
-            $table->bigInteger("id_viaje");
+
+            $table->unsignedBigInteger("id_camioneros");
+            $table->foreign("id_camioneros")->references("id_camioneros")->on("camioneros");
+            
+            $table->unsignedBigInteger("id_viaje");
             $table->foreign("id_viaje")->references("id_viajes")->on("viajes");
+            
             $table->string("detalles");
             $table->string("tipo");
         });
