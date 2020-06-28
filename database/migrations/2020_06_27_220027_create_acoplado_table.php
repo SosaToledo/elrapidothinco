@@ -15,7 +15,7 @@ class CreateAcopladoTable extends Migration
     public function up()
     {
         Schema::create('acoplado', function (Blueprint $table) {
-            $table->id("id_acoplado");
+            $table->id();
             $table->string("id_simple_acoplado");
             $table->string("patente", 10);
             $table->date("vtv_vencimiento", 0);

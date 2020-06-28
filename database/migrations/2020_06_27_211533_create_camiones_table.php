@@ -14,7 +14,7 @@ class CreateCamionesTable extends Migration
     public function up()
     {
         Schema::create('camiones', function (Blueprint $table) {
-            $table->id("id_camiones");
+            $table->id();
             $table->string("id_simple_camiones");
             $table->string("patente", 10);
             $table->date("vtv_vencimiento", 0);

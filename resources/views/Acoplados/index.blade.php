@@ -36,8 +36,8 @@
             <td>{{ $acoplado->senasa_vencimiento }}</td>
             <td>{{ $acoplado->seguro_vencimiento }}</td>
             <td>
-                <form action="{{ route('acoplados.destroy',$acoplado->id_acoplado) }}" method="POST">
-                    <a class="btn btn-primary" href="{{ route('acoplados.edit',$acoplado->id_acoplado) }}">Editar</a>
+                <form action="{{ route('acoplados.destroy',$acoplado->id) }}" method="POST">
+                    <a class="btn btn-primary" href="{{ route('acoplados.edit',$acoplado->id) }}">Editar</a>
                     @csrf
                     @method('DELETE')
                     <button type="submit" class="btn btn-danger">Borrar</button>

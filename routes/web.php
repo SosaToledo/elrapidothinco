@@ -23,6 +23,6 @@ Route::get('/home', 'HomeController@index')->name('home');
 
 Route::get('/newTravel', 'travelController@index')->name('travel');
 
-Route::resource('acoplados','AcopladoController');
-Route::delete('acoplados/{id}', 'AcopladoController@destroy');
+Route::resource('acoplados','AcopladoController')->middleware('role:admin');
+
 

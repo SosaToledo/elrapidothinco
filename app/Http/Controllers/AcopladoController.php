@@ -126,8 +126,8 @@ class AcopladoController extends Controller
      */
     public function destroy(Acoplado $acoplado)
     {
-        $acoplado->delete();
-  
+        Acoplado::destroy($acoplado->id);
+ 
         return redirect()->route('acoplados.index')
                         ->with('success','Acoplado eliminado');
     }

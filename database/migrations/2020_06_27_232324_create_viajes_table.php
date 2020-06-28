@@ -13,21 +13,25 @@ class CreateViajesTable extends Migration
      */
     public function up()
     {
+        //-------------- ACLARACIÓN IMPORTANTE -----------------------------------------------------------
+        //Durante un migrate refresh me generaba el problema que no borraba correctamente la tabla viajes, 
+        //por lo que despues de hacer un rollback tuve que borrarla manualmente desde la BD o desde Tinker
+        
         Schema::create('viajes', function (Blueprint $table) {
-            $table->id("id_viajes");
+            $table->id();
             $table->timestamps();
             
             $table->unsignedBigInteger("id_camiones");
-            $table->foreign("id_camiones")->references("id_camiones")->on("camiones");
+            $table->foreign("id_camiones")->references("id")->on("camiones");
 
             $table->unsignedBigInteger("id_acoplado")->nullable();
-            $table->foreign('id_acoplado')->references('id_acoplado')->on('acoplado');
+            $table->foreign('id_acoplado')->references('id')->on('acoplado');
 
             $table->unsignedBigInteger("id_camionero");
-            $table->foreign('id_camionero')->references('id_camioneros')->on('camioneros');
+            $table->foreign('id_camionero')->references('id')->on('camioneros');
 
             $table->unsignedBigInteger("id_cliente");
-            $table->foreign('id_cliente')->references('id_clientes')->on('clientes');
+            $table->foreign('id_cliente')->references('id')->on('clientes');
 
             $table->string("idSimpleViaje");  //identificador interno VI000
             $table->float("km_inicial")->nullable();
@@ -35,7 +39,7 @@ class CreateViajesTable extends Migration
             $table->float("distancia")->nullable(); //kmfinal-kminicial
 
             $table->unsignedBigInteger("origen");
-            $table->foreign('origen')->references('id_ciudades')->on('ciudades');
+            $table->foreign('origen')->references('id')->on('ciudades');
 
             //destinos no lo ponemos aca, va en la tabla de muchos a muchos
             $table->float("valor");
