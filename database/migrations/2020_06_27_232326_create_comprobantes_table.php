@@ -14,14 +14,14 @@ class CreateComprobantesTable extends Migration
     public function up()
     {
         Schema::create('comprobantes', function (Blueprint $table) {
-            $table->id("id_comprobantes");
+            $table->id("id");
             $table->string("id_simple_comprobante");
 
             $table->unsignedBigInteger("id_camioneros");
-            $table->foreign("id_camioneros")->references("id_camioneros")->on("camioneros");
+            $table->foreign("id_camioneros")->references("id")->on("camioneros");
             
             $table->unsignedBigInteger("id_viaje");
-            $table->foreign("id_viaje")->references("id_viajes")->on("viajes");
+            $table->foreign("id_viaje")->references("id")->on("viajes");
             
             $table->string("detalles");
             $table->string("tipo");
