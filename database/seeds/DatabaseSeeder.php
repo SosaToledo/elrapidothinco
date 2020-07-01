@@ -15,5 +15,8 @@ class DatabaseSeeder extends Seeder
         //Generamos los usuarios por defecto del sistema.
         $this->call(RoleTableSeeder::class);
         $this->call(UserTableSeeder::class);
+
+        $this->call(ProvinciasSeeder::class);
+        $this->call(CiudadesSeeder::class);
     }
 }

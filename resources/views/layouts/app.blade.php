@@ -45,6 +45,14 @@
                         <li><a href="/newTravel">Viajes</a></li>
                         <li><a href=""></a></li>
                     </ul>
+                    <ul class="navbar-nav mr-auto">
+                        <li><a href="{{route('acoplados.index')}}">Acoplados</a></li>
+                        <li><a href=""></a></li>
+                    </ul>
+                    <ul class="navbar-nav mr-auto">
+                        <li><a href="{{route('camiones.index')}}">Camiones</a></li>
+                        <li><a href=""></a></li>
+                    </ul>
                     @endguest
                     <!-- Right Side Of Navbar -->
                     <ul class="navbar-nav ml-auto">

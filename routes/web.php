@@ -25,5 +25,6 @@ Route::get('/home', 'HomeController@index')->name('home');
 Route::get('/newTravel', 'travelController@index')->name('travel');
 
 Route::resource('acoplados','AcopladoController')->middleware('role:admin');
+Route::resource('camiones','CamionesController')->middleware('role:admin');
 
 

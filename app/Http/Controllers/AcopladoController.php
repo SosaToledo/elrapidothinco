@@ -80,6 +80,8 @@ class AcopladoController extends Controller
      * @param  \App\Acoplado  $acoplado
      * @return \Illuminate\Http\Response
      */
+
+     //Esta función no se utiliza nunca, lo  deje por ser el modelo a seguir para el resto de los crud pero para los acoplados no hace falta la vista de detalle
     public function show(Acoplado $acoplado)
     {
         return view('acoplados.show',compact('acoplado'));
@@ -91,8 +93,9 @@ class AcopladoController extends Controller
      * @param  \App\Acoplado  $acoplado
      * @return \Illuminate\Http\Response
      */
-    public function edit(Acoplado $acoplado)
+    public function edit($id)
     {
+        $acoplado = Acoplado::find($id);
         return view('acoplados.edit',compact('acoplado'));
     }
 
@@ -103,17 +106,22 @@ class AcopladoController extends Controller
      * @param  \App\Acoplado  $acoplado
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Acoplado $acoplado)
+    public function update(Request $request, $id)
     {
         $request->validate([
             'patente' => 'required',
             'vtv_vencimiento' => 'required',
             'senasa_vencimiento' => 'required',
             'seguro_vencimiento' => 'required',
-        ]);
-  
-        $acoplado ->update($request->all());
-  
+            ]);
+            
+        $acoplado = Acoplado::find($id);
+        $acoplado->patente = $request->get('patente');
+        $acoplado->vtv_vencimiento = $request->get('vtv_vencimiento');
+        $acoplado->senasa_vencimiento = $request->get('senasa_vencimiento');
+        $acoplado->seguro_vencimiento = $request->get('seguro_vencimiento');
+        $acoplado->save();
+          
         return redirect()->route('acoplados.index')
                         ->with('success','Acoplado actualizado');
     }
@@ -124,10 +132,12 @@ class AcopladoController extends Controller
      * @param  \App\Acoplado  $acoplado
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Acoplado $acoplado)
+    public function destroy($id)
     {
-        Acoplado::destroy($acoplado->id);
- 
+
+        $acoplado = Acoplado::find($id);
+        $acoplado->delete();
+        
         return redirect()->route('acoplados.index')
                         ->with('success','Acoplado eliminado');
     }
