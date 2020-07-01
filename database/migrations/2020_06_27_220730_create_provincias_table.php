@@ -16,6 +16,8 @@ class CreateProvinciasTable extends Migration
         Schema::create('provincias', function (Blueprint $table) {
             $table->id("id");
             $table->string("provincia_nombre");
+            $table->timestamp('created_at')->default(DB::raw('CURRENT_TIMESTAMP'));
+            $table->timestamp('updated_at')->default(DB::raw('CURRENT_TIMESTAMP on update CURRENT_TIMESTAMP'));
         });
     }
 

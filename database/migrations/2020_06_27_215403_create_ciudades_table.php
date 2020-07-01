@@ -18,6 +18,8 @@ class CreateCiudadesTable extends Migration
             $table->string("ciudad_nombre");
             $table->integer("cp");
             $table->smallInteger("provincia_id");
+            $table->timestamp('created_at')->default(DB::raw('CURRENT_TIMESTAMP'));
+            $table->timestamp('updated_at')->default(DB::raw('CURRENT_TIMESTAMP on update CURRENT_TIMESTAMP'));
         });
     }
 

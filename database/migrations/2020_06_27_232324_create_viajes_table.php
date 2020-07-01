@@ -19,7 +19,7 @@ class CreateViajesTable extends Migration
         
         Schema::create('viajes', function (Blueprint $table) {
             $table->id();
-            $table->timestamps();
+            //$table->timestamps();
             
             $table->unsignedBigInteger("id_camiones");
             $table->foreign("id_camiones")->references("id")->on("camiones");
@@ -51,6 +51,9 @@ class CreateViajesTable extends Migration
             $table->float("gasoil_precio")->nullable(); //gasto de gasoil promedio
             $table->integer("notaViaje")->nullable(); //usado en el sistema viejo, pasará a desuso.
             $table->integer("guia"); //numero de talonario guia que se entrega al chofer
+
+            // $table->timestamp('created_at')->default(DB::raw('CURRENT_TIMESTAMP'));
+            // $table->timestamp('updated_at')->default(DB::raw('CURRENT_TIMESTAMP on update CURRENT_TIMESTAMP'));
             
             //LOS VALORES QUE ACEPTAN NULOS SON PORQUE SE TIENEN QUE COMPLETAR EN OTRO MOMENTO (AL TERMINAR EL VIAJE)
         });

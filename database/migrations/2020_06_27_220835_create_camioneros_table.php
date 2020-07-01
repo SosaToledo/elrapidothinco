@@ -17,10 +17,13 @@ class CreateCamionerosTable extends Migration
             $table->id("id");
             $table->string("id_simple_camioneros");
             $table->bigInteger("DNI");
+            $table->string("password")->nullable();
             $table->bigInteger("telefono");
             $table->string("nombre");
             $table->string("apellido");
             $table->string("direccion");
+            $table->timestamp('created_at')->default(DB::raw('CURRENT_TIMESTAMP'));
+            $table->timestamp('updated_at')->default(DB::raw('CURRENT_TIMESTAMP on update CURRENT_TIMESTAMP'));
         });
     }
 

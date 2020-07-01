@@ -42,16 +42,14 @@
                     @guest
                     @else
                     <ul class="navbar-nav mr-auto">
-                        <li><a href="/newTravel">Viajes</a></li>
-                        <li><a href=""></a></li>
-                    </ul>
-                    <ul class="navbar-nav mr-auto">
-                        <li><a href="{{route('acoplados.index')}}">Acoplados</a></li>
-                        <li><a href=""></a></li>
-                    </ul>
-                    <ul class="navbar-nav mr-auto">
-                        <li><a href="{{route('camiones.index')}}">Camiones</a></li>
-                        <li><a href=""></a></li>
+                        <!-- <li class="nav-item"><a class="nav-link" href="{{route('acoplados.index')}}">Viajes</a></li> -->
+                        <li class="nav-item"><a class="nav-link" href="{{route('acoplados.index')}}">Acoplados</a></li>
+                        <li class="nav-item"><a class="nav-link" href="{{route('camiones.index')}}">Camiones</a></li>
+                        <li class="nav-item"><a class="nav-link" href="{{route('camioneros.index')}}">Camioneros</a></li>
+                        <li class="nav-item"><a class="nav-link" href="{{route('comprobantes.index')}}">Comprobantes</a></li>
+                        <!-- <li class="nav-item"><a class="nav-link" href="{{route('camioneros.index')}}">Camioneros</a></li>
+                        <li class="nav-item"><a class="nav-link" href="{{route('camioneros.index')}}">Camioneros</a></li>
+                        <li class="nav-item"><a class="nav-link" href="{{route('camioneros.index')}}">Camioneros</a></li> -->
                     </ul>
                     @endguest
                     <!-- Right Side Of Navbar -->

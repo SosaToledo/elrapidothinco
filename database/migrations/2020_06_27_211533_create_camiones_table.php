@@ -21,6 +21,8 @@ class CreateCamionesTable extends Migration
             $table->date("vtv_vencimiento", 0);
             $table->date("senasa_vencimiento", 0);
             $table->date("seguro_vencimiento", 0);
+            $table->timestamp('created_at')->default(DB::raw('CURRENT_TIMESTAMP'));
+            $table->timestamp('updated_at')->default(DB::raw('CURRENT_TIMESTAMP on update CURRENT_TIMESTAMP'));
 
             //Se agregan mas campos en una nueva migrate, sacado desde este enlace de stackoverflow
             //https://stackoverflow.com/questions/39934276/laravel-5-2-how-to-update-migration-without-losing-data
