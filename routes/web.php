@@ -28,5 +28,6 @@ Route::resource('acoplados','AcopladoController')->middleware('role:admin');
 Route::resource('camiones','CamionesController')->middleware('role:admin');
 Route::resource('camioneros','CamionerosController')->middleware('role:admin');
 Route::resource('comprobantes','ComprobantesController')->middleware('role:admin');
+Route::resource('clientes','ClientesController')->middleware('role:admin');
 
 

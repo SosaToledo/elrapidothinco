@@ -17,6 +17,7 @@ class CreateClientesTable extends Migration
             $table->id();
             $table->string("id_simple_clientes");
             $table->bigInteger("CUIL");
+            $table->string("nombre");
             $table->string("direccion");
             $table->bigInteger("telefono");
             $table->string("correo");
