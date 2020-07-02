@@ -30,8 +30,7 @@ class AcopladoController extends Controller
      */
     public function create()
     {
-
-        return view('acoplados.create');
+       return view('acoplados.create');
     }
 
     /**

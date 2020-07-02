@@ -51,8 +51,8 @@
                         <li class="nav-item"><a class="nav-link" href="{{route('camioneros.index')}}">Camioneros</a></li>
                         <li class="nav-item"><a class="nav-link" href="{{route('comprobantes.index')}}">Comprobantes</a></li>
                         <li class="nav-item"><a class="nav-link" href="{{route('clientes.index')}}">Clientes</a></li>
-                        <!-- <li class="nav-item"><a class="nav-link" href="{{route('camioneros.index')}}">Camioneros</a></li>
-                        <li class="nav-item"><a class="nav-link" href="{{route('camioneros.index')}}">Camioneros</a></li> -->
+                        <li class="nav-item"><a class="nav-link" href="{{route('viajes.index')}}">Viajes</a></li>
+                        <!-- <li class="nav-item"><a class="nav-link" href="{{route('camioneros.index')}}">Camioneros</a></li> -->
                     </ul>
                     @endguest
                     <!-- Right Side Of Navbar -->

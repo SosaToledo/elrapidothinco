@@ -52,8 +52,8 @@ class CreateViajesTable extends Migration
             $table->integer("notaViaje")->nullable(); //usado en el sistema viejo, pasará a desuso.
             $table->integer("guia"); //numero de talonario guia que se entrega al chofer
 
-            // $table->timestamp('created_at')->default(DB::raw('CURRENT_TIMESTAMP'));
-            // $table->timestamp('updated_at')->default(DB::raw('CURRENT_TIMESTAMP on update CURRENT_TIMESTAMP'));
+            $table->timestamp('created_at')->default(DB::raw('CURRENT_TIMESTAMP'));
+            $table->timestamp('updated_at')->default(DB::raw('CURRENT_TIMESTAMP on update CURRENT_TIMESTAMP'));
             
             //LOS VALORES QUE ACEPTAN NULOS SON PORQUE SE TIENEN QUE COMPLETAR EN OTRO MOMENTO (AL TERMINAR EL VIAJE)
         });

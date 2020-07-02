@@ -14,7 +14,7 @@ class CreateCiudadesViajesTable extends Migration
     public function up()
     {
         Schema::create('ciudades_viajes', function (Blueprint $table) {
-            $table->id("id_ciudades_viajes");
+            $table->id();
 
             $table->unsignedBigInteger("id_ciudad");
             $table->foreign('id_ciudad')->references('id')->on('ciudades');

@@ -11,6 +11,14 @@ class Camionero extends Model
     public $timestamps = true;
 
     protected $fillable = [
-        'id_simple_camioneros', 'DNI', 'telefono', 'nombre', 'apellido', 'direccion', 'password', 'created_at','updated_at'
+        'id_simple_camioneros', 
+        'DNI', 
+        'telefono', 
+        'nombre', 
+        'apellido', 
+        'direccion', 
+        'password', 
+        'created_at',
+        'updated_at'
     ];
 }
