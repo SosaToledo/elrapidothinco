@@ -15,11 +15,15 @@ class checkRole
      */
     public function handle($request, Closure $next, $role)
     {
-        if (! $request->user()->hasRole($role)){
+        try {
+            if (! $request->user()->hasRole($role)){
+                abort(403, "No tienes permisos necesarios para acceder.");
+                //return redirect('home');
+            }
+        
+        } catch (\Throwable $th) {
             abort(403, "No tienes permisos necesarios para acceder.");
-            //return redirect('home');
         }
-
-        return $next($request);
+        return $next($request);        
     }
 }
