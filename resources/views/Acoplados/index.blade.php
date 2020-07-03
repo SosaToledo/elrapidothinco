@@ -40,22 +40,22 @@
                 <th width="280px">Acciones</th>
             </tr>
             @foreach ($acoplados as $acoplado)
-            <tr>
-                <td>{{ $acoplado->id_simple_acoplado }}</td>
-                <td>{{ $acoplado->patente }}</td>
-                <td>{{ $acoplado->vtv_vencimiento }}</td>
-                <td>{{ $acoplado->senasa_vencimiento }}</td>
-                <td>{{ $acoplado->seguro_vencimiento }}</td>
-                <td>
-                    <form action="{{ route('acoplados.destroy',$acoplado->id) }}" method="POST">
-                        <a class="btn btn-primary" href="{{ route('acoplados.edit',$acoplado->id) }}">Editar</a>
-                        @csrf
-                        @method('DELETE')
-                        <button type="submit" class="btn btn-danger">Borrar</button>
-                    </form>
+                <tr>
+                    <td>{{ $acoplado->id_simple_acoplado }}</td>
+                    <td>{{ $acoplado->patente }}</td>
+                    <td>{{ $acoplado->vtv_vencimiento }}</td>
+                    <td>{{ $acoplado->senasa_vencimiento }}</td>
+                    <td>{{ $acoplado->seguro_vencimiento }}</td>
+                    <td>
+                        <form action="{{ route('acoplados.destroy',$acoplado->id) }}" method="POST">
+                            <a class="btn btn-primary" href="{{ route('acoplados.edit',$acoplado->id) }}">Editar</a>
+                            @csrf
+                            @method('DELETE')
+                            <button type="submit" class="btn btn-danger">Borrar</button>
+                        </form>
 
-                </td>
-            </tr>
+                    </td>
+                </tr>
             @endforeach
         </table>
     </div>

@@ -32,7 +32,7 @@
 <body>
     <div id="app">
         <nav class="navbar navbar-expand-md navbar-light bg-white shadow-sm">
-            <div class="container">
+            <div class="">
                 <a class="navbar-brand" href="{{ url('/') }}">
                     {{ config('app.name', 'Control Transportes') }}
                 </a>
@@ -45,14 +45,13 @@
                     @guest
                     @else
                     <ul class="navbar-nav mr-auto">
-                        <!-- <li class="nav-item"><a class="nav-link" href="{{route('acoplados.index')}}">Viajes</a></li> -->
                         <li class="nav-item"><a class="nav-link" href="{{route('acoplados.index')}}">Acoplados</a></li>
                         <li class="nav-item"><a class="nav-link" href="{{route('camiones.index')}}">Camiones</a></li>
                         <li class="nav-item"><a class="nav-link" href="{{route('camioneros.index')}}">Camioneros</a></li>
                         <li class="nav-item"><a class="nav-link" href="{{route('comprobantes.index')}}">Comprobantes</a></li>
                         <li class="nav-item"><a class="nav-link" href="{{route('clientes.index')}}">Clientes</a></li>
                         <li class="nav-item"><a class="nav-link" href="{{route('viajes.index')}}">Viajes</a></li>
-                        <!-- <li class="nav-item"><a class="nav-link" href="{{route('camioneros.index')}}">Camioneros</a></li> -->
+                        <li class="nav-item"><a class="nav-link" href="{{route('sueldos.index')}}">Liquidación de sueldos</a></li>
                     </ul>
                     @endguest
                     <!-- Right Side Of Navbar -->
