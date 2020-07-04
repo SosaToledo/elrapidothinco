@@ -15,7 +15,8 @@ class Comprobante extends Model
         'id_camioneros', 
         'id_viaje', 
         'detalles', 
-        'tipo', 
+        'tipo',
+        'monto',
         'created_at',
         'updated_at'
     ];

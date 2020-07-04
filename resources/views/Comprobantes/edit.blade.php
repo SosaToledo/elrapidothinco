@@ -57,6 +57,12 @@
                 <input type="text" class="form-control" name="tipo" placeholder="" value="{{$comprobante->tipo}}">
             </div>
         </div>
+        <div class="col-xs-12 col-sm-12 col-md-12">
+            <div class="form-group">
+                <strong>Monto:</strong>
+                <input type="text" class="form-control" name="monto" placeholder="" value="{{$comprobante->monto}}">
+            </div>
+        </div>
         <div class="col-xs-12 col-sm-12 col-md-12 text-center">
                 <button type="submit" class="btn btn-primary">Guardar</button>
         </div>
