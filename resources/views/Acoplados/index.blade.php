@@ -1,5 +1,6 @@
 @extends('layouts.app')
- 
+@section('title', 'Listado de acoplados')
+
 @section('content')
 
 <div class="container">
@@ -8,7 +9,7 @@
             <h2>Acoplados.</h2>
         </div>
         <div class="col-md-6">
-            <a class="btn btn-success float-right" href="{{ route('acoplados.create') }}"> Nuevo Acoplado</a>
+            <a class="btn btn-success float-right" href="{{ route('acoplados.create') }}"> <i class="fa fa-plus"></i> Nuevo Acoplado</a>
         </div>
     </div>
    
@@ -48,10 +49,10 @@
                     <td>{{ $acoplado->seguro_vencimiento }}</td>
                     <td>
                         <form action="{{ route('acoplados.destroy',$acoplado->id) }}" method="POST">
-                            <a class="btn btn-primary" href="{{ route('acoplados.edit',$acoplado->id) }}">Editar</a>
+                            <a class="btn btn-primary" href="{{ route('acoplados.edit',$acoplado->id) }}"><i class="fa fa-edit"></i> Editar</a>
                             @csrf
                             @method('DELETE')
-                            <button type="submit" class="btn btn-danger">Borrar</button>
+                            <button type="submit" class="btn btn-danger"><i class="fa fa-trash"></i> Borrar</button>
                         </form>
 
                     </td>

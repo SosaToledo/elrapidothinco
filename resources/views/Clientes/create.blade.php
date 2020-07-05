@@ -2,15 +2,16 @@
   
 @section('content')
 <div class="row">
-    <div class="col-lg-12 margin-tb">
+    <div class="col-md-2">
+        <a class="btn btn-primary" href="{{ route('clientes.index') }}"><i class="fa fa-arrow-circle-left"></i> Volver</a>
+    </div>
+    <div class="col margin-tb">
         <div class="pull-left">
-            <h2>Agregar nuevo cliente</h2>
-        </div>
-        <div class="pull-right">
-            <a class="btn btn-primary" href="{{ route('clientes.index') }}"> Volver</a>
+            <h2>Agregar nuevo Cliente</h2>
         </div>
     </div>
 </div>
+<hr>
    
 @if ($errors->any())
     <div class="alert alert-danger">
@@ -26,44 +27,45 @@
 <form action="{{ route('clientes.store') }}" method="POST">
     @csrf
      <div class="row">
-        <div class="col-xs-12 col-sm-12 col-md-12">
+     <div class="col-sm-12 col-md-6 lg-3">
             <div class="form-group">
-                <strong>CODIGO: CA0000</strong>
+                <strong>CODIGO:</strong>
+                <input type="text" disabled value=CL0000 max=10 name="codigo" class="form-control" placeholder="">
             </div>
         </div>
         
-        <div class="col-xs-12 col-sm-12 col-md-12">
+        <div class="col-sm-12 col-md-6 lg-3">
             <div class="form-group">
                 <strong>CUIL:</strong>
-                <input type="text" max=10 name="cuil" class="form-control" placeholder="">
+                <input type="text" max=10 name="cuil" class="form-control" placeholder="Sin guiones ni espacios">
             </div>
         </div>
-        <div class="col-xs-12 col-sm-12 col-md-12">
+        <div class="col-sm-12 col-md-6 lg-3">
             <div class="form-group">
                 <strong>Razón social:</strong>
-                <input type="text" class="form-control" name="nombre" placeholder="">
+                <input type="text"  max="30" class="form-control" name="nombre" placeholder="">
             </div>
         </div>
-        <div class="col-xs-12 col-sm-12 col-md-12">
+        <div class="col-sm-12 col-md-6 lg-3">
             <div class="form-group">
                 <strong>Dirección:</strong>
-                <input type="text" class="form-control" name="direccion" placeholder="">
+                <input type="text" max="60" class="form-control" name="direccion" placeholder="">
             </div>
         </div>
-        <div class="col-xs-12 col-sm-12 col-md-12">
+        <div class="col-sm-12 col-md-6 lg-3">
             <div class="form-group">
                 <strong>Teléfono:</strong>
-                <input type="text" class="form-control" name="telefono" placeholder="">
+                <input type="text" class="form-control" name="telefono" placeholder="+54 9 2477 412345">
             </div>
         </div>
-        <div class="col-xs-12 col-sm-12 col-md-12">
+        <div class="col-sm-12 col-md-6 lg-3">
             <div class="form-group">
                 <strong>Correo:</strong>
-                <input type="text" class="form-control" name="correo" placeholder="">
+                <input type="email" class="form-control" name="correo" placeholder="correo@dominio.com">
             </div>
         </div>
-        <div class="col-xs-12 col-sm-12 col-md-12 text-center">
-                <button type="submit" class="btn btn-primary">Guardar</button>
+        <div class="col-sm-12 ">
+            <button type="submit" class="btn btn-primary btn-block"><i class="fa fa-save"></i> Guardar</button>
         </div>
     </div>
    

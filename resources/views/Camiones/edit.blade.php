@@ -2,16 +2,16 @@
    
 @section('content')
     <div class="row">
-        <div class="col-lg-12 margin-tb">
+        <div class="col-md-2">
+            <a class="btn btn-primary" href="{{ route('camiones.index') }}">Volver</a>
+        </div>
+        <div class="col margin-tb">
             <div class="pull-left">
                 <h2>Editar Camión</h2>
             </div>
-            <div class="pull-right">
-                <a class="btn btn-primary" href="{{ route('camiones.index') }}"> Volver</a>
-            </div>
         </div>
     </div>
-   
+    <hr>
     @if ($errors->any())
         <div class="alert alert-danger">
             <strong>Whoops!</strong> Tenemos problemas con los datos cargados.<br><br>
@@ -29,41 +29,42 @@
         @method('PUT')
    
         <div class="row">
-
-        <div class="col-xs-12 col-sm-12 col-md-12">
-            <div class="form-group">
-                <strong>CODIGO: {{$camion->id_simple_camiones}}</strong>
+            <div class="col-sm-12 col-md-6 lg-3">
+                <div class="form-group">
+                    <strong>CODIGO:</strong>
+                    <input type="text" disabled value="{{$camion->id_simple_camiones}}" max=10 name="patente" class="form-control">
+                </div>
+            </div>
+            
+            <div class="col-sm-12 col-md-6 lg-3">
+                <div class="form-group">
+                    <strong>Patente:</strong>
+                    <input type="text" maxlength="7" name="patente" class="form-control" value="{{$camion->patente}}">
+                </div>
+            </div>
+            <div class="col-sm-12 col-md-6 lg-3">
+                <div class="form-group">
+                    <strong>Vencimiento VTV:</strong>
+                    <input type="date" min="2020-01-01" max="2040-12-31" class="form-control" name="vtv_vencimiento" value="{{$camion->vtv_vencimiento}}">
+                </div>
+            </div>
+            <div class="col-sm-12 col-md-6 lg-3">
+                <div class="form-group">
+                    <strong>Vencimiento SENASA:</strong>
+                    <input type="date" min="2020-01-01" max="2040-12-31" class="form-control" name="senasa_vencimiento" value="{{$camion->senasa_vencimiento}}">
+                </div>
+            </div>
+            <div class="col-sm-12 col-md-6 lg-3">
+                <div class="form-group">
+                    <strong>Vencimiento Seguro:</strong>
+                    <input type="date" min="2020-01-01" max="2040-12-31" class="form-control" name="seguro_vencimiento" value="{{$camion->seguro_vencimiento}}" >
+                </div>
+            </div>
+            <div class="col-sm-12 col-md-12 lg-12">
+                <div class="text-center">
+                    <button type="submit" class="btn btn-primary btn-block">Guardar</button>
+                </div>
             </div>
         </div>
-
-        <div class="col-xs-12 col-sm-12 col-md-12">
-            <div class="form-group">
-                <strong>Patente:</strong>
-                <input value={{$camion->patente}} type="text" max=10 name="patente" class="form-control" placeholder="">
-            </div>
-        </div>
-        <div class="col-xs-12 col-sm-12 col-md-12">
-            <div class="form-group">
-                <strong>Vencimiento VTV:</strong>
-                <input value={{$camion->vtv_vencimiento}} type="date" class="form-control" name="vtv_vencimiento" placeholder="">
-            </div>
-        </div>
-        <div class="col-xs-12 col-sm-12 col-md-12">
-            <div class="form-group">
-                <strong>Vencimiento SENASA:</strong>
-                <input value={{$camion->senasa_vencimiento}} type="date" class="form-control" name="senasa_vencimiento" placeholder="">
-            </div>
-        </div>
-        <div class="col-xs-12 col-sm-12 col-md-12">
-            <div class="form-group">
-                <strong>Vencimiento Seguro:</strong>
-                <input value={{$camion->seguro_vencimiento}} type="date" class="form-control" name="seguro_vencimiento" placeholder="">
-            </div>
-        </div>
-        <div class="col-xs-12 col-sm-12 col-md-12 text-center">
-                <button type="submit" class="btn btn-primary">Guardar</button>
-        </div>
-    </div>
-   
     </form>
 @endsection

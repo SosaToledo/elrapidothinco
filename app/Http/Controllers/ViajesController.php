@@ -18,10 +18,20 @@ class ViajesController extends Controller
      */
     public function index()
     {
-        $viajes = Viaje::latest()->paginate(10);
-  
+        $viajes = Viaje::orderby('id','asc')
+                ->select('viajes.id','viajes.idSimpleViaje','viajes.fecha','clientes.nombre','camioneros.id_simple_camioneros','camiones.id_simple_camiones')
+                ->join('clientes','viajes.id_cliente','=','clientes.id')
+                ->join('camioneros','viajes.id_camionero','=','camioneros.id')
+                ->join('camiones','viajes.id_camiones','=','camiones.id')
+                ->get();
+
+        return view('viajes.index',compact('viajes'));
+
+        // este anda 
+/*         $viajes = Viaje::latest()->paginate(10);
         return view('viajes.index',compact('viajes'))
             ->with('i', (request()->input('page', 1) - 1) * 10);
+*/
     }
 
     /**
@@ -111,9 +121,10 @@ class ViajesController extends Controller
      */
     public function show($id)
     {
-        //
+        $viaje = Viaje::find($id);
+        return view('viajes.show',compact('viaje'));
     }
-
+    
     /**
      * Show the form for editing the specified resource.
      *
@@ -203,4 +214,24 @@ class ViajesController extends Controller
         return redirect()->route('viajes.index')
                         ->with('success','Viaje eliminado');
     }
+
+    public function searchViajes(Request $request){
+
+        $search = $request->get('term');
+        //$search = $request->search;
+        
+        if($search == ''){
+            $viajes = Viaje::orderby('idSimpleViaje','asc')->select('id','idSimpleViaje')->limit(5)->get();
+         }else{
+            $viajes = Viaje::orderby('idSimpleViaje','asc')->select('id','idSimpleViaje')->where('idSimpleViaje', 'like', '%' .$search . '%')->limit(5)->get();
+         }
+   
+         $response = array();
+         foreach($viajes as $viaje){
+            $response[] = array("idSimpleviaje"=>$viaje->idSimpleViaje,"id"=>$viaje->id);
+         }
+         return response()->json($response);
+
+    }
+
 }

@@ -1,5 +1,7 @@
 @extends('layouts.app')
- 
+
+@section('title', 'Listado de viajes')
+
 @section('content')
 
 <div class="">
@@ -8,7 +10,7 @@
             <h2>Viajes.</h2>
         </div>
         <div class="col-md-6">
-            <a class="btn btn-success float-right" href="{{ route('viajes.create') }}">Nuevo Viaje</a>
+            <a class="btn btn-success float-right" href="{{ route('viajes.create') }}"> <i class="fa fa-plus"></i> Nuevo Viaje</a>
         </div>
     </div>
    
@@ -36,59 +38,29 @@
                 <th>Cliente</th>
                 <th>Camionero</th>
                 <th>Camion</th>
-                <th>Acoplado</th>
-                <th>Km Inicial</th>
-                <th>Km final</th>
-                <th>Distancia</th>
-                <th>Origen</th>
-                <th>Destinos</th>
-                <th>Valor</th>
-                <th>18% Camionero</th>
-                <th>Tipo</th>
                 <th>Fecha</th>
-                <th>Peajes</th>
-                <th>Gasoil (litros)</th>
-                <th>Gasoil (precio)</th>
-                <th>Nota de viaje</th>
-                <th>Guia</th>
-                <th width="280px">Acciones</th>
+                <th width="320px">Acciones</th>
             </tr>
             @foreach ($viajes as $viaje)
             <tr>
                 <td>{{ $viaje->idSimpleViaje }}</td>
-                <td>{{ $viaje->id_cliente }}</td>
-                <td>{{ $viaje->id_camionero }}</td>
-                <td>{{ $viaje->id_camiones }}</td>
-                <td>{{ $viaje->id_acomplado }}</td>
-                <td>{{ $viaje->km_inicial }}</td>
-                <td>{{ $viaje->km_final }}</td>
-                <td>{{ $viaje->distancia }}</td>
-                <td>{{ $viaje->origen }}</td>
-                <td>{{ $viaje->destino }}</td>
-                <td>{{ $viaje->valor }}</td>
-                <td>{{ $viaje->ganancia_camionero }}</td>
-                <td>{{ $viaje->tipoCamion }}</td>
+                <td>{{ $viaje->nombre }}</td>
+                <td>{{ $viaje->id_simple_camioneros }}</td>
+                <td>{{ $viaje->id_simple_camiones }}</td>
                 <td>{{ $viaje->fecha }}</td>
-                <td>{{ $viaje->peajes }}</td>
-                <td>{{ $viaje->gasoil_litros }}</td>
-                <td>{{ $viaje->gasoil_precio }}</td>
-                <td>{{ $viaje->notaViaje }}</td>
-                <td>{{ $viaje->guia }}</td>
                 <td>
                     <form action="{{ route('viajes.destroy',$viaje->id) }}" method="POST">
-                        <a class="btn btn-primary" href="{{ route('viajes.edit',$viaje->id) }}">Editar</a>
+                        <a class="btn btn-info" href="{{ route('viajes.show',$viaje->id) }}"> <i class="fa fa-eye"></i> Detalle</a>
+                        <a class="btn btn-primary" href="{{ route('viajes.edit',$viaje->id) }}"> <i class="fa fa-edit"></i> Editar</a>
                         @csrf
                         @method('DELETE')
-                        <button type="submit" class="btn btn-danger">Borrar</button>
+                        <button type="submit" class="btn btn-danger"><i class="fa fa-trash"></i> Borrar</button>
                     </form>
-
                 </td>
             </tr>
             @endforeach
         </table>
     </div>
-
-    {!! $viajes->links() !!}
 
     @endif
 </div>
