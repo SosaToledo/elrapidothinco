@@ -36,5 +36,8 @@ Route::resource('viajes','ViajesController')->middleware('role:admin');
 Route::get('camionesAutocomplete','CamionesController@searchCamiones')->name('camiones.search');
 Route::get('acopladoAutocomplete','AcopladoController@searchAcoplado')->name('acoplado.search');
 Route::get('camionerosAutocomplete','CamionerosController@searchCamioneros')->name('camioneros.search');
+Route::get('clienteAutocomplete','ClientesController@searchClientes')->name('clientes.search');
+Route::get('ciudadAutocomplete','CiudadesController@searchCiudades')->name('ciudades.search');
+
 
 

@@ -86,13 +86,16 @@
             <div class="form-group">
                 <strong>Origen:</strong>
                 <input type="hidden" id="origen" name="origen"  >
-                <input type="text" id="origenAutocomplete" class="form-control" name="origenVista" placeholder="Ingrese cuidad">
+                <input type="text" id="origenAutocomplete" class="form-control" name="origenVista" placeholder="Ingrese nombre de la cuidad">
             </div>
         </div>
         <div class="col-sm-12 col-md-6 lg-3">
             <div class="form-group">
                 <strong>Destinos:</strong>
-                <input type="text" class="form-control" name="destino" >
+                <input type="text" id="destino" name="destino"> <!-- //Aca vamos a ir guardando los id de las ciudades separadas por coma -->
+                <input type="text" id="destinoAutocomplete" class="form-control" name="destinoVista" placeholder="Ingrese nombre de la ciudad">
+                <input type="text" data-role="tagsinput" id="destinoTag" class="form-control" name="destinoTag">
+
             </div>
         </div>
         <div class="col-sm-12 col-md-6 lg-3">
@@ -290,6 +293,145 @@
                         $('#camionero').val(ui.item.value); // save selected id to input
                         return false;
                     }
+                },
+                focus: function(event, ui){
+                    return false;
+                }
+            });
+
+            //clientes autocomplete
+            $( "#clienteAutocomplete" ).autocomplete({
+                source: function(request, response) {
+                    $.ajax({
+                        url: "{{route('clientes.search')}}",
+                        data: {
+                                term : request.term
+                        },
+                        dataType: "json",
+                        success: function(data){
+
+                            if(!data.length){
+                                var result = [
+                                    { label: 'Sin resultados', value: response.term }
+                                ];
+                                response(result);
+                            }
+                            else{
+                                var resp = $.map(data,function(obj){
+                                    //console.log(obj);
+                                    return {
+                                        label: obj.nombre,
+                                        value: obj.id
+                                    }
+                                });
+                                response(resp);
+                            }
+                        }
+                    });
+                },
+                minLength: 1,
+                select:function(event,ui){
+                    if (ui.item.label == "Sin resultados") {
+                        event.preventDefault(); 
+                    } else {
+                        $('#clienteAutocomplete').val(ui.item.label); // display the selected text
+                        $('#cliente').val(ui.item.value); // save selected id to input
+                        return false;
+                    }
+                },
+                focus: function(event, ui){
+                    return false;
+                }
+            });
+
+            //ciudades autocomplete
+             $( "#origenAutocomplete" ).autocomplete({
+                source: function(request, response) {
+                    $.ajax({
+                        url: "{{route('ciudades.search')}}",
+                        data: {
+                                term : request.term
+                        },
+                        dataType: "json",
+                        success: function(data){
+
+                            if(!data.length){
+                                var result = [
+                                    { label: 'Sin resultados', value: response.term }
+                                ];
+                                response(result);
+                            }
+                            else{
+                                var resp = $.map(data,function(obj){
+                                    //console.log(obj);
+                                    return {
+                                        label: obj.nombre + " - " + obj.provincia,
+                                        value: obj.id
+                                    }
+                                });
+                                response(resp);
+                            }
+                        }
+                    });
+                },
+                minLength: 1,
+                select:function(event,ui){
+                    if (ui.item.label == "Sin resultados") {
+                        event.preventDefault(); 
+                    } else {
+                        $('#origenAutocomplete').val(ui.item.label); // display the selected text
+                        $('#origen').val(ui.item.value); // save selected id to input
+                        return false;
+                    }
+                    
+                },
+                focus: function(event, ui){
+                    return false;
+                }
+            });
+
+            //ciudades autocomplete
+            $( "#destinoAutocomplete" ).autocomplete({
+                source: function(request, response) {
+                    $.ajax({
+                        url: "{{route('ciudades.search')}}",
+                        data: {
+                                term : request.term
+                        },
+                        dataType: "json",
+                        success: function(data){
+
+                            if(!data.length){
+                                var result = [
+                                    { label: 'Sin resultados', value: response.term }
+                                ];
+                                response(result);
+                            }
+                            else{
+                                var resp = $.map(data,function(obj){
+                                    //console.log(obj);
+                                    return {
+                                        label: obj.nombre + " - " + obj.provincia,
+                                        value: obj.id
+                                    }
+                                });
+                                response(resp);
+                            }
+                        }
+                    });
+                },
+                minLength: 1,
+                select:function(event,ui){
+                    if (ui.item.label == "Sin resultados") {
+                        event.preventDefault(); 
+                    } else {
+                        $('#destinoAutocomplete').val(""); 
+                        $('#destinoTag').tagsinput('add', ui.item.label,true,true );
+
+                        console.log($("#destinoTag").val());
+                        return false;
+                    }
+                    
                 },
                 focus: function(event, ui){
                     return false;

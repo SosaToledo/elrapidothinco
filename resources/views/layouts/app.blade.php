@@ -19,6 +19,10 @@
 
     <!-- Styles -->
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
+
+    <!-- bootstrap tags -->
+    <link href="{{ asset('css/tagsinput.css') }}" rel="stylesheet" type="text/css">
+
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css" integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">
     
     {{-- paso a la version full de jquery por las animaciones --}}
@@ -34,7 +38,8 @@
     {{-- aca cargaba el jquery AHORA SOLO EL JS --}}
     <script src="{{asset('jqueryui/jquery-ui.min.js')}}" type="text/javascript"></script>
 
-
+    <!-- js del tag bootstrap -->
+    <script src="{{ asset('js/tagsinput.js')}}"></script>
 </head>
 
 <body>
