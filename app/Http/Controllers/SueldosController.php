@@ -17,7 +17,8 @@ class SueldosController extends Controller
     public function index()
     {
         $camioneros = Camionero::All();
-        return view('sueldos.index',compact('camioneros'));
+        $detalles_sueldo = [];
+        return view('sueldos.index',compact('camioneros'))->with(compact('detalles_sueldo'));
     }
 
     /**
@@ -25,9 +26,22 @@ class SueldosController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function create()
+    public function create(Request $request)
     {
-        return view('sueldos.show');
+        $detalles_sueldo = DB::select('
+            SELECT c.nombre, c.apellido, v.ganancia_camionero, v.fecha, v.peajes, com.monto 
+            FROM camioneros c 
+            JOIN viajes v ON v.id = v.id 
+            JOIN comprobantes com ON com.id_camioneros = c.id
+            WHERE c.id ='.$request->camionero.'
+                AND v.fecha BETWEEN "'.$request->fecha_inicio.'" AND "'.$request->fecha_fin.'"
+        ');
+
+        $camioneros = Camionero::All();
+
+        return view('sueldos.index')
+        ->with(compact('detalles_sueldo'))
+        ->with(compact('camioneros'));
     }
 
     /**

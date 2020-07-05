@@ -133,4 +133,24 @@ class ClientesController extends Controller
         return redirect()->route('clientes.index')
                         ->with('success','Cliente eliminado');
     }
+
+    public function searchClientes(Request $request){
+
+        $search = $request->get('term');
+        //$search = $request->search;
+
+        if($search == ''){
+            $clientes = Cliente::orderby('nombre','asc')->select('id','nombre')->limit(5)->get();
+         }else{
+            $clientes = Cliente::orderby('nombre','asc')->select('id','nombre')->where('nombre', 'like', '%' .$search . '%')->limit(5)->get();
+         }
+   
+         $response = array();
+         foreach($clientes as $Cliente){
+            $response[] = array("nombre"=>$Cliente->nombre, "id"=>$Cliente->id);
+         }
+         return response()->json($response);
+
+    }
+
 }

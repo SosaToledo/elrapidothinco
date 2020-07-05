@@ -9,6 +9,7 @@ use Carbon\Carbon;
 use SebastianBergmann\Environment\Console;
 use Symfony\Component\Console\Logger\ConsoleLogger;
 
+
 class CamionesController extends Controller
 {
     /**
@@ -132,5 +133,23 @@ class CamionesController extends Controller
         $camion->delete();
         return redirect()->route('camiones.index')
                         ->with('success','Camión eliminado');
+    }
+    public function searchCamiones(Request $request){
+
+        $search = $request->get('term');
+        //$search = $request->search;
+
+        if($search == ''){
+            $camiones = Camion::orderby('patente','asc')->select('id','patente')->limit(5)->get();
+         }else{
+            $camiones = Camion::orderby('patente','asc')->select('id','patente')->where('patente', 'like', '%' .$search . '%')->limit(5)->get();
+         }
+   
+         $response = array();
+         foreach($camiones as $camion){
+            $response[] = array("patente"=>$camion->patente,"id"=>$camion->id);
+         }
+         return response()->json($response);
+
     }
 }

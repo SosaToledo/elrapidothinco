@@ -25,6 +25,7 @@
             <th>Camionero</th>
             <th>detalles</th>
             <th>Tipo</th>
+            <th>Monto</th>
             <th width="280px">Acciones</th>
         </tr>
         @foreach ($comprobantes as $comprobante)
@@ -34,6 +35,7 @@
             <td>{{ $comprobante->id_camioneros}}</td>
             <td>{{ $comprobante->detalles }}</td>
             <td>{{ $comprobante->tipo }}</td>
+            <td>{{ $comprobante->monto }}</td>
             <td>
                 <form action="{{ route('comprobantes.destroy',$comprobante->id) }}" method="POST">
                     <a class="btn btn-primary" href="{{ route('comprobantes.edit',$comprobante->id) }}">Editar</a>

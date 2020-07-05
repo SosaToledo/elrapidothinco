@@ -146,4 +146,24 @@ class AcopladoController extends Controller
         return redirect()->route('acoplados.index')
                         ->with('success','Acoplado eliminado');
     }
+
+    public function searchAcoplado(Request $request){
+
+        $search = $request->get('term');
+        //$search = $request->search;
+
+        if($search == ''){
+            $acoplados = Acoplado::orderby('patente','asc')->select('id','patente')->limit(5)->get();
+         }else{
+            $acoplados = Acoplado::orderby('patente','asc')->select('id','patente')->where('patente', 'like', '%' .$search . '%')->limit(5)->get();
+         }
+   
+         $response = array();
+         foreach($acoplados as $acoplado){
+            $response[] = array("patente"=>$acoplado->patente,"id"=>$acoplado->id);
+         }
+         return response()->json($response);
+
+    }
+
 }

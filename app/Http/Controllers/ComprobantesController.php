@@ -46,6 +46,7 @@ class ComprobantesController extends Controller
             'camionero' => 'required',
             'detalles' => 'required',
             'tipo' => 'required',
+            'monto' => 'required',
         ]);
 
         $id=DB::select("SHOW TABLE STATUS LIKE 'comprobantes'");
@@ -57,6 +58,7 @@ class ComprobantesController extends Controller
         $comprobante->id_camioneros = $request->camionero;
         $comprobante->detalles = $request->detalles;
         $comprobante->tipo = $request->tipo;
+        $comprobante->monto = $request->monto;
         $comprobante->created_at = Carbon::now();
         $comprobante->updated_at = Carbon::now();
         $comprobante->save(['timestamps' => false]);
@@ -101,6 +103,7 @@ class ComprobantesController extends Controller
             'camionero' => 'required',
             'detalles' => 'required',
             'tipo' => 'required',
+            'monto' => 'required'
         ]);
 
 
@@ -109,6 +112,7 @@ class ComprobantesController extends Controller
         $comprobante->id_camioneros = $request->camionero;
         $comprobante->detalles = $request->detalles;
         $comprobante->tipo = $request->tipo;
+        $comprobante->monto = $request->monto;
         $comprobante->save(['timestamps' => false]);
 
         return redirect()->route('comprobantes.index')

@@ -131,4 +131,24 @@ class CamionerosController extends Controller
         return redirect()->route('camioneros.index')
                         ->with('success','Camionero eliminado');
     }
+
+    public function searchCamioneros(Request $request){
+
+        $search = $request->get('term');
+        //$search = $request->search;
+
+        if($search == ''){
+            $camioneros = Camionero::orderby('apellido','asc')->select('id','apellido','nombre')->limit(5)->get();
+         }else{
+            $camioneros = Camionero::orderby('apellido','asc')->select('id','apellido','nombre')->where('apellido', 'like', '%' .$search . '%')->limit(5)->get();
+         }
+   
+         $response = array();
+         foreach($camioneros as $camionero){
+            $response[] = array("apellido"=>$camionero->apellido,"nombre"=>$camionero->nombre, "id"=>$camionero->id);
+         }
+         return response()->json($response);
+
+    }
+
 }
