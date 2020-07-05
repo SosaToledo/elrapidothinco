@@ -39,6 +39,6 @@ Route::get('acopladoAutocomplete','AcopladoController@searchAcoplado')->name('ac
 Route::get('camionerosAutocomplete','CamionerosController@searchCamioneros')->name('camioneros.search');
 Route::get('clienteAutocomplete','ClientesController@searchClientes')->name('clientes.search');
 Route::get('ciudadAutocomplete','CiudadesController@searchCiudades')->name('ciudades.search');
-
+Route::get('viajesAutocomplete','ViajesController@searchViajes')->name('viajes.search');
 
 

@@ -1,4 +1,5 @@
 @extends('layouts.app')
+@section('title', 'Liquidación de sueldos')
 
 @section('content')
   <form action="{{ route('sueldos.create')}}" method="GET">

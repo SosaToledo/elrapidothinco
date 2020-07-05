@@ -1,19 +1,21 @@
 @extends('layouts.app')
+@section('title', 'Listado de comprobantes')
  
 @section('content')
     <div class="row">
-        <div class="col-lg-12 margin-tb">
-            <div class="pull-left">
-                <h2>CRUD COMPROBANTES</h2>
-            </div>
-            <div class="pull-right">
-                <a class="btn btn-success" href="{{ route('comprobantes.create') }}"> Crear nuevo comprobante</a>
-            </div>
+        <div class="col-md-6 margin-tb">
+            <h2>Comprobantes.</h2>
+        </div>
+        <div class="col-md-6">
+            <a class="btn btn-success float-right" href="{{ route('comprobantes.create') }}"> <i class="fa fa-plus"></i> Nuevo Comprobante</a>
         </div>
     </div>
    
     @if ($message = Session::get('success'))
-        <div class="alert alert-success">
+        <div id="success-alert" class="alert alert-success alert-dimissible fade show" role="alert">
+            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+            </button>
             <p>{{ $message }}</p>
         </div>
     @endif
@@ -51,5 +53,20 @@
     </table>
   
     {!! $comprobantes->links() !!}
-      
+
+    @endif
+    </div>
+   
+
+<script>
+    $(document).ready(function() {
+       // show the alert
+       setTimeout(function() {
+            //$(".success-alert").alert('close');
+            //$('#btnCerrar').click();
+            jQuery('#success-alert').fadeOut();
+       }, 2000);
+    });
+</script>
+
 @endsection
