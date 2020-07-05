@@ -26,6 +26,7 @@
     <table class="table table-hover">
       <tr>
         <th>Fecha</th>
+        <th>id</th>
         <th>Sueldo</th>
         <th>Viaticos</th>
         <th>Adelantos</th>
@@ -33,6 +34,7 @@
       @foreach($detalles_sueldo as $viajes)
         <tr>
           <td>{{$viajes->fecha}}</td>
+          <td>{{$viajes->id}}</td>
           <td>{{$viajes->ganancia_camionero}}</td>
           <td>{{$viajes->peajes}}</td>
           <td>{{$viajes->monto}}</td>
