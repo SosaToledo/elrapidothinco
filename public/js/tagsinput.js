@@ -43,7 +43,7 @@
   function TagsInput(element, options) {
     this.isInit = true;
     this.itemsArray = [];
-    this.idArray = [];
+    
 
     this.$element = $(element);
     this.$element.addClass('sr-only');
@@ -140,8 +140,7 @@
 
       // register item in internal array and map
       self.itemsArray.push(item);
-      self.idArray.push(item.id);
-
+      
       // add a tag element
 
       var $tag = $('<span class="' + htmlEncode(tagClass) + (itemTitle !== null ? ('" title="' + itemTitle) : '') + '">' + htmlEncode(itemText) + '<span data-role="remove"></span></span>');
@@ -191,10 +190,8 @@
       if (self.objectItems) {
         if (typeof item === "object"){
           item = $.grep(self.itemsArray, function(other) { return self.options.itemValue(other) ==  self.options.itemValue(item); } );
-          id = $.grep(self.idArray, function(other) { return self.options.itemValue(other) ==  self.options.itemValue(item); } );
         }else{
           item = $.grep(self.itemsArray, function(other) { return self.options.itemValue(other) ==  item; } );
-          id = $.grep(self.idArray, function(other) { return self.options.itemValue(other) ==  item; } );
         }
         item = item[item.length-1];
         id = item[item.length-1];

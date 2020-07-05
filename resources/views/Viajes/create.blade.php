@@ -1,6 +1,7 @@
 @extends('layouts.app')
   
 @section('content')
+
 <div class="row">
 
     <div class="col-md-2">
@@ -411,7 +412,7 @@
                                 var resp = $.map(data,function(obj){
                                     //console.log(obj);
                                     return {
-                                        label: obj.nombre + " - " + obj.provincia,
+                                        label: obj.id + " | " + obj.nombre + " - " + obj.provincia,
                                         value: obj.id
                                     }
                                 });
@@ -427,7 +428,6 @@
                     } else {
                         $('#destinoAutocomplete').val(""); 
                         $('#destinoTag').tagsinput('add', ui.item.label,true,true );
-
                         console.log($("#destinoTag").val());
                         return false;
                     }
@@ -436,6 +436,13 @@
                 focus: function(event, ui){
                     return false;
                 }
+            });
+            //Terminan los auto complete aca --------------
+
+
+            $('[data-role="remove"]').on('click', function() {
+                alert("click sobre boton x");
+                console.log($(this));
             });
 
         });
