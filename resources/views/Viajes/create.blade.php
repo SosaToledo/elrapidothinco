@@ -110,7 +110,7 @@
         <div class="col-sm-12 col-md-6 lg-3">
             <div class="form-group">
                 <strong>fecha:</strong>
-                <input type="date" class="form-control" name="fecha" >
+                <input min="2020-01-01" max="2040-12-31" type="date" class="form-control" name="fecha" >
             </div>
         </div>
         <div class="col-sm-12 col-md-6 lg-3">

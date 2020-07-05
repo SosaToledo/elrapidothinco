@@ -30,7 +30,13 @@ class AcopladoController extends Controller
      */
     public function create()
     {
-       return view('acoplados.create');
+      $ultimo = DB::table('acoplado')->orderByDesc('created_at')->first();
+      if($ultimo == null){
+        $ultimo = 1;
+        return view('acoplados.create', compact('ultimo'));
+      }
+      $ultimo = $ultimo->id + 1;
+      return view('acoplados.create', compact('ultimo'));
     }
 
     /**
@@ -55,7 +61,7 @@ class AcopladoController extends Controller
         Acoplado::create($request->all()); */
    
         $acoplado = new Acoplado;
-        $acoplado->id_simple_acoplado = $next_id;
+        $acoplado->id_simple_acoplado = 'AC'.$next_id;
         $acoplado->patente = $request->patente;
         $acoplado->vtv_vencimiento = $request->vtv_vencimiento;
         $acoplado->senasa_vencimiento = $request->senasa_vencimiento;
