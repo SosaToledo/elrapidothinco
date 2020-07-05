@@ -14,6 +14,7 @@ class Comprobante extends Model
         'id_simple_comprobante', 
         'id_camioneros', 
         'id_viaje', 
+        'fecha',
         'detalles', 
         'tipo',
         'monto',

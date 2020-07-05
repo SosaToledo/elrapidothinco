@@ -43,6 +43,7 @@ class ComprobantesController extends Controller
     public function store(Request $request)
     {
         $request->validate([
+            'fecha' => 'required',
             'camionero' => 'required',
             'detalles' => 'required',
             'tipo' => 'required',
@@ -54,6 +55,7 @@ class ComprobantesController extends Controller
 
         $comprobante = new Comprobante;
         $comprobante->id_simple_comprobante = $next_id;
+        $comprobante->fecha = $request->fecha;
         $comprobante->id_viaje = $request->viaje;
         $comprobante->id_camioneros = $request->camionero;
         $comprobante->detalles = $request->detalles;
@@ -100,15 +102,16 @@ class ComprobantesController extends Controller
     public function update(Request $request, $id)
     {
         $request->validate([
+            'fecha' => 'required',
             'camionero' => 'required',
             'detalles' => 'required',
             'tipo' => 'required',
             'monto' => 'required'
         ]);
 
-
         $comprobante = Comprobante::find($id);
         $comprobante->id_viaje = $request->viaje;
+        $comprobante->fecha = $request->fecha;
         $comprobante->id_camioneros = $request->camionero;
         $comprobante->detalles = $request->detalles;
         $comprobante->tipo = $request->tipo;

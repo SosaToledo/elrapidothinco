@@ -20,9 +20,10 @@ class CreateComprobantesTable extends Migration
             $table->unsignedBigInteger("id_camioneros");
             $table->foreign("id_camioneros")->references("id")->on("camioneros");
             
-            $table->unsignedBigInteger("id_viaje");
+            $table->unsignedBigInteger("id_viaje")->nullable();
             $table->foreign("id_viaje")->references("id")->on("viajes");
             
+            $table->string("fecha");
             $table->string("detalles");
             $table->string("tipo");
             $table->float('monto', 10,2);

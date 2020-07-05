@@ -29,8 +29,8 @@ class SueldosController extends Controller
     public function create(Request $request)
     {
         $detalles_sueldo = DB::select('
-            SELECT c.nombre, c.apellido, v.ganancia_camionero, v.fecha, v.peajes, com.monto 
-            FROM camioneros c 
+            SELECT c.nombre, v.id, c.apellido, v.ganancia_camionero, v.fecha, v.peajes, com.monto
+            FROM camioneros c
             JOIN viajes v ON v.id = v.id 
             JOIN comprobantes com ON com.id_camioneros = c.id
             WHERE c.id ='.$request->camionero.'
