@@ -21,6 +21,7 @@
     <table class="table table-bordered">
         <tr>
             <th>CODIGO</th>
+            <th>Fecha</th>
             <th>Viaje</th>
             <th>Camionero</th>
             <th>detalles</th>
@@ -31,6 +32,7 @@
         @foreach ($comprobantes as $comprobante)
         <tr>
             <td>{{ $comprobante->id }}</td>
+            <td>{{ $comprobante->fecha }}</td>
             <td>{{ $comprobante->id_viaje }}</td>
             <td>{{ $comprobante->id_camioneros}}</td>
             <td>{{ $comprobante->detalles }}</td>

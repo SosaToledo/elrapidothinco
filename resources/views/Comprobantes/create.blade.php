@@ -32,12 +32,12 @@
                 <input type="text" max=10 name="viaje" class="form-control" placeholder="">
             </div>
         </div>
-        <!-- <div class="col-xs-12 col-sm-12 col-md-12">
+        <div class="col-xs-12 col-sm-12 col-md-12">
             <div class="form-group">
-                <strong>Contraseña:</strong>
-                <input type="text" class="form-control" name="contraseña" placeholder="">
+                <strong>Fecha:</strong>
+                <input type="date" class="form-control" name="fecha" placeholder="">
             </div>
-        </div> -->
+        </div>
         <div class="col-xs-12 col-sm-12 col-md-12">
             <div class="form-group">
                 <strong>Camionero:</strong>

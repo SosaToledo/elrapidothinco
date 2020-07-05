@@ -30,15 +30,15 @@
         <div class="col-xs-12 col-sm-12 col-md-12">
             <div class="form-group">
                 <strong>Viaje:</strong>
-                <input type="text" max=10 name="viaje" class="form-control" placeholder="" value="{{ $comprobante->viaje}}">
+                <input type="text" max=10 name="viaje" class="form-control" placeholder="" value="{{ $comprobante->id}}">
             </div>
         </div>
-        <!-- <div class="col-xs-12 col-sm-12 col-md-12">
+        <div class="col-xs-12 col-sm-12 col-md-12">
             <div class="form-group">
-                <strong>Contraseña:</strong>
-                <input type="text" class="form-control" name="contraseña" placeholder="">
+                <strong>Fecha:</strong>
+                <input type="date" class="form-control" name="fecha" placeholder="" value="{{$comprobante->fecha}}">
             </div>
-        </div> -->
+        </div>
         <div class="col-xs-12 col-sm-12 col-md-12">
             <div class="form-group">
                 <strong>Camionero:</strong>

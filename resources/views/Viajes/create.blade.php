@@ -80,7 +80,7 @@
         <div class="col-sm-12 col-md-6 lg-3">
             <div class="form-group">
                 <strong>Distancia:</strong>
-                <input disabled type="text" class="form-control" name="distancia" >
+                <input type="text" class="form-control" name="distancia" >
             </div>
         </div>
         <div class="col-sm-12 col-md-6 lg-3">
