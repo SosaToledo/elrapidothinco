@@ -28,14 +28,23 @@ class SueldosController extends Controller
      */
     public function create(Request $request)
     {
-        $detalles_sueldo = DB::select('
-            SELECT c.nombre, v.id, c.apellido, v.ganancia_camionero, v.fecha, v.peajes, com.monto
-            FROM camioneros c
-            JOIN viajes v ON v.id = v.id 
-            JOIN comprobantes com ON com.id_camioneros = c.id
-            WHERE c.id ='.$request->camionero.'
-                AND v.fecha BETWEEN "'.$request->fecha_inicio.'" AND "'.$request->fecha_fin.'"
-        ');
+        // $detalles_sueldo = DB::select('
+        //     SELECT c.nombre, v.id, c.apellido, v.ganancia_camionero, v.fecha, v.peajes, com.monto
+        //     FROM viajes v
+        //     JOIN camioneros c ON v.id = v.id 
+        //     JOIN comprobantes com ON com.id_camioneros = v.id_camionero
+        //     WHERE c.id ='.$request->camionero.'
+        //         AND v.fecha BETWEEN "'.$request->fecha_inicio.'" AND "'.$request->fecha_fin.'"
+        // ');
+
+        $detalles_sueldo = DB::table('camioneros')
+        ->select('camioneros.nombre','viajes.id', 'camioneros.apellido','viajes.ganancia_camionero', 'viajes.fecha', 'viajes.peajes', DB::raw('SUM(comprobantes.monto) as monto'))
+        ->rightJoin('viajes', 'camioneros.id', '=', 'viajes.id_camionero')
+        ->rightJoin('comprobantes', 'comprobantes.id_camioneros', '=', 'viajes.id_camionero')
+        ->where('camioneros.id', $request->camionero)
+        ->whereBetween('viajes.fecha', [$request->fecha_inicio, $request->fecha_fin])
+        ->groupby('camioneros.nombre','viajes.id', 'camioneros.apellido','viajes.ganancia_camionero', 'viajes.fecha', 'viajes.peajes')
+        ->get();
 
         $camioneros = Camionero::All();
 

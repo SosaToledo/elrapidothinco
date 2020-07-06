@@ -54,7 +54,7 @@
   
     {!! $comprobantes->links() !!}
 
-    @endif
+
     </div>
    
 
