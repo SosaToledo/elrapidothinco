@@ -45,7 +45,6 @@ class ComprobantesController extends Controller
         $request->validate([
             'fecha' => 'required',
             'camionero' => 'required',
-            'detalles' => 'required',
             'tipo' => 'required',
             'monto' => 'required',
         ]);
@@ -104,7 +103,6 @@ class ComprobantesController extends Controller
         $request->validate([
             'fecha' => 'required',
             'camionero' => 'required',
-            'detalles' => 'required',
             'tipo' => 'required',
             'monto' => 'required'
         ]);

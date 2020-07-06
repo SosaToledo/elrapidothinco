@@ -38,17 +38,31 @@ class SueldosController extends Controller
         // ');
 
         $detalles_sueldo = DB::table('camioneros')
-        ->select('camioneros.nombre','viajes.id', 'camioneros.apellido','viajes.ganancia_camionero', 'viajes.fecha', 'viajes.peajes', DB::raw('SUM(comprobantes.monto) as monto'))
+        ->select('camioneros.nombre','viajes.id', 'camioneros.apellido','viajes.ganancia_camionero', 'viajes.fecha', 'viajes.peajes')
         ->rightJoin('viajes', 'camioneros.id', '=', 'viajes.id_camionero')
-        ->rightJoin('comprobantes', 'comprobantes.id_camioneros', '=', 'viajes.id_camionero')
         ->where('camioneros.id', $request->camionero)
         ->whereBetween('viajes.fecha', [$request->fecha_inicio, $request->fecha_fin])
-        ->groupby('camioneros.nombre','viajes.id', 'camioneros.apellido','viajes.ganancia_camionero', 'viajes.fecha', 'viajes.peajes')
+        ->get();
+
+        // $suma_sueldos = DB::table('camioneros')
+        // ->select('camioneros.nombre', 'viajes.fecha', DB::raw('sum(viajes.ganancia_camionero) as ganancia_camionero'), DB::raw('SUM(viajes.peajes) as peajes'))
+        // ->rightJoin('viajes', 'camioneros.id', '=', 'viajes.id_camionero')
+        // ->where('camioneros.id', $request->camionero)
+        // ->whereBetween('viajes.fecha', [$request->fecha_inicio, $request->fecha_fin])
+        // ->groupby('camioneros.nombre', 'viajes.fecha')
+        // ->get();
+
+        $detalles_adelanto = DB::table('comprobantes')
+        ->select('comprobantes.fecha', 'comprobantes.monto', 'comprobantes.id_viaje')
+        ->where('tipo', 'adelanto')
+        ->whereBetween('comprobantes.fecha', [$request->fecha_inicio, $request->fecha_fin])
         ->get();
 
         $camioneros = Camionero::All();
 
         return view('sueldos.index')
+        ->with(compact('detalles_adelanto'))
+        // ->with(compact('suma_sueldos'))
         ->with(compact('detalles_sueldo'))
         ->with(compact('camioneros'));
     }
