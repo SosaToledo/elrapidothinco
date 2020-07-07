@@ -30,7 +30,7 @@
         <div class="col-sm-12 col-md-6 lg-3">
             <div class="form-group">
                 <strong>CODIGO:</strong>
-                <input type="text" disabled value=AC0000 max=10 name="patente" class="form-control" placeholder="">
+                <input type="text" readonly value="CM{{$ultimo}}" max=10 name="idSimple" class="form-control" placeholder="">
             </div>
         </div>
         

@@ -49,19 +49,14 @@ class AcopladoController extends Controller
     {
         $request->validate([
             'patente' => 'required',
+            'id_simple' => 'required',
             'vtv_vencimiento' => 'required',
             'senasa_vencimiento' => 'required',
             'seguro_vencimiento' => 'required',
         ]);
-  
-        $id=DB::select("SHOW TABLE STATUS LIKE 'acoplado'");
-        $next_id=$id[0]->Auto_increment;
-
-        /* $request->id_simple_acoplado = $next_id;
-        Acoplado::create($request->all()); */
    
         $acoplado = new Acoplado;
-        $acoplado->id_simple_acoplado = 'AC'.$next_id;
+        $acoplado->id_simple_acoplado = $request->id_simple;
         $acoplado->patente = $request->patente;
         $acoplado->vtv_vencimiento = $request->vtv_vencimiento;
         $acoplado->senasa_vencimiento = $request->senasa_vencimiento;

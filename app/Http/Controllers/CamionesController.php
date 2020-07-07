@@ -32,8 +32,13 @@ class CamionesController extends Controller
      */
     public function create()
     {
-        //
-        return view ('camiones.create');
+        $ultimo = DB::table('camiones')->orderByDesc('created_at')->first();
+        if($ultimo == null){
+            $ultimo = 1;
+            return view('camiones.create', compact('ultimo'));
+        }
+        $ultimo = $ultimo->id + 1;
+        return view('camiones.create', compact('ultimo'));
     }
 
     /**
@@ -46,16 +51,14 @@ class CamionesController extends Controller
     {
         $request->validate([
             'patente' => 'required',
+            'idSimple' => 'required',
             'vtv_vencimiento' => 'required',
             'senasa_vencimiento' => 'required',
             'seguro_vencimiento' => 'required',
         ]);
-
-        $id=DB::select("SHOW TABLE STATUS LIKE 'camiones'");
-        $next_id=$id[0]->Auto_increment;
   
         $camion = new Camion;
-        $camion->id_simple_camiones = $next_id;
+        $camion->id_simple_camiones = $request->idSimple;
         $camion->patente = $request->patente;
         $camion->vtv_vencimiento = $request->vtv_vencimiento;
         $camion->senasa_vencimiento = $request->senasa_vencimiento;
@@ -129,15 +132,25 @@ class CamionesController extends Controller
      */
     public function destroy($id)
     {
+
         $camion = Camion::find($id);
-        $camion->delete();
+        try {
+            $camion->delete();
+        } catch (Exception $th) {
+            return redirect()->route('camiones.index')
+                        ->withError('success',$th->geMessenge());
+        }
         return redirect()->route('camiones.index')
                         ->with('success','Camión eliminado');
+            
+        
+        
     }
+
+
     public function searchCamiones(Request $request){
 
         $search = $request->get('term');
-        //$search = $request->search;
 
         if($search == ''){
             $camiones = Camion::orderby('patente','asc')->select('id','patente')->limit(5)->get();
