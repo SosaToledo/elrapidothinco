@@ -6,7 +6,7 @@
 <div class="row">
 
     <div class="col-md-2">
-        <a class="btn btn-primary" href="{{ route('viajes.index') }}">Volver</a>
+        <a class="btn btn-primary" href="{{ route('viajes.index') }}"> <i class="fa fa-arrow-circle-left"></i> Volver</a>
     </div>
     <div class="col margin-tb">
         <div class="pull-left">
@@ -115,7 +115,10 @@
         <div class="col-sm-12 col-md-6 lg-3">
             <div class="form-group">
                 <strong>Tipo:</strong>
-                <input type="text" class="form-control" name="tipoCamion" >
+                <select class="form-control" name="tipoCamion" id="tipo">
+                    <option value="Chasis">Chasis</option>
+                    <option value="Acoplado">Acoplado</option>
+                </select>
             </div>
         </div>
         <div class="col-sm-12 col-md-6 lg-3">
@@ -156,7 +159,7 @@
         </div>
         <div class="col-sm-12 col-md-12 lg-12">
             <div class="text-center">
-                <button type="submit" class="btn btn-primary btn-block">Guardar</button>
+                <button type="submit" class="btn btn-primary btn-block"> <i class="fa fa-save"></i> Guardar</button>
             </div>
         </div>
     </div>
@@ -440,11 +443,6 @@
             });
             //Terminan los auto complete aca --------------
 
-
-            $('[data-role="remove"]').on('click', function() {
-                alert("click sobre boton x");
-                console.log($(this));
-            });
 
         });
 </script>

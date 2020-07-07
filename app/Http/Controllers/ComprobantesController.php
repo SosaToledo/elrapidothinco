@@ -19,7 +19,12 @@ class ComprobantesController extends Controller
     public function index()
     {
         $comprobantes = Comprobante::latest()->paginate(10);
-  
+        $comprobantes = Comprobante::orderby('id','asc')
+        ->select('comprobantes.id','comprobantes.id_simple_comprobante','viajes.idSimpleViaje','comprobantes.fecha', 'camioneros.nombre','comprobantes.tipo', 'comprobantes.tipo', 'comprobantes.monto','comprobantes.detalles')
+        ->join('camioneros','comprobantes.id_camioneros','=','camioneros.id')
+        ->join('viajes','comprobantes.id_viaje','=','viajes.id')
+        ->get();
+        
         return view('comprobantes.index',compact('comprobantes'))
             ->with('i', (request()->input('page', 1) - 1) * 10);
     }
@@ -43,10 +48,12 @@ class ComprobantesController extends Controller
     public function store(Request $request)
     {
         $request->validate([
+            'viaje' => 'required',
             'fecha' => 'required',
             'camionero' => 'required',
             'tipo' => 'required',
             'monto' => 'required',
+            'detalles' => 'required'
         ]);
 
         $id=DB::select("SHOW TABLE STATUS LIKE 'comprobantes'");
@@ -87,8 +94,16 @@ class ComprobantesController extends Controller
      */
     public function edit($id)
     {
-        $comprobante = Comprobante::find($id);
+        
+        $comprobante = Comprobante::select('comprobantes.id','comprobantes.id_simple_comprobante','comprobantes.id_viaje','comprobantes.fecha'
+        ,'comprobantes.id_camioneros', 'comprobantes.tipo', 'comprobantes.monto','comprobantes.detalles'
+        ,'viajes.idSimpleViaje','camioneros.apellido','camioneros.nombre',)
+        ->join('camioneros','comprobantes.id_camioneros','=','camioneros.id')
+        ->join('viajes','comprobantes.id_viaje','=','viajes.id')
+        ->where('comprobantes.id','=',$id)
+        ->get();
         return view('comprobantes.edit',compact('comprobante'));
+
     }
 
     /**
