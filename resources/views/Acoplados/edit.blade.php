@@ -3,7 +3,7 @@
 @section('content')
 <div class="row">
     <div class="col-md-2">
-        <a class="btn btn-primary" href="{{ route('acoplados.index') }}">Volver</a>
+        <a class="btn btn-primary" href="{{ route('acoplados.index') }}"> <i class="fa fa-arrow-circle-left"></i> Volver</a>
     </div>
     <div class="col margin-tb">
         <div class="pull-left">
@@ -42,7 +42,7 @@
                     <input type="text" maxlength="7" name="patente" class="form-control" value="{{$acoplado->patente}}">
                 </div>
             </div>
-            <div class="col-xs-12 col-sm-12 col-md-12">
+            <div class="col-sm-12 col-md-6 lg-3">
                 <div class="form-group">
                     <strong>Vencimiento VTV:</strong>
                     <input value="{{$acoplado->vtv_vencimiento}}" min="2020-01-01" max="2040-12-31" type="date" class="form-control" name="vtv_vencimiento" placeholder="">
@@ -62,7 +62,7 @@
             </div>
             <div class="col-sm-12 col-md-12 lg-12">
                 <div class="text-center">
-                    <button type="submit" class="btn btn-primary btn-block">Guardar</button>
+                    <button type="submit" class="btn btn-primary btn-block"> <i class="fa fa-save"></i> Guardar</button>
                 </div>
             </div>
         </div>

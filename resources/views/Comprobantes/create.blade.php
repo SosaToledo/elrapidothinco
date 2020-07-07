@@ -28,20 +28,20 @@
 <form action="{{ route('comprobantes.store') }}" method="POST">
     @csrf
      <div class="row">
-     <div class="col-sm-12 col-md-6 lg-3">
+        <div class="col-sm-12 col-md-4 lg-4">
              <div class="form-group">
                  <strong>Viaje:</strong>
                  <input type="hidden" id="viaje" name="viaje" >
                  <input type="text" id="viajeAutocomplete" maxlength="7" name="viajeVista" class="form-control" placeholder="Ingrese el código del viaje">
             </div>
         </div>
-        <div class="col-xs-12 col-sm-12 col-md-12">
+        <div class="col-sm-12 col-md-4 lg-4">
             <div class="form-group">
                 <strong>Fecha:</strong>
                 <input type="date" class="form-control" name="fecha" placeholder="">
             </div>
         </div>
-        <div class="col-xs-12 col-sm-12 col-md-12">
+        <div class="col-sm-12 col-md-4 lg-4">
             <div class="form-group">
                 <strong>Camionero:</strong>
                 <input type="hidden" id="camionero" name="camionero" >
@@ -74,13 +74,13 @@
         <div class="col-xs-12 col-sm-12 col-md-12">
             <div class="form-group">
                 <strong>Detalles:</strong>
-                <textarea rows="3" class="form-control" name="detalles" placeholder=""></textarea>
+                <textarea required rows="3" class="form-control" name="detalles" placeholder=""></textarea>
             </div>
         </div>
 
         <div class="col-sm-12 col-md-12 lg-12">
             <div class="text-center">
-                <button type="submit" class="btn btn-primary btn-block">Guardar</button>
+                <button type="submit" class="btn btn-primary btn-block"> <i class="fa fa-save"></i> Guardar</button>
             </div>
         </div>
     </div>

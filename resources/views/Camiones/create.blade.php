@@ -3,7 +3,7 @@
 @section('content')
 <div class="row">
     <div class="col-md-2">
-        <a class="btn btn-primary" href="{{ route('camiones.index') }}">Volver</a>
+        <a class="btn btn-primary" href="{{ route('camiones.index') }}"> <i class="fa fa-arrow-circle-left"></i> Volver</a>
     </div>
     <div class="col margin-tb">
         <div class="pull-left">
@@ -33,7 +33,6 @@
                 <input type="text" readonly value="CM{{$ultimo}}" max=10 name="idSimple" class="form-control" placeholder="">
             </div>
         </div>
-        
         <div class="col-sm-12 col-md-6 lg-3">
             <div class="form-group">
                 <strong>Patente:</strong>
@@ -60,7 +59,7 @@
         </div>
         <div class="col-sm-12 col-md-12 lg-12">
             <div class="text-center">
-                <button type="submit" class="btn btn-primary btn-block">Guardar</button>
+                <button type="submit" class="btn btn-primary btn-block"> <i class="fa fa-save"></i> Guardar</button>
             </div>
         </div>
     </div>

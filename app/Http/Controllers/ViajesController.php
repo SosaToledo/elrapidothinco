@@ -133,7 +133,29 @@ class ViajesController extends Controller
      */
     public function edit($id)
     {
-        $viaje = Viaje::find($id);
+        /* $viaje = Viaje::find($id);
+        return view('viajes.edit',compact('viaje')); */
+
+        //TODO Falta agregar los destinos a este select
+        $viaje = Viaje::select('viajes.id','viajes.id_camiones','viajes.id_acoplado','viajes.id_camionero',
+                                'viajes.id_cliente','viajes.km_inicial','viajes.km_final',
+                                'viajes.distancia','viajes.origen','viajes.valor',
+                                //TODO falta agregar destinos a este update
+                                'viajes.ganancia_camionero','viajes.tipoCamion','viajes.fecha',
+                                'viajes.peajes','viajes.gasoil_litros','viajes.gasoil_precio',
+                                'viajes.notaViaje','viajes.guia',
+                                'acoplado.id_simple_acoplado','camiones.id_simple_camiones',
+                                'camioneros.apellido','camioneros.nombre','clientes.nombre as clienteNombre',
+                                'ciudades.ciudad_nombre as cnombreorigen','ciudades.provincia_id',
+                                'provincias.provincia_nombre as pnombreorigen')
+                        ->join('camioneros','viajes.id_camionero','camioneros.id')
+                        ->leftJoin('acoplado','viajes.id_acoplado','acoplado.id')
+                        ->join('camiones','viajes.id_camiones','camiones.id')
+                        ->join('clientes','viajes.id_cliente','clientes.id')
+                        ->join('ciudades','viajes.origen','ciudades.id')
+                        ->join('provincias','ciudades.provincia_id','=','provincias.id')
+                        ->where('viajes.id','=',$id)
+                        ->get();
         return view('viajes.edit',compact('viaje'));
     }
 
@@ -175,6 +197,7 @@ class ViajesController extends Controller
         $viaje->km_final = $request->km_final;
         $viaje->distancia = $request->distancia;
         $viaje->origen = $request->origen;
+        //TODO falta agregar destinos a este update
         $viaje->valor = $request->valor;
         $viaje->ganancia_camionero = $request->ganancia_camionero;
         $viaje->tipoCamion = $request->tipoCamion;

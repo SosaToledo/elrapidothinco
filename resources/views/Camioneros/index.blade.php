@@ -46,11 +46,11 @@
                     <td>{{ $camionero->direccion }}</td>
                     <td>{{ $camionero->telefono }}</td>
                     <td>
-                        <form action="{{ route('camioneros.destroy',$camionero->id) }}" method="POST">
+                        <form id="formBorrar" action="{{ route('camioneros.destroy',$camionero->id) }}" method="POST">
                             <a class="btn btn-primary" href="{{ route('camioneros.edit',$camionero->id) }}"><i class="fa fa-edit"></i> Editar</a>
                             @csrf
                             @method('DELETE')
-                            <button type="submit" class="btn btn-danger"><i class="fa fa-trash"></i> Borrar</button>
+                            <button type="button" name="btn" class="btn btn-danger" id="submitBtn" data-toggle="modal" data-target="#confirm-submit"> <i class="fa fa-trash"></i> Borrar</button>
                         </form>
 
                     </td>
@@ -63,7 +63,26 @@
 
     @endif
 </div>
-   
+
+<div class="modal fade" id="confirm-submit" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                Borrado de elemento
+            </div>
+            <div class="modal-body">
+                <i>
+                    ¿Estas seguro de lo que vas a hacer?
+                </i>
+            </div>
+
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">Cancelar</button>
+                <a href="#" id="submit" class="btn btn-danger danger"> <i class="fa fa-remove"></i> Si, borrar</a>
+            </div>
+        </div>
+    </div>
+</div>
 
 <script>
     $(document).ready(function() {
@@ -73,6 +92,10 @@
             //$('#btnCerrar').click();
             jQuery('#success-alert').fadeOut();
        }, 2000);
+
+       $('#submit').click(function() {
+            $('#formBorrar').submit();
+        });
     });
 </script>
 

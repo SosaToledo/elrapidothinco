@@ -1,5 +1,6 @@
 @extends('layouts.app')
-  
+@section('title', 'Nuevo cliente')
+
 @section('content')
 <div class="row">
     <div class="col-md-2">
@@ -12,28 +13,28 @@
     </div>
 </div>
 <hr>
-   
+
 @if ($errors->any())
-    <div class="alert alert-danger">
-        <strong>Whoops!</strong> Parece que tenemos un problema con los datos que ingresaste.<br><br>
-        <ul>
-            @foreach ($errors->all() as $error)
-                <li>{{ $error }}</li>
-            @endforeach
-        </ul>
-    </div>
+<div class="alert alert-danger">
+    <strong>Whoops!</strong> Parece que tenemos un problema con los datos que ingresaste.<br><br>
+    <ul>
+        @foreach ($errors->all() as $error)
+        <li>{{ $error }}</li>
+        @endforeach
+    </ul>
+</div>
 @endif
-   
+
 <form action="{{ route('clientes.store') }}" method="POST">
     @csrf
-     <div class="row">
-     <div class="col-sm-12 col-md-6 lg-3">
+    <div class="row">
+        <div class="col-sm-12 col-md-6 lg-3">
             <div class="form-group">
                 <strong>CODIGO:</strong>
                 <input type="text" disabled value=CL0000 max=10 name="codigo" class="form-control" placeholder="">
             </div>
         </div>
-        
+
         <div class="col-sm-12 col-md-6 lg-3">
             <div class="form-group">
                 <strong>CUIL:</strong>
@@ -43,7 +44,7 @@
         <div class="col-sm-12 col-md-6 lg-3">
             <div class="form-group">
                 <strong>Razón social:</strong>
-                <input type="text"  max="30" class="form-control" name="nombre" placeholder="">
+                <input type="text" max="30" class="form-control" name="nombre" placeholder="">
             </div>
         </div>
         <div class="col-sm-12 col-md-6 lg-3">
@@ -68,6 +69,6 @@
             <button type="submit" class="btn btn-primary btn-block"><i class="fa fa-save"></i> Guardar</button>
         </div>
     </div>
-   
+
 </form>
 @endsection
