@@ -4,7 +4,7 @@
 @section('content')
 <div class="row">
     <div class="col-md-2">
-        <a class="btn btn-primary" href="{{ route('comprobantes.index') }}"><i class="fa fa-arrow-circle-left"></i> Volver</a>
+        
     </div>
     <div class="col margin-tb">
         <div class="pull-left">
@@ -44,7 +44,7 @@
         <div class="col-sm-12 col-md-4 lg-4">
             <div class="form-group">
                 <strong>Camionero:</strong>
-                <input type="hidden" id="camionero" name="camionero" >
+                <input type="hidden" id="camionero" name="camionero">
                 <input type="text" id="camioneroAutocomplete" class="form-control" name="camioneroVista" placeholder="Ingrese Apellido" >
             </div>
         </div>

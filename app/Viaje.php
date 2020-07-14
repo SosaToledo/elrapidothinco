@@ -20,6 +20,7 @@ class Viaje extends Model
         'km_final',
         'distancia',
         'origen',
+        'destino',
         'valor',
         'ganancia_camionero',
         'tipoCamion',
@@ -29,6 +30,7 @@ class Viaje extends Model
         'gasoil_precio',
         'notaViaje',
         'guia',
+        'estados',
         'created_at',
         'updated_at'
     ];

@@ -129,7 +129,15 @@ class ClientesController extends Controller
     public function destroy($id)
     {
         $cliente = Cliente::find($id);
-        $cliente->delete();
+
+        try {
+            $cliente->delete();
+        } catch (\Throwable $th) {
+            return redirect()->route('clientes.index')
+                        ->with('success','El cliente no fue eliminado por tener viajes asignados');
+        }
+
+        
         return redirect()->route('clientes.index')
                         ->with('success','Cliente eliminado');
     }

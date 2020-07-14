@@ -51,7 +51,7 @@
                             @csrf
                             @method('DELETE')
                             <button type="button" name="btn" class="btn btn-danger" id="submitBtn" data-toggle="modal" data-target="#confirm-submit"> <i class="fa fa-trash"></i> Borrar</button>
-                            <a class="btn btn-primary" href="{{ route('comprobantes.show','adelanto')}}">Adel.</a>
+                            <a class="btn btn-primary" href="{{ route('comprobantes.show',2)}}">Adel.</a>
                         </form>
 
                     </td>
@@ -92,11 +92,12 @@
             //$(".success-alert").alert('close');
             //$('#btnCerrar').click();
             jQuery('#success-alert').fadeOut();
-       }, 2000);
-
+       }, 3000);
+       
        $('#submit').click(function() {
             $('#formBorrar').submit();
         });
+
     });
 </script>
 

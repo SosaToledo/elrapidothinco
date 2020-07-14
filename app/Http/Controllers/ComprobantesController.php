@@ -85,8 +85,9 @@ class ComprobantesController extends Controller
     public function show($id)
     {
         $comprobante = 'adelanto';
-        if($id==1) $comprobante = 'nafta';
-        return view('comprobantes.create')->with(compact('comprobante'));
+        if($id == 1) $comprobante = 'nafta';
+        
+        return view('comprobantes.create', compact('comprobante'));
     }
 
     /**

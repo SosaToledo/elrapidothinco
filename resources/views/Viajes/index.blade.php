@@ -39,6 +39,7 @@
                 <th>Camionero</th>
                 <th>Camion</th>
                 <th>Fecha</th>
+                <th>Estado</th>
                 <th width="320px">Acciones</th>
             </tr>
             @foreach ($viajes as $viaje)
@@ -48,6 +49,7 @@
                 <td>{{ $viaje->apellido }}</td>
                 <td>{{ $viaje->id_simple_camiones }}</td>
                 <td>{{ $viaje->fecha }}</td>
+                <td>{{ $viaje->estados}}</td>
                 <td>
                     <form id="formBorrar" action="{{ route('viajes.destroy',$viaje->id) }}" method="POST">
                         <a class="btn btn-info" href="{{ route('comprobantes.show',1) }}"> <i class=""></i>Comp</a>
@@ -93,7 +95,7 @@
             //$(".success-alert").alert('close');
             //$('#btnCerrar').click();
             jQuery('#success-alert').fadeOut();
-       }, 2000);
+       }, 3000);
 
        $('#submit').click(function() {
             $('#formBorrar').submit();

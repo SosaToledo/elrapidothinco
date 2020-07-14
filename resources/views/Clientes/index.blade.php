@@ -93,7 +93,7 @@
             //$(".success-alert").alert('close');
             //$('#btnCerrar').click();
             jQuery('#success-alert').fadeOut();
-       }, 2000);
+       }, 3000);
 
        $('#submit').click(function() {
             $('#formBorrar').submit();

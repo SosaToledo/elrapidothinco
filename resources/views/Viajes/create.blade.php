@@ -153,6 +153,15 @@
                 <input type="text" class="form-control" name="guia" >
             </div>
         </div>
+        <div class="col-sm-12 col-md-6 lg-3">
+            <div class="form-group">
+                <strong>Estado:</strong>
+                <select class="form-control" name="estado" id="estado" value="Terminado">
+                    <option value="Iniciado">Iniciado</option>
+                    <option value="Terminado">Terminado</option>
+                </select>
+            </div>
+        </div>
         <div class="col-sm-12 col-md-12 lg-12">
             <div class="text-center">
                 <button type="submit" class="btn btn-primary btn-block"> <i class="fa fa-save"></i> Guardar</button>

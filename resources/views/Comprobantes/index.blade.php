@@ -83,20 +83,6 @@
     </div>
 </div>
 
-<script>
-    $(document).ready(function() {
-       // show the alert
-       setTimeout(function() {
-            //$(".success-alert").alert('close');
-            //$('#btnCerrar').click();
-            jQuery('#success-alert').fadeOut();
-       }, 2000);
-       
-       $('#submit').click(function() {
-            $('#formBorrar').submit();
-        });
 
-    });
-</script>
 
 @endsection

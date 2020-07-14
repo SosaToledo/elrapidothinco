@@ -1,5 +1,7 @@
 @extends('layouts.app')
-  
+@section('title')
+    Editar viaje
+@endsection
 @section('content')
 <div class="row">
 
@@ -88,13 +90,13 @@
             <div class="form-group">
                 <strong>Origen:</strong>
                 <input type="hidden" id="origen" name="origen"  value="{{$viaje[0]->origen}}">
-                <input type="text" id="origenAutocomplete" class="form-control" value="{{$viaje[0]->cnombreorigen.' - '.$viaje[0]->pnombreorigen}}" name="origenVista" placeholder="Ingrese nombre de la cuidad">
+                <input type="text" id="origenAutocomplete" class="form-control" value="{{$viaje[0]->origen}}" name="origenVista" placeholder="Ingrese nombre de la cuidad">
             </div>
         </div>
         <div class="col-sm-12 col-md-6 lg-3">
             <div class="form-group">
                 <strong>Destinos:</strong>
-                <input type="text" class="form-control" name="destinos" value="{{$destinos_array}}">
+                <input type="text" class="form-control" name="destino" value="{{$viaje[0]->destino}}">
             </div>
         </div>
         <div class="col-sm-12 col-md-6 lg-3">
@@ -113,10 +115,12 @@
             <div class="form-group">
                 <strong>Tipo:</strong>
                 <select class="form-control" name="tipoCamion" id="tipo">
-                    <!-- <option value="Chasis">Chasis</option>
-                    <option value="Acoplado">Acoplado</option> -->
-                    <option value="Chasis" {{ old('tipo',$viaje[0]->tipo)=='Chasis' ? 'selected' : ''  }}>Chasis</option>
-                    <option value="Acoplado" {{ old('tipo',$viaje[0]->tipo)=='Acoplado' ? 'selected' : ''  }}>Acoplado</option>
+                    <option value="Chasis"@php
+                                             if($viaje[0]->tipoCamion == 'Chasis') echo 'selected'
+                                          @endphp>Chasis</option>
+                    <option value="Acoplado"@php 
+                                              if($viaje[0]->tipoCamion == 'Acoplado') echo 'selected'
+                                            @endphp >Acoplado</option>
                 </select>
             </div>
         </div>
@@ -154,6 +158,19 @@
             <div class="form-group">
                 <strong>Guía:</strong>
                 <input type="text" class="form-control" name="guia" value="{{$viaje[0]->guia}}">
+            </div>
+        </div>
+        <div class="col-sm-12 col-md-6 lg-3">
+            <div class="form-group">
+                <strong>Estado:</strong>
+                <select class="form-control" name="estado" id="" value="">
+                    <option value="Iniciado"@php
+                                             if($viaje[0]->estados == 'Iniciado') echo 'selected'
+                                            @endphp>Iniciado</option>
+                    <option value="Terminado"@php
+                                             if($viaje[0]->estados == 'Terminado') echo 'selected'
+                                            @endphp>Terminado</option>
+                </select>
             </div>
         </div>
         <div class="col-sm-12 col-md-12 lg-12">

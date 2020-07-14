@@ -40,7 +40,7 @@ class CreateViajesTable extends Migration
 
             $table->string("origen");
             $table->string("destino");
-            //destinos no lo ponemos aca, va en la tabla de muchos a muchos
+            $table->string("estados");
             $table->float("valor");
             $table->float("ganancia_camionero"); //el 18% que se lleva el camionero del valor de viaje
             $table->string("tipoCamion"); //es para definir si el camion va con acoplado solo o lleva chasis tipo de valor esperado [CHASIS/ACOPLADO]
