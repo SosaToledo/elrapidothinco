@@ -79,12 +79,14 @@ class ComprobantesController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  string  $id
+     * @param  int  $id
      * @return \Illuminate\Http\Response
      */
     public function show($id)
     {
-        return view('comprobantes.create')->with($id);
+        $comprobante = 'adelanto';
+        if($id==1) $comprobante = 'nafta';
+        return view('comprobantes.create')->with(compact('comprobante'));
     }
 
     /**
@@ -98,7 +100,7 @@ class ComprobantesController extends Controller
         
         $comprobante = Comprobante::select('comprobantes.id','comprobantes.id_simple_comprobante','comprobantes.id_viaje','comprobantes.fecha'
         ,'comprobantes.id_camioneros', 'comprobantes.tipo', 'comprobantes.monto','comprobantes.detalles'
-        ,'viajes.idSimpleViaje','camioneros.apellido','camioneros.nombre',)
+        ,'viajes.idSimpleViaje','camioneros.apellido','camioneros.nombre')
         ->join('camioneros','comprobantes.id_camioneros','=','camioneros.id')
         ->join('viajes','comprobantes.id_viaje','=','viajes.id')
         ->where('comprobantes.id','=',$id)

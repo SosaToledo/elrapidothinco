@@ -50,8 +50,8 @@
                 <td>{{ $viaje->fecha }}</td>
                 <td>
                     <form id="formBorrar" action="{{ route('viajes.destroy',$viaje->id) }}" method="POST">
-                        <a class="btn btn-info" href="{{ route('viajes.show',$viaje->id) }}"> <i class="fa fa-eye"></i> Detalle</a>
-                        <a class="btn btn-primary" href="{{ route('viajes.edit',$viaje->id) }}"> <i class="fa fa-edit"></i> Editar</a>
+                        <a class="btn btn-info" href="{{ route('comprobantes.show',1) }}"> <i class=""></i>Comp</a>
+                        <a class="btn btn-primary" href="{{ route('viajes.edit',$viaje->id) }}"> <i class="fa fa-edit"></i>/<i class="fa fa-eye"></i></a>
                         @csrf
                         @method('DELETE')
                         <button type="button" name="btn" class="btn btn-danger" id="submitBtn" data-toggle="modal" data-target="#confirm-submit"> <i class="fa fa-trash"></i> Borrar</button>

@@ -14,7 +14,7 @@ class ClientesSeeder extends Seeder
     public function run()
     {
         DB::table('clientes')->insert([
-            'id_simple_clientes' => 1,
+            'id_simple_clientes' => 'CL1',
             'CUIL' => 20352094189,
             'nombre' => 'Luciano Sosa',
             'direccion' => 'por ahi',
@@ -25,7 +25,7 @@ class ClientesSeeder extends Seeder
         ]);
 
         DB::table('clientes')->insert([
-            'id_simple_clientes' => 1,
+            'id_simple_clientes' => 'CL2',
             'CUIL' => 20452001529,
             'nombre' => 'Frank Toledo',
             'direccion' => 'casa fea',

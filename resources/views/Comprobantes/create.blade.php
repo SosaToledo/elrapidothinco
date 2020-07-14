@@ -56,7 +56,7 @@
                     <option value="combustible">Combustible</option>
                     <option value="adelanto">Adelanto</option>
                 </select> -->
-                <input type="text" class="form-control" name="tipo" placeholder="" value="{{$id ?? ''}}">
+                <input type="text" class="form-control" name="tipo" placeholder="" value="{{$comprobante}}">
             </div>
         </div>
         <div class="col-sm-12 col-md-6 lg-3">

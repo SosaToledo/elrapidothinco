@@ -14,7 +14,7 @@ class CamionerosSeeder extends Seeder
     public function run()
     {
         DB::table('camioneros')->insert([
-            'id_simple_camioneros' => 22,
+            'id_simple_camioneros' => 'CM1',
             'DNI' => 35209418,
             'telefono' => 2700,
             'nombre' => 'el lucho',

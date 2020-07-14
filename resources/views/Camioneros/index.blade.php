@@ -51,7 +51,7 @@
                             @csrf
                             @method('DELETE')
                             <button type="button" name="btn" class="btn btn-danger" id="submitBtn" data-toggle="modal" data-target="#confirm-submit"> <i class="fa fa-trash"></i> Borrar</button>
-                            <a class="btn btn-primary" href="{{ route('comprobantes.show','adelanto')}}">Adelanto</a>
+                            <a class="btn btn-primary" href="{{ route('comprobantes.show','adelanto')}}">Adel.</a>
                         </form>
 
                     </td>

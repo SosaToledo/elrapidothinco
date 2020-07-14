@@ -14,7 +14,7 @@ class CamionesSeeder extends Seeder
     public function run()
     {
         DB::table('camiones')->insert([
-            'id_simple_camiones' => 22,
+            'id_simple_camiones' => 'CA1',
             'patente' => 'asd123', 
             'vtv_vencimiento' =>  Carbon::now(),
             'senasa_vencimiento' => Carbon::now(),
