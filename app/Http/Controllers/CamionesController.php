@@ -132,14 +132,15 @@ class CamionesController extends Controller
      */
     public function destroy($id)
     {
-
         $camion = Camion::find($id);
+     
         try {
             $camion->delete();
-        } catch (Exception $th) {
+        } catch (\Throwable $thh) {
             return redirect()->route('camiones.index')
-                        ->withError('success',$th->geMessenge());
+                        ->with('success','El camión no fue eliminado por tener viajes realizados');
         }
+     
         return redirect()->route('camiones.index')
                         ->with('success','Camión eliminado');
             

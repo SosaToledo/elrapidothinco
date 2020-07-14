@@ -38,9 +38,8 @@ class CreateViajesTable extends Migration
             $table->float("km_final")->nullable();
             $table->float("distancia")->nullable(); //kmfinal-kminicial
 
-            $table->unsignedBigInteger("origen");
-            $table->foreign('origen')->references('id')->on('ciudades');
-
+            $table->string("origen");
+            $table->string("destino");
             //destinos no lo ponemos aca, va en la tabla de muchos a muchos
             $table->float("valor");
             $table->float("ganancia_camionero"); //el 18% que se lleva el camionero del valor de viaje

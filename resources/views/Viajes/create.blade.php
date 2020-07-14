@@ -34,7 +34,7 @@
         <div class="col-sm-12 col-md-6 lg-3">
             <div class="form-group">
                 <strong>CODIGO:</strong>
-                <input type="text" disabled value=VC0000 max=10 name="idSimpleViajes" class="form-control" placeholder="">
+                <input type="text" readonly value="V{{$ultimo}}" max=10 name="idSimpleViajes" class="form-control" placeholder="">
             </div>
         </div>
         
@@ -87,17 +87,13 @@
         <div class="col-sm-12 col-md-6 lg-3">
             <div class="form-group">
                 <strong>Origen:</strong>
-                <input type="hidden" id="origen" name="origen"  >
-                <input type="text" id="origenAutocomplete" class="form-control" name="origenVista" placeholder="Ingrese nombre de la cuidad">
+                <input type="text" id="" class="form-control" name="origen" placeholder="Ingrese nombre de la cuidad">
             </div>
         </div>
         <div class="col-sm-12 col-md-6 lg-3">
             <div class="form-group">
                 <strong>Destinos:</strong>
-                <input type="text" id="destino" name="destino"> <!-- //Aca vamos a ir guardando los id de las ciudades separadas por coma -->
-                <input type="text" id="destinoAutocomplete" class="form-control" name="destinoVista" placeholder="Ingrese nombre de la ciudad">
-                <input type="text" data-role="tagsinput" id="destinoTag" class="form-control" name="destinoTag">
-
+                <input type="text" id="" class="form-control" name="destino" placeholder="Ingrese nombres de las ciudades">
             </div>
         </div>
         <div class="col-sm-12 col-md-6 lg-3">
@@ -414,7 +410,6 @@
                             }
                             else{
                                 var resp = $.map(data,function(obj){
-                                    //console.log(obj);
                                     return {
                                         label: obj.id + " | " + obj.nombre + " - " + obj.provincia,
                                         value: obj.id

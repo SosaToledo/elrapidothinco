@@ -127,9 +127,16 @@ class CamionerosController extends Controller
     public function destroy($id)
     {
         $camionero = Camionero::find($id);
-        $camionero->delete();
+         
+        try {
+            $camionero->delete(); 
+        } catch (\Throwable $th) {
+            return redirect()->route('camioneros.index')
+                        ->with('success','El camionero no fue eliminado por tener viajes realizados');
+        }
+        
         return redirect()->route('camioneros.index')
-                        ->with('success','Camionero eliminado');
+                        ->with('success','El camionero fue eliminado');
     }
 
     public function searchCamioneros(Request $request){

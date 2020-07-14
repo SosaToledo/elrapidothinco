@@ -94,7 +94,7 @@
         <div class="col-sm-12 col-md-6 lg-3">
             <div class="form-group">
                 <strong>Destinos:</strong>
-                <input type="text" class="form-control" name="destinos" value="{{$viaje[0]->destino}}">
+                <input type="text" class="form-control" name="destinos" value="{{$destinos_array}}">
             </div>
         </div>
         <div class="col-sm-12 col-md-6 lg-3">

@@ -19,7 +19,7 @@ class ViajesController extends Controller
     public function index()
     {
         $viajes = Viaje::orderby('id','asc')
-                ->select('viajes.id','viajes.idSimpleViaje','viajes.fecha','clientes.nombre','camioneros.id_simple_camioneros','camiones.id_simple_camiones')
+                ->select('viajes.id','viajes.idSimpleViaje','viajes.fecha','clientes.nombre','camioneros.apellido','camiones.id_simple_camiones')
                 ->join('clientes','viajes.id_cliente','=','clientes.id')
                 ->join('camioneros','viajes.id_camionero','=','camioneros.id')
                 ->join('camiones','viajes.id_camiones','=','camiones.id')
@@ -41,7 +41,13 @@ class ViajesController extends Controller
      */
     public function create()
     {
-        return view('viajes.create');
+        $ultimo = DB::table('viajes')->orderByDesc('created_at')->first();
+        if($ultimo == null){
+            $ultimo = 1;
+            return view('viajes.create', compact('ultimo'));
+        }
+        $ultimo = $ultimo->id + 1;
+        return view('viajes.create', compact('ultimo'));
     }
 
     /**
@@ -72,11 +78,9 @@ class ViajesController extends Controller
             'guia' => 'required',
         ]);
 
-        $id=DB::select("SHOW TABLE STATUS LIKE 'viajes'");
-        $next_id=$id[0]->Auto_increment;
         
         $viaje = new Viaje;
-        $viaje->idSimpleViaje = $next_id;
+        $viaje->idSimpleViaje = $request->idSimpleViajes;
         $viaje->id_camiones = $request->camion;
         $viaje->id_acoplado = $request->acoplado;
         $viaje->id_camionero = $request->camionero;
@@ -85,6 +89,7 @@ class ViajesController extends Controller
         $viaje->km_final = $request->km_final;
         $viaje->distancia = $request->distancia;
         $viaje->origen = $request->origen;
+        $viaje->destino = $request->destino;
         $viaje->valor = $request->valor;
         $viaje->ganancia_camionero = $request->ganancia_camionero;
         $viaje->tipoCamion = $request->tipoCamion;
@@ -98,14 +103,14 @@ class ViajesController extends Controller
         $viaje->updated_at = Carbon::now();
         $viaje->save(['timestamps' => false]);
         
-        $viaje_ultimo = DB::table('viajes')->orderByDesc('created_at')->first();
+        // $viaje_ultimo = DB::table('viajes')->orderByDesc('created_at')->first();
         
-        DB::table('ciudades_viajes')->insert([
-            'id_ciudad' => $request->destino,
-            'id_viajes' => $viaje_ultimo->id,
-            'created_at' => Carbon::now(),
-            'updated_at' => Carbon::now()
-        ]);
+        // DB::table('ciudades_viajes')->insert([
+        //     'id_ciudad' => $request->destino,
+        //     'id_viajes' => $viaje_ultimo->id,
+        //     'created_at' => Carbon::now(),
+        //     'updated_at' => Carbon::now()
+        // ]);
         
         $viaje->save(['timestamps' => false]);
 
@@ -156,7 +161,20 @@ class ViajesController extends Controller
                         ->join('provincias','ciudades.provincia_id','=','provincias.id')
                         ->where('viajes.id','=',$id)
                         ->get();
-        return view('viajes.edit',compact('viaje'));
+
+        $destinos = DB::raw('
+            SELECT cuidades.nombre 
+            FROM cuidades_viajes
+            JOIN cuidades ON cuidades_viajes.id_viaje = cuidades.id
+            WHERE cuidades_viajes.created_at = "'. $viaje[0]->fecha .'"
+        ');
+
+        $destinos_array = "";
+
+        foreach ($destinos as $destino) {
+            $destinos_array += " ".$destino->cuidad_nombre;
+        }
+        return view('viajes.edit',compact('viaje'))->with(compact('destinos_array'));
     }
 
     /**
