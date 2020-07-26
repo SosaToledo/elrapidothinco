@@ -18,7 +18,7 @@ class ViajesController extends Controller
      */
     public function index()
     {
-        $viajes = Viaje::orderby('id','asc')
+        $viajes = Viaje::orderby('fecha','asc')
                 ->select('viajes.id','viajes.idSimpleViaje','viajes.fecha','clientes.nombre','camioneros.apellido','camiones.id_simple_camiones', 'viajes.estados')
                 ->join('clientes','viajes.id_cliente','=','clientes.id')
                 ->join('camioneros','viajes.id_camionero','=','camioneros.id')
