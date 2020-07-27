@@ -31,7 +31,13 @@ class ClientesController extends Controller
      */
     public function create()
     {
-        return view('clientes.create');
+        $ultimo = DB::table('clientes')->orderByDesc('created_at')->first();
+        if($ultimo == null)
+            $ultimo = FuncionesComunes::rellenarNum(1);
+        else
+            $ultimo = FuncionesComunes::rellenarNum($ultimo->id + 1);
+        
+        return view('clientes.create', compact('ultimo'));
     }
 
     /**
@@ -43,6 +49,7 @@ class ClientesController extends Controller
     public function store(Request $request)
     {
         $request->validate([
+            'idSimple' => 'required',
             'cuil' => 'required',
             'nombre' => 'required',
             'correo' => 'required',
@@ -54,7 +61,8 @@ class ClientesController extends Controller
         $next_id=$id[0]->Auto_increment;
 
         $cliente = new Cliente;
-        $cliente->id_simple_clientes = $next_id;
+
+        $cliente->id_simple_clientes = $request->idSimple;
         $cliente->cuil = $request->cuil;
         $cliente->nombre = $request->nombre;
         $cliente->direccion = $request->direccion;

@@ -34,7 +34,7 @@
         <div class="col-sm-12 col-md-6 lg-3">
             <div class="form-group">
                 <strong>CODIGO:</strong>
-                <input type="text" readonly value="V{{$ultimo}}" max=10 name="idSimpleViajes" class="form-control" placeholder="">
+                <input type="text" readonly value="VJ{{$ultimo}}" max=10 name="idSimpleViajes" class="form-control" placeholder="">
             </div>
         </div>
         

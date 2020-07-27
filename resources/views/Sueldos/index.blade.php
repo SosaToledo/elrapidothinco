@@ -44,6 +44,13 @@
 
   @if(count($detalles_sueldo ?? '')==0)
   
+    <div class="alert alert-primary alert-dimissible fade show" role="alert">
+        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+        </button>
+        <p>Sin resultados.</p>
+    </div>        
+
   @else
    <hr>
   <div class="table-responsive mt-3">

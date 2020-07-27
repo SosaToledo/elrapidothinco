@@ -32,10 +32,10 @@ class AcopladoController extends Controller
     {
       $ultimo = DB::table('acoplado')->orderByDesc('created_at')->first();
       if($ultimo == null){
-        $ultimo = 1;
+        $ultimo = FuncionesComunes::rellenarNum(1);
         return view('acoplados.create', compact('ultimo'));
       }
-      $ultimo = $ultimo->id + 1;
+      $ultimo = FuncionesComunes::rellenarNum($ultimo->id + 1);
       return view('acoplados.create', compact('ultimo'));
     }
 
@@ -134,7 +134,7 @@ class AcopladoController extends Controller
      */
     public function destroy($id)
     {
-
+        dd($id);
         $acoplado = Acoplado::find($id);
         $acoplado->delete();
         

@@ -31,7 +31,7 @@
         <div class="col-sm-12 col-md-6 lg-3">
             <div class="form-group">
                 <strong>CODIGO:</strong>
-                <input type="text" disabled value=CL0000 max=10 name="codigo" class="form-control" placeholder="">
+                <input type="text" readonly  value="CL{{$ultimo}}"  max=10 name="idSimple" class="form-control" >
             </div>
         </div>
 
@@ -56,7 +56,7 @@
         <div class="col-sm-12 col-md-6 lg-3">
             <div class="form-group">
                 <strong>Teléfono:</strong>
-                <input type="text" class="form-control" name="telefono" placeholder="+54 9 2477 412345">
+                <input type="text" class="form-control" name="telefono" placeholder="2477 123456">
             </div>
         </div>
         <div class="col-sm-12 col-md-6 lg-3">

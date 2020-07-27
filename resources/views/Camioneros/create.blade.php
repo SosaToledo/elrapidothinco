@@ -15,20 +15,26 @@
 <hr>
 
 @if ($errors->any())
-    <div class="alert alert-danger">
-        <strong>Whoops!</strong> Parece que tenemos un problema con los datos que ingresaste.<br><br>
-        <ul>
-            @foreach ($errors->all() as $error)
-                <li>{{ $error }}</li>
-            @endforeach
-        </ul>
-    </div>
+<div class="alert alert-danger">
+    <strong>Whoops!</strong> Parece que tenemos un problema con los datos que ingresaste.<br><br>
+    <ul>
+        @foreach ($errors->all() as $error)
+        <li>{{ $error }}</li>
+        @endforeach
+    </ul>
+</div>
 @endif
-   
+
 <form action="{{ route('camioneros.store') }}" method="POST">
     @csrf
-     <div class="row">
-     <div class="col-sm-12 col-md-4 lg-4">
+    <div class="row">
+        <div class="col-sm-12 col-md-4 lg-3">
+            <div class="form-group">
+                <strong>CODIGO:</strong>
+                <input type="text" value="CM{{$ultimo}}" max=10 name="id_simple" class="form-control" readonly>
+            </div>
+        </div>
+        <div class="col-sm-12 col-md-4 lg-4">
             <div class="form-group">
                 <strong>DNI:</strong>
                 <input type="text" max=10 name="dni" class="form-control" placeholder="">
@@ -52,16 +58,16 @@
                 <input type="text" class="form-control" name="apellido" placeholder="">
             </div>
         </div>
-        <div class="col-sm-12 col-md-6 lg-3">
+        <div class="col-sm-12 col-md-4 lg-3">
             <div class="form-group">
                 <strong>Dirección:</strong>
                 <input type="text" class="form-control" name="direccion" placeholder="">
             </div>
         </div>
-        <div class="col-sm-12 col-md-6 lg-3">
+        <div class="col-sm-12 col-md-4 lg-3">
             <div class="form-group">
                 <strong>Teléfono:</strong>
-                <input type="text" class="form-control" name="telefono" placeholder="">
+                <input type="text" class="form-control" name="telefono" placeholder="Ingresar sin 0 & 15. Por ej: 2477 123456">
             </div>
         </div>
         <div class="col-sm-12 col-md-12 lg-12">
@@ -70,6 +76,6 @@
             </div>
         </div>
     </div>
-   
+
 </form>
 @endsection

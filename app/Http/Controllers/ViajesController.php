@@ -42,11 +42,10 @@ class ViajesController extends Controller
     public function create()
     {
         $ultimo = DB::table('viajes')->orderByDesc('created_at')->first();
-        if($ultimo == null){
-            $ultimo = 1;
-            return view('viajes.create', compact('ultimo'));
-        }
-        $ultimo = $ultimo->id + 1;
+        if($ultimo == null)
+            $ultimo = FuncionesComunes::rellenarNum(1);
+        else
+            $ultimo = FuncionesComunes::rellenarNum($ultimo->id + 1);
         return view('viajes.create', compact('ultimo'));
     }
 

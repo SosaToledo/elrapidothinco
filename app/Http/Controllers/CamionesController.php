@@ -34,10 +34,10 @@ class CamionesController extends Controller
     {
         $ultimo = DB::table('camiones')->orderByDesc('created_at')->first();
         if($ultimo == null){
-            $ultimo = 1;
+            $ultimo = FuncionesComunes::rellenarNum(1);
             return view('camiones.create', compact('ultimo'));
         }
-        $ultimo = $ultimo->id + 1;
+        $ultimo = FuncionesComunes::rellenarNum($ultimo->id + 1);
         return view('camiones.create', compact('ultimo'));
     }
 

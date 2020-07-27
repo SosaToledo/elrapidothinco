@@ -37,7 +37,7 @@
         <div class="col-sm-12 col-md-6 lg-3">
             <div class="form-group">
                 <strong>Patente:</strong>
-                <input type="text" maxlength="7" name="patente" class="form-control" placeholder="">
+                <input type="text" maxlength="7" name="patente" class="form-control" placeholder="" autofocus>
             </div>
         </div>
         <div class="col-sm-12 col-md-6 lg-3">

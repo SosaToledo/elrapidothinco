@@ -36,7 +36,7 @@
                 <th>Apellido y Nombre </th>
                 <th>Dirección</th>
                 <th>Teléfono</th>
-                <th width="280px">Acciones</th>
+                <th width="380px">Acciones</th>
             </tr>
             @foreach ($camioneros as $camionero)
                 <tr>
@@ -44,14 +44,17 @@
                     <td>{{ $camionero->DNI }}</td>
                     <td>{{ $camionero->apellido." ".$camionero->nombre }}</td>
                     <td>{{ $camionero->direccion }}</td>
-                    <td>{{ $camionero->telefono }}</td>
+                    <td>{{ $camionero->telefono }} 
+                                       
+                    </td>
                     <td>
-                        <form id="formBorrar" action="{{ route('camioneros.destroy',$camionero->id) }}" method="POST">
+                        <form id="formBorrar{{$camionero->id}}" action="{{ route('camioneros.destroy',$camionero->id) }}" method="POST">
                             <a class="btn btn-primary" href="{{ route('camioneros.edit',$camionero->id) }}"><i class="fa fa-edit"></i> Editar</a>
+                            <a class="btn btn-info" href="{{ route('comprobantes.show',2)}}"><i class="fa fa-money"></i> Adelanto</a>
+                            <a target="_blank" href="https://api.whatsapp.com/send?phone={{ $camionero->telefono}}"> <button class="btn btn-success"><i class="fa fa-whatsapp"></i></button></a>
                             @csrf
                             @method('DELETE')
-                            <button type="button" name="btn" class="btn btn-danger" id="submitBtn" data-toggle="modal" data-target="#confirm-submit"> <i class="fa fa-trash"></i> Borrar</button>
-                            <a class="btn btn-primary" href="{{ route('comprobantes.show',2)}}">Adel.</a>
+                            <button type="button"  idParaBorrar="{{$camionero->id}}" codigoSimple="{{$camionero->id_simple_camioneros}}"  name="btn" class="btn btn-danger submitBtn" id="submitBtn" data-toggle="modal" data-target="#confirm-submit"> <i class="fa fa-trash"></i> Borrar</button>
                         </form>
 
                     </td>
@@ -65,40 +68,7 @@
     @endif
 </div>
 
-<div class="modal fade" id="confirm-submit" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-    <div class="modal-dialog">
-        <div class="modal-content">
-            <div class="modal-header">
-                Borrado de elemento
-            </div>
-            <div class="modal-body">
-                <i>
-                    ¿Estas seguro de lo que vas a hacer?
-                </i>
-            </div>
-
-            <div class="modal-footer">
-                <button type="button" class="btn btn-default" data-dismiss="modal">Cancelar</button>
-                <a href="#" id="submit" class="btn btn-danger danger"> <i class="fa fa-remove"></i> Si, borrar</a>
-            </div>
-        </div>
-    </div>
-</div>
-
-<script>
-    $(document).ready(function() {
-       // show the alert
-       setTimeout(function() {
-            //$(".success-alert").alert('close');
-            //$('#btnCerrar').click();
-            jQuery('#success-alert').fadeOut();
-       }, 3000);
-       
-       $('#submit').click(function() {
-            $('#formBorrar').submit();
-        });
-
-    });
-</script>
+@include('Modal.confirmacionBorrado')
+<script src="{{ asset('js/utilities.js')}}"></script>
 
 @endsection
