@@ -51,7 +51,7 @@
                         <form id="formBorrar{{$camionero->id}}" action="{{ route('camioneros.destroy',$camionero->id) }}" method="POST">
                             <a class="btn btn-primary" href="{{ route('camioneros.edit',$camionero->id) }}"><i class="fa fa-edit"></i> Editar</a>
                             <a class="btn btn-info" href="{{ route('comprobantes.show',2)}}"><i class="fa fa-money"></i> Adelanto</a>
-                            <a target="_blank" href="https://api.whatsapp.com/send?phone={{ $camionero->telefono}}"> <button class="btn btn-success"><i class="fa fa-whatsapp"></i></button></a>
+                            <a target="_blank" href="https://api.whatsapp.com/send?phone={{ $camionero->telefono}}"> <button type="button" class="btn btn-success"><i class="fa fa-whatsapp"></i></button></a>
                             @csrf
                             @method('DELETE')
                             <button type="button"  idParaBorrar="{{$camionero->id}}" codigoSimple="{{$camionero->id_simple_camioneros}}"  name="btn" class="btn btn-danger submitBtn" id="submitBtn" data-toggle="modal" data-target="#confirm-submit"> <i class="fa fa-trash"></i> Borrar</button>
