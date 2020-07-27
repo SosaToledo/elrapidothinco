@@ -69,19 +69,19 @@
         <div class="col-sm-12 col-md-6 lg-3">
             <div class="form-group">
                 <strong>Km inicial:</strong>
-                <input type="text" class="form-control" name="km_inicial" >
+                <input type="text" class="form-control" name="km_inicial" id="km_inicial" >
             </div>
         </div>
         <div class="col-sm-12 col-md-6 lg-3">
             <div class="form-group">
                 <strong>Km final:</strong>
-                <input type="text" class="form-control" name="km_final" >
+                <input type="text" class="form-control" name="km_final" id="km_final" >
             </div>
         </div>
         <div class="col-sm-12 col-md-6 lg-3">
             <div class="form-group">
                 <strong>Distancia:</strong>
-                <input type="text" class="form-control" name="distancia" >
+                <input type="text" class="form-control" name="distancia" id="distancia">
             </div>
         </div>
         <div class="col-sm-12 col-md-6 lg-3">
@@ -99,13 +99,13 @@
         <div class="col-sm-12 col-md-6 lg-3">
             <div class="form-group">
                 <strong>Valor:</strong>
-                <input type="text" class="form-control" name="valor" >
+                <input type="text" class="form-control" name="valor" id="valorViaje" >
             </div>
         </div>
         <div class="col-sm-12 col-md-6 lg-3">
             <div class="form-group">
                 <strong>18% del camionero:</strong>
-                <input type="text" class="form-control" name="ganancia_camionero" >
+                <input type="text" class="form-control" name="ganancia_camionero" id="gananciaCamionero">
             </div>
         </div>
         <div class="col-sm-12 col-md-6 lg-3">
@@ -172,8 +172,28 @@
 </form>
 
 <script type="text/javascript">
+         
+        function calcularKmTotales() {
+            var inicio = $("#km_inicial").val();
+            var final = $("#km_final").val();
+
+            if (!(inicio == null && final ==null ) && inicio!=0 && final!=0 && final>inicio){
+                $("#distancia").val(final-inicio);
+            }
+        }
         
+        function calcularGananciaCamionero() {
+            var valorViaje = $("#valorViaje").val();
+            $("#gananciaCamionero").val(Math.floor((18*valorViaje)/100));
+        }
+
         $(document).ready(function() {
+        
+            $("#km_inicial").change(calcularKmTotales);
+            $("#km_final").change(calcularKmTotales);
+            $("#valorViaje").change(calcularGananciaCamionero);
+
+        
             //Autocompletado para camiones
             $( "#camionAutocomplete" ).autocomplete({
                 source: function(request, response) {
