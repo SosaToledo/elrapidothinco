@@ -1,4 +1,4 @@
-<?php
+ZearcEmyekyie8A<?php
 
 namespace App\Http\Controllers;
 
@@ -20,7 +20,7 @@ class CamionerosController extends Controller
     {
         $camioneros = Camionero::latest()->paginate(10);
 
-        return view('camioneros.index',compact('camioneros'))
+        return view('Camioneros.index',compact('camioneros'))
             ->with('i', (request()->input('page', 1) - 1) * 10);
     }
 
@@ -35,7 +35,7 @@ class CamionerosController extends Controller
         $next_id=$id[0]->Auto_increment;
 
         $ultimo = FuncionesComunes::rellenarNum($next_id);
-        return view('camioneros.create', compact('ultimo'));
+        return view('Camioneros.create', compact('ultimo'));
     }
 
     /**
@@ -66,7 +66,7 @@ class CamionerosController extends Controller
         $camionero->updated_at = Carbon::now();
         $camionero->save(['timestamps' => false]);
 
-        return redirect()->route('camioneros.index')
+        return redirect()->route('Camioneros.index')
                         ->with('success','Camionero ingresado correctamente.');
     }
 
@@ -90,7 +90,7 @@ class CamionerosController extends Controller
     public function edit($id)
     {
         $camionero = Camionero::find($id);
-        return view('camioneros.edit',compact('camionero'));
+        return view('Camioneros.edit',compact('camionero'));
     }
 
     /**
@@ -117,7 +117,7 @@ class CamionerosController extends Controller
         $camionero->dni = $request->dni;
         $camionero->save();
 
-        return redirect()->route('camioneros.index')
+        return redirect()->route('Camioneros.index')
                         ->with('success','Camionero actualizado.');
     }
 
@@ -134,11 +134,11 @@ class CamionerosController extends Controller
         try {
             $camionero->delete(); 
         } catch (\Throwable $th) {
-            return redirect()->route('camioneros.index')
+            return redirect()->route('Camioneros.index')
                         ->with('error','El camionero no fue eliminado por tener viajes realizados');
         }
         
-        return redirect()->route('camioneros.index')
+        return redirect()->route('Camioneros.index')
                         ->with('success','El camionero fue eliminado');
     }
 

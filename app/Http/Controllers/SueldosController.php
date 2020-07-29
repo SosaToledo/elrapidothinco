@@ -18,7 +18,7 @@ class SueldosController extends Controller
     {
         $camioneros = Camionero::All();
         $detalles_sueldo = [];
-        return view('sueldos.index',compact('camioneros'))->with(compact('detalles_sueldo'));
+        return view('Sueldosindex',compact('camioneros'))->with(compact('detalles_sueldo'));
     }
 
     /**
@@ -43,7 +43,7 @@ class SueldosController extends Controller
 
         $camioneros = Camionero::All();
 
-        return view('sueldos.index')
+        return view('Sueldosindex')
         ->with(compact('detalles_adelanto'))
         ->with(compact('detalles_sueldo'))
         ->with(compact('camioneros'));

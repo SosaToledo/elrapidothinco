@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers;
 
-use App\viaje;
+use App\Viaje;
 use Illuminate\Http\Request;
 use App\User;
 

@@ -21,7 +21,7 @@ class CamionesController extends Controller
     {
         $camiones = Camion::latest()->paginate(10);
   
-        return view('camiones.index',compact('camiones'))
+        return view('Camiones.index',compact('camiones'))
             ->with('i', (request()->input('page', 1) - 1) * 10);
     }
 
@@ -35,10 +35,10 @@ class CamionesController extends Controller
         $ultimo = DB::table('camiones')->orderByDesc('created_at')->first();
         if($ultimo == null){
             $ultimo = FuncionesComunes::rellenarNum(1);
-            return view('camiones.create', compact('ultimo'));
+            return view('Camiones.create', compact('ultimo'));
         }
         $ultimo = FuncionesComunes::rellenarNum($ultimo->id + 1);
-        return view('camiones.create', compact('ultimo'));
+        return view('Camiones.create', compact('ultimo'));
     }
 
     /**
@@ -67,7 +67,7 @@ class CamionesController extends Controller
         $camion->updated_at = Carbon::now();
         $camion->save(['timestamps' => false]);
 
-        return redirect()->route('camiones.index')
+        return redirect()->route('Camiones.index')
                         ->with('success','Camión ingresado correctamente.');
     }
 
@@ -91,7 +91,7 @@ class CamionesController extends Controller
     public function edit($id)
     {
         $camion = Camion::find($id);
-        return view('camiones.edit',compact('camion'));
+        return view('Camiones.edit',compact('camion'));
     }
 
     /**
@@ -120,7 +120,7 @@ class CamionesController extends Controller
         $camion->seguro_vencimiento = $request->get('seguro_vencimiento');
         $camion->save();
             
-        return redirect()->route('camiones.index')
+        return redirect()->route('Camiones.index')
                         ->with('success','Camión actualizado');
     }
 
@@ -137,11 +137,11 @@ class CamionesController extends Controller
         try {
             $camion->delete();
         } catch (\Throwable $thh) {
-            return redirect()->route('camiones.index')
+            return redirect()->route('Camiones.index')
                         ->with('success','El camión no fue eliminado por tener viajes realizados');
         }
      
-        return redirect()->route('camiones.index')
+        return redirect()->route('Camiones.index')
                         ->with('success','Camión eliminado');
             
         

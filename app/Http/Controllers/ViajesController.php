@@ -19,17 +19,17 @@ class ViajesController extends Controller
     public function index()
     {
         $viajes = Viaje::orderby('fecha','asc')
-                ->select('viajes.id','viajes.idSimpleViaje','viajes.fecha','clientes.nombre','camioneros.apellido','camiones.id_simple_camiones', 'viajes.estados')
-                ->join('clientes','viajes.id_cliente','=','clientes.id')
-                ->join('camioneros','viajes.id_camionero','=','camioneros.id')
-                ->join('camiones','viajes.id_camiones','=','camiones.id')
+                ->select('Viajes.id','Viajes.idSimpleViaje','Viajes.fecha','clientes.nombre','camioneros.apellido','camiones.id_simple_camiones', 'Viajes.estados')
+                ->join('clientes','Viajes.id_cliente','=','clientes.id')
+                ->join('camioneros','Viajes.id_camionero','=','camioneros.id')
+                ->join('camiones','Viajes.id_camiones','=','camiones.id')
                 ->get();
 
-        return view('viajes.index',compact('viajes'));
+        return view('Viajes.index',compact('viajes'));
 
         // este anda 
 /*         $viajes = Viaje::latest()->paginate(10);
-        return view('viajes.index',compact('viajes'))
+        return view('Viajes.index',compact('viajes'))
             ->with('i', (request()->input('page', 1) - 1) * 10);
 */
     }
@@ -46,7 +46,7 @@ class ViajesController extends Controller
             $ultimo = FuncionesComunes::rellenarNum(1);
         else
             $ultimo = FuncionesComunes::rellenarNum($ultimo->id + 1);
-        return view('viajes.create', compact('ultimo'));
+        return view('Viajes.create', compact('ultimo'));
     }
 
     /**
@@ -115,7 +115,7 @@ class ViajesController extends Controller
         
         $viaje->save(['timestamps' => false]);
 
-        return redirect()->route('viajes.index')
+        return redirect()->route('Viajes.index')
                         ->with('success','viaje ingresado correctamente.');
     }
 
@@ -128,7 +128,7 @@ class ViajesController extends Controller
     public function show($id)
     {
         $viaje = Viaje::find($id);
-        return view('viajes.show',compact('viaje'));
+        return view('Viajes.show',compact('viaje'));
     }
     
     /**
@@ -141,24 +141,24 @@ class ViajesController extends Controller
     {
 
         //TODO Falta agregar los destinos a este select
-        $viaje = Viaje::select('viajes.id','viajes.id_camiones','viajes.id_acoplado','viajes.id_camionero',
-                                'viajes.id_cliente','viajes.km_inicial','viajes.km_final',
-                                'viajes.distancia','viajes.origen','viajes.valor',
-                                'viajes.ganancia_camionero','viajes.tipoCamion','viajes.fecha',
-                                'viajes.peajes','viajes.gasoil_litros','viajes.gasoil_precio',
-                                'viajes.notaViaje','viajes.guia', 'viajes.destino',
+        $viaje = Viaje::select('Viajes.id','Viajes.id_camiones','Viajes.id_acoplado','Viajes.id_camionero',
+                                'Viajes.id_cliente','Viajes.km_inicial','Viajes.km_final',
+                                'Viajes.distancia','Viajes.origen','Viajes.valor',
+                                'Viajes.ganancia_camionero','Viajes.tipoCamion','Viajes.fecha',
+                                'Viajes.peajes','Viajes.gasoil_litros','Viajes.gasoil_precio',
+                                'Viajes.notaViaje','Viajes.guia', 'Viajes.destino',
                                 'acoplado.id_simple_acoplado','camiones.id_simple_camiones',
                                 'camioneros.apellido','camioneros.nombre','clientes.nombre as clienteNombre', 
-                                'viajes.estados')
-                        ->join('camioneros','viajes.id_camionero','camioneros.id')
-                        ->leftJoin('acoplado','viajes.id_acoplado','acoplado.id')
-                        ->join('camiones','viajes.id_camiones','camiones.id')
-                        ->join('clientes','viajes.id_cliente','clientes.id')
-                        ->where('viajes.id','=',$id)
+                                'Viajes.estados')
+                        ->join('camioneros','Viajes.id_camionero','camioneros.id')
+                        ->leftJoin('acoplado','Viajes.id_acoplado','acoplado.id')
+                        ->join('camiones','Viajes.id_camiones','camiones.id')
+                        ->join('clientes','Viajes.id_cliente','clientes.id')
+                        ->where('Viajes.id','=',$id)
                         ->get();
 
         
-        return view('viajes.edit',compact('viaje'));
+        return view('Viajes.edit',compact('viaje'));
     }
 
     /**
@@ -215,7 +215,7 @@ class ViajesController extends Controller
 
        
 
-        return redirect()->route('viajes.index')
+        return redirect()->route('Viajes.index')
                         ->with('success','viaje actulizado correctamente.');
 
     }
@@ -231,7 +231,7 @@ class ViajesController extends Controller
         $viaje = Viaje::find($id);
         $viaje->delete();
         
-        return redirect()->route('viajes.index')
+        return redirect()->route('Viajes.index')
                         ->with('success','Viaje eliminado');
     }
 

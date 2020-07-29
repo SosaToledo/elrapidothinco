@@ -20,7 +20,7 @@ class ClientesController extends Controller
     {
         $clientes = Cliente::latest()->paginate(10);
   
-        return view('clientes.index',compact('clientes'))
+        return view('Clientes.index',compact('clientes'))
             ->with('i', (request()->input('page', 1) - 1) * 10);
     }
 
@@ -37,7 +37,7 @@ class ClientesController extends Controller
         else
             $ultimo = FuncionesComunes::rellenarNum($ultimo->id + 1);
         
-        return view('clientes.create', compact('ultimo'));
+        return view('Clientes.create', compact('ultimo'));
     }
 
     /**
@@ -72,7 +72,7 @@ class ClientesController extends Controller
         $cliente->updated_at = Carbon::now();
         $cliente->save(['timestamps' => false]);
 
-        return redirect()->route('clientes.index')
+        return redirect()->route('Clientes.index')
                         ->with('success','Cliente ingresado correctamente.');
     }
 
@@ -96,7 +96,7 @@ class ClientesController extends Controller
     public function edit($id)
     {
         $cliente = Cliente::find($id);
-        return view('clientes.edit',compact('cliente'));
+        return view('Clientes.edit',compact('cliente'));
     }
 
     /**
@@ -124,7 +124,7 @@ class ClientesController extends Controller
         $cliente->correo = $request->correo;
         $cliente->save();
 
-        return redirect()->route('clientes.index')
+        return redirect()->route('Clientes.index')
                         ->with('success','Cliente actualizado');
     }
 
@@ -141,12 +141,12 @@ class ClientesController extends Controller
         try {
             $cliente->delete();
         } catch (\Throwable $th) {
-            return redirect()->route('clientes.index')
+            return redirect()->route('Clientes.index')
                         ->with('success','El cliente no fue eliminado por tener viajes asignados');
         }
 
         
-        return redirect()->route('clientes.index')
+        return redirect()->route('Clientes.index')
                         ->with('success','Cliente eliminado');
     }
 

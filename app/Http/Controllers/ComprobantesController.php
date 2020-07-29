@@ -20,12 +20,12 @@ class ComprobantesController extends Controller
     {
         $comprobantes = Comprobante::latest()->paginate(10);
         $comprobantes = Comprobante::orderby('id','asc')
-        ->select('comprobantes.id','comprobantes.id_simple_comprobante','viajes.idSimpleViaje','comprobantes.fecha', 'camioneros.nombre','comprobantes.tipo', 'comprobantes.tipo', 'comprobantes.monto','comprobantes.detalles')
-        ->join('camioneros','comprobantes.id_camioneros','=','camioneros.id')
-        ->join('viajes','comprobantes.id_viaje','=','viajes.id')
+        ->select('Comprobantes.id','Comprobantes.id_simple_comprobante','viajes.idSimpleViaje','Comprobantes.fecha', 'camioneros.nombre','Comprobantes.tipo', 'Comprobantes.tipo', 'Comprobantes.monto','Comprobantes.detalles')
+        ->join('camioneros','Comprobantes.id_camioneros','=','camioneros.id')
+        ->join('viajes','Comprobantes.id_viaje','=','viajes.id')
         ->get();
         
-        return view('comprobantes.index',compact('comprobantes'))
+        return view('Comprobantes.index',compact('comprobantes'))
             ->with('i', (request()->input('page', 1) - 1) * 10);
     }
 
@@ -36,7 +36,7 @@ class ComprobantesController extends Controller
      */
     public function create($id)
     {
-        // return view('comprobantes.create')->with($id);
+        // return view('Comprobantes.create')->with($id);
     }
 
     /**
@@ -72,7 +72,7 @@ class ComprobantesController extends Controller
         $comprobante->updated_at = Carbon::now();
         $comprobante->save(['timestamps' => false]);
 
-        return redirect()->route('comprobantes.index')
+        return redirect()->route('Comprobantes.index')
                         ->with('success','Comprobante ingresado correctamente.');
     }
 
@@ -87,7 +87,7 @@ class ComprobantesController extends Controller
         $comprobante = 'adelanto';
         if($id == 1) $comprobante = 'nafta';
         
-        return view('comprobantes.create', compact('comprobante'));
+        return view('Comprobantes.create', compact('comprobante'));
     }
 
     /**
@@ -99,14 +99,14 @@ class ComprobantesController extends Controller
     public function edit($id)
     {
         
-        $comprobante = Comprobante::select('comprobantes.id','comprobantes.id_simple_comprobante','comprobantes.id_viaje','comprobantes.fecha'
-        ,'comprobantes.id_camioneros', 'comprobantes.tipo', 'comprobantes.monto','comprobantes.detalles'
+        $comprobante = Comprobante::select('Comprobantes.id','Comprobantes.id_simple_comprobante','Comprobantes.id_viaje','Comprobantes.fecha'
+        ,'Comprobantes.id_camioneros', 'Comprobantes.tipo', 'Comprobantes.monto','Comprobantes.detalles'
         ,'viajes.idSimpleViaje','camioneros.apellido','camioneros.nombre')
-        ->join('camioneros','comprobantes.id_camioneros','=','camioneros.id')
-        ->join('viajes','comprobantes.id_viaje','=','viajes.id')
-        ->where('comprobantes.id','=',$id)
+        ->join('camioneros','Comprobantes.id_camioneros','=','camioneros.id')
+        ->join('viajes','Comprobantes.id_viaje','=','viajes.id')
+        ->where('Comprobantes.id','=',$id)
         ->get();
-        return view('comprobantes.edit',compact('comprobante'));
+        return view('Comprobantes.edit',compact('comprobante'));
 
     }
 
@@ -135,7 +135,7 @@ class ComprobantesController extends Controller
         $comprobante->monto = $request->monto;
         $comprobante->save(['timestamps' => false]);
 
-        return redirect()->route('comprobantes.index')
+        return redirect()->route('Comprobantes.index')
                         ->with('success','Comprobante actualizado.');
     }
 
@@ -149,7 +149,7 @@ class ComprobantesController extends Controller
     {
         $comprobante = Comprobante::find($id);
         $comprobante->delete();
-        return redirect()->route('comprobantes.index')
+        return redirect()->route('Comprobantes.index')
                         ->with('success','Comprobante eliminado');
     }
 }

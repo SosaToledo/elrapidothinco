@@ -19,7 +19,7 @@ class AcopladoController extends Controller
     {
         $acoplados = Acoplado::latest()->paginate(10);
   
-        return view('acoplados.index',compact('acoplados'))
+        return view('Acoplados.index',compact('acoplados'))
             ->with('i', (request()->input('page', 1) - 1) * 10);
     }
 
@@ -33,10 +33,10 @@ class AcopladoController extends Controller
       $ultimo = DB::table('acoplado')->orderByDesc('created_at')->first();
       if($ultimo == null){
         $ultimo = FuncionesComunes::rellenarNum(1);
-        return view('acoplados.create', compact('ultimo'));
+        return view('Acoplados.create', compact('ultimo'));
       }
       $ultimo = FuncionesComunes::rellenarNum($ultimo->id + 1);
-      return view('acoplados.create', compact('ultimo'));
+      return view('Acoplados.create', compact('ultimo'));
     }
 
     /**
@@ -70,7 +70,7 @@ class AcopladoController extends Controller
         //$acoplado->save();
 
 
-        return redirect()->route('acoplados.index')
+        return redirect()->route('Acoplados.index')
                         ->with('success','Acoplado ingresado correctamente.');
     }
 
@@ -84,7 +84,7 @@ class AcopladoController extends Controller
      //Esta función no se utiliza nunca, lo  deje por ser el modelo a seguir para el resto de los crud pero para los acoplados no hace falta la vista de detalle
     public function show(Acoplado $acoplado)
     {
-        return view('acoplados.show',compact('acoplado'));
+        return view('Acoplados.show',compact('acoplado'));
     }
 
     /**
@@ -96,7 +96,7 @@ class AcopladoController extends Controller
     public function edit($id)
     {
         $acoplado = Acoplado::find($id);
-        return view('acoplados.edit',compact('acoplado'));
+        return view('Acoplados.edit',compact('acoplado'));
     }
 
     /**
@@ -122,7 +122,7 @@ class AcopladoController extends Controller
         $acoplado->seguro_vencimiento = $request->get('seguro_vencimiento');
         $acoplado->save();
           
-        return redirect()->route('acoplados.index')
+        return redirect()->route('Acoplados.index')
                         ->with('success','Acoplado actualizado');
     }
 
@@ -138,7 +138,7 @@ class AcopladoController extends Controller
         $acoplado = Acoplado::find($id);
         $acoplado->delete();
         
-        return redirect()->route('acoplados.index')
+        return redirect()->route('Acoplados.index')
                         ->with('success','Acoplado eliminado');
     }
 
