@@ -1,4 +1,4 @@
-ZearcEmyekyie8A<?php
+<?php
 
 namespace App\Http\Controllers;
 
@@ -9,7 +9,7 @@ use Carbon\Carbon;
 use SebastianBergmann\Environment\Console;
 use Symfony\Component\Console\Logger\ConsoleLogger;
 
-class CamionerosController extends Controller
+class camionerosController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -66,7 +66,7 @@ class CamionerosController extends Controller
         $camionero->updated_at = Carbon::now();
         $camionero->save(['timestamps' => false]);
 
-        return redirect()->route('Camioneros.index')
+        return redirect()->route('camioneros.index')
                         ->with('success','Camionero ingresado correctamente.');
     }
 
@@ -117,7 +117,7 @@ class CamionerosController extends Controller
         $camionero->dni = $request->dni;
         $camionero->save();
 
-        return redirect()->route('Camioneros.index')
+        return redirect()->route('camioneros.index')
                         ->with('success','Camionero actualizado.');
     }
 
@@ -134,11 +134,11 @@ class CamionerosController extends Controller
         try {
             $camionero->delete(); 
         } catch (\Throwable $th) {
-            return redirect()->route('Camioneros.index')
+            return redirect()->route('camioneros.index')
                         ->with('error','El camionero no fue eliminado por tener viajes realizados');
         }
         
-        return redirect()->route('Camioneros.index')
+        return redirect()->route('camioneros.index')
                         ->with('success','El camionero fue eliminado');
     }
 

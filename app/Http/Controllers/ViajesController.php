@@ -19,10 +19,10 @@ class ViajesController extends Controller
     public function index()
     {
         $viajes = Viaje::orderby('fecha','asc')
-                ->select('Viajes.id','Viajes.idSimpleViaje','Viajes.fecha','clientes.nombre','camioneros.apellido','camiones.id_simple_camiones', 'Viajes.estados')
-                ->join('clientes','Viajes.id_cliente','=','clientes.id')
-                ->join('camioneros','Viajes.id_camionero','=','camioneros.id')
-                ->join('camiones','Viajes.id_camiones','=','camiones.id')
+                ->select('viajes.id','viajes.idSimpleViaje','viajes.fecha','clientes.nombre','camioneros.apellido','camiones.id_simple_camiones', 'viajes.estados')
+                ->join('clientes','viajes.id_cliente','=','clientes.id')
+                ->join('camioneros','viajes.id_camionero','=','camioneros.id')
+                ->join('camiones','viajes.id_camiones','=','camiones.id')
                 ->get();
 
         return view('Viajes.index',compact('viajes'));
@@ -115,7 +115,7 @@ class ViajesController extends Controller
         
         $viaje->save(['timestamps' => false]);
 
-        return redirect()->route('Viajes.index')
+        return redirect()->route('viajes.index')
                         ->with('success','viaje ingresado correctamente.');
     }
 
@@ -141,20 +141,20 @@ class ViajesController extends Controller
     {
 
         //TODO Falta agregar los destinos a este select
-        $viaje = Viaje::select('Viajes.id','Viajes.id_camiones','Viajes.id_acoplado','Viajes.id_camionero',
-                                'Viajes.id_cliente','Viajes.km_inicial','Viajes.km_final',
-                                'Viajes.distancia','Viajes.origen','Viajes.valor',
-                                'Viajes.ganancia_camionero','Viajes.tipoCamion','Viajes.fecha',
-                                'Viajes.peajes','Viajes.gasoil_litros','Viajes.gasoil_precio',
-                                'Viajes.notaViaje','Viajes.guia', 'Viajes.destino',
+        $viaje = Viaje::select('viajes.id','viajes.id_camiones','viajes.id_acoplado','viajes.id_camionero',
+                                'viajes.id_cliente','viajes.km_inicial','viajes.km_final',
+                                'viajes.distancia','viajes.origen','viajes.valor',
+                                'viajes.ganancia_camionero','viajes.tipoCamion','viajes.fecha',
+                                'viajes.peajes','viajes.gasoil_litros','viajes.gasoil_precio',
+                                'viajes.notaViaje','viajes.guia', 'viajes.destino',
                                 'acoplado.id_simple_acoplado','camiones.id_simple_camiones',
                                 'camioneros.apellido','camioneros.nombre','clientes.nombre as clienteNombre', 
-                                'Viajes.estados')
-                        ->join('camioneros','Viajes.id_camionero','camioneros.id')
-                        ->leftJoin('acoplado','Viajes.id_acoplado','acoplado.id')
-                        ->join('camiones','Viajes.id_camiones','camiones.id')
-                        ->join('clientes','Viajes.id_cliente','clientes.id')
-                        ->where('Viajes.id','=',$id)
+                                'viajes.estados')
+                        ->join('camioneros','viajes.id_camionero','camioneros.id')
+                        ->leftJoin('acoplado','viajes.id_acoplado','acoplado.id')
+                        ->join('camiones','viajes.id_camiones','camiones.id')
+                        ->join('clientes','viajes.id_cliente','clientes.id')
+                        ->where('viajes.id','=',$id)
                         ->get();
 
         
@@ -215,7 +215,7 @@ class ViajesController extends Controller
 
        
 
-        return redirect()->route('Viajes.index')
+        return redirect()->route('viajes.index')
                         ->with('success','viaje actulizado correctamente.');
 
     }
@@ -231,7 +231,7 @@ class ViajesController extends Controller
         $viaje = Viaje::find($id);
         $viaje->delete();
         
-        return redirect()->route('Viajes.index')
+        return redirect()->route('viajes.index')
                         ->with('success','Viaje eliminado');
     }
 

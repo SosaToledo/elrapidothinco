@@ -20,9 +20,9 @@ class ComprobantesController extends Controller
     {
         $comprobantes = Comprobante::latest()->paginate(10);
         $comprobantes = Comprobante::orderby('id','asc')
-        ->select('Comprobantes.id','Comprobantes.id_simple_comprobante','viajes.idSimpleViaje','Comprobantes.fecha', 'camioneros.nombre','Comprobantes.tipo', 'Comprobantes.tipo', 'Comprobantes.monto','Comprobantes.detalles')
-        ->join('camioneros','Comprobantes.id_camioneros','=','camioneros.id')
-        ->join('viajes','Comprobantes.id_viaje','=','viajes.id')
+        ->select('comprobantes.id','comprobantes.id_simple_comprobante','viajes.idSimpleViaje','comprobantes.fecha', 'camioneros.nombre','comprobantes.tipo', 'comprobantes.monto','comprobantes.detalles')
+        ->join('camioneros','comprobantes.id_camioneros','=','camioneros.id')
+        ->join('viajes','comprobantes.id_viaje','=','viajes.id')
         ->get();
         
         return view('Comprobantes.index',compact('comprobantes'))
@@ -49,7 +49,6 @@ class ComprobantesController extends Controller
     public function store(Request $request )
     {
         $request->validate([
-            'viaje' => 'required',
             'fecha' => 'required',
             'camionero' => 'required',
             'tipo' => 'required',
@@ -72,7 +71,7 @@ class ComprobantesController extends Controller
         $comprobante->updated_at = Carbon::now();
         $comprobante->save(['timestamps' => false]);
 
-        return redirect()->route('Comprobantes.index')
+        return redirect()->route('comprobantes.index')
                         ->with('success','Comprobante ingresado correctamente.');
     }
 

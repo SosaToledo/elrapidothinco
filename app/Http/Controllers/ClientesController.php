@@ -72,7 +72,7 @@ class ClientesController extends Controller
         $cliente->updated_at = Carbon::now();
         $cliente->save(['timestamps' => false]);
 
-        return redirect()->route('Clientes.index')
+        return redirect()->route('clientes.index')
                         ->with('success','Cliente ingresado correctamente.');
     }
 
@@ -124,7 +124,7 @@ class ClientesController extends Controller
         $cliente->correo = $request->correo;
         $cliente->save();
 
-        return redirect()->route('Clientes.index')
+        return redirect()->route('clientes.index')
                         ->with('success','Cliente actualizado');
     }
 
@@ -141,12 +141,12 @@ class ClientesController extends Controller
         try {
             $cliente->delete();
         } catch (\Throwable $th) {
-            return redirect()->route('Clientes.index')
+            return redirect()->route('clientes.index')
                         ->with('success','El cliente no fue eliminado por tener viajes asignados');
         }
 
         
-        return redirect()->route('Clientes.index')
+        return redirect()->route('clientes.index')
                         ->with('success','Cliente eliminado');
     }
 

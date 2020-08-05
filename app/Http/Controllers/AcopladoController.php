@@ -70,7 +70,7 @@ class AcopladoController extends Controller
         //$acoplado->save();
 
 
-        return redirect()->route('Acoplados.index')
+        return redirect()->route('acoplados.index')
                         ->with('success','Acoplado ingresado correctamente.');
     }
 
@@ -122,7 +122,7 @@ class AcopladoController extends Controller
         $acoplado->seguro_vencimiento = $request->get('seguro_vencimiento');
         $acoplado->save();
           
-        return redirect()->route('Acoplados.index')
+        return redirect()->route('acoplados.index')
                         ->with('success','Acoplado actualizado');
     }
 
@@ -134,11 +134,10 @@ class AcopladoController extends Controller
      */
     public function destroy($id)
     {
-        dd($id);
         $acoplado = Acoplado::find($id);
         $acoplado->delete();
         
-        return redirect()->route('Acoplados.index')
+        return redirect()->route('acoplados.index')
                         ->with('success','Acoplado eliminado');
     }
 
