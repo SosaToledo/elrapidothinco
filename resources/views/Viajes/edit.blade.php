@@ -34,7 +34,7 @@
         <div class="col-sm-12 col-md-6 lg-3">
             <div class="form-group">
                 <strong>CODIGO:</strong>
-                <input type="text" disabled value=VC0000 max=10 name="idSimpleViajes" class="form-control" placeholder=""value="{{$viaje[0]->idSimpleViajes}}">
+                <input type="text"  max=10 name="idSimpleViajes" class="form-control" placeholder="" value="{{$viaje[0]->idSimpleViaje}}" readonly>
             </div>
         </div>
         
@@ -113,13 +113,13 @@
         </div> -->
         <div class="col-sm-12 col-md-6 lg-3">
             <div class="form-group">
-                <strong>cantidad:</strong>
+                <strong>Cantidad:</strong>
                 <input type="text" class="form-control" value="{{$viaje[0]->cantidad}}" name="cantidad" id="cantidad" >
             </div>
         </div>
         <div class="col-sm-12 col-md-6 lg-3">
             <div class="form-group">
-                <strong>precio:</strong>
+                <strong>Precio:</strong>
                 <input type="text" class="form-control" value="{{$viaje[0]->precio}}" name="precio" id="precio" >
             </div>
         </div>
@@ -144,7 +144,7 @@
                                           @endphp>Chasis</option>
                     <option value="Acoplado"@php 
                                               if($viaje[0]->tipoCamion == 'Acoplado') echo 'selected'
-                                            @endphp >Acoplado</option>
+                                            @endphp >Chasis y acoplado</option>
                 </select>
             </div>
         </div>
@@ -156,7 +156,7 @@
         </div>
         <div class="col-sm-12 col-md-6 lg-3">
             <div class="form-group">
-                <strong>Peajes:</strong>
+                <strong>Viáticos:</strong>
                 <input type="text" class="form-control" name="peajes" value="{{$viaje[0]->peajes}}">
             </div>
         </div>        

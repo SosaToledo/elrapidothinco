@@ -119,9 +119,10 @@ class ViajesController extends Controller
     {
 
         //TODO Falta agregar los destinos a este select
-        $viaje = Viaje::select('viajes.id','viajes.id_camiones','viajes.id_acoplado','viajes.id_camionero',
+        $viaje = Viaje::select('viajes.id','viajes.idSimpleViaje','viajes.id_camiones','viajes.id_acoplado','viajes.id_camionero',
                                 'viajes.id_cliente','viajes.km_inicial','viajes.km_final',
                                 'viajes.distancia','viajes.origen','viajes.valor',
+                                'viajes.cantidad', 'viajes.precio', 'viajes.remitos',
                                 'viajes.ganancia_camionero','viajes.tipoCamion','viajes.fecha',
                                 'viajes.peajes','viajes.gasoil_litros','viajes.gasoil_precio',
                                 'viajes.notaViaje','viajes.guia', 'viajes.destino',
@@ -148,46 +149,30 @@ class ViajesController extends Controller
      */
     public function update(Request $request, $id)
     {
-        $request->validate([
-            'camion' => 'required',
-            'camionero' => 'required',
-            'cliente' => 'required',
-            'km_inicial' => 'required',
-            'km_final' => 'required',
-            'distancia' => 'required',
-            'origen' => 'required',
-            'destino' => 'required',
-            'valor' => 'required',
-            'ganancia_camionero' => 'required',
-            'tipoCamion' => 'required',
-            'fecha' => 'required',
-            'peajes' => 'required',
-            'gasoil_litros' => 'required',
-            'gasoil_precio' => 'required',
-            'notaViaje' => 'required',
-            'guia' => 'required',
-            'estado' => 'required'
-        ]);
-
+       
         $viaje = Viaje::find($id);
         $viaje->id_camiones = $request->camion;
         $viaje->id_acoplado = $request->acoplado;
         $viaje->id_camionero = $request->camionero;
         $viaje->id_cliente = $request->cliente;
-        $viaje->km_inicial = $request->km_inicial;
-        $viaje->km_final = $request->km_final;
-        $viaje->distancia = $request->distancia;
+        $viaje->km_inicial = $request->km_inicial ?? 0;
+        $viaje->km_final = $request->km_final ?? 0;
+        $viaje->distancia = $request->distancia ?? 0;
         $viaje->origen = $request->origen;
         $viaje->destino = $request->destino;
+        $viaje->remitos = $request->remitos ?? 0;
+        $viaje->carta_porte = $request->carta_porte ?? 0;
+        $viaje->cantidad = $request->cantidad ?? 0;
+        $viaje->precio = $request->precio ?? 0;
         $viaje->valor = $request->valor;
-        $viaje->ganancia_camionero = $request->ganancia_camionero;
+        $viaje->ganancia_camionero = $request->ganancia_camionero ?? 0;
         $viaje->tipoCamion = $request->tipoCamion;
         $viaje->fecha = $request->fecha;
-        $viaje->peajes = $request->peajes;
-        $viaje->gasoil_litros = $request->gasoil_litros;
-        $viaje->gasoil_precio = $request->gasoil_precio;
-        $viaje->notaViaje = $request->notaViaje;
-        $viaje->guia = $request->guia;
+        $viaje->peajes = $request->peajes ?? 0;
+        $viaje->gasoil_litros = $request->gasoil_litros ?? 0;
+        $viaje->gasoil_precio = $request->gasoil_precio ?? 0;
+        $viaje->notaViaje = $request->notaViaje ?? 0;
+        $viaje->guia = $request->guia ?? 0;
         $viaje->estados = $request->estado;
         $viaje->save();
 
