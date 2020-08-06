@@ -9,7 +9,7 @@
             <h2>Comprobantes.</h2>
         </div>
         <div class="col-md-6">
-            <a class="btn btn-success float-right" href="{{ route('Comprobantes.create') }}"> <i class="fa fa-plus"></i> Nuevo Comprobante</a>
+            <a class="btn btn-success float-right" href="{{ route('comprobantes.create') }}"> <i class="fa fa-plus"></i> Nuevo Comprobante</a>
         </div>
     </div>
    

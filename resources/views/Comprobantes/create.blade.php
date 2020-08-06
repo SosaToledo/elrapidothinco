@@ -4,7 +4,7 @@
 @section('content')
 <div class="row">
     <div class="col-md-2">
-        <a class="btn btn-primary" href="{{ route('Comprobantes.index') }}"> <i class="fa fa-arrow-circle-left"></i> Volver</a>
+        <a class="btn btn-primary" href="{{ route('comprobantes.index') }}"> <i class="fa fa-arrow-circle-left"></i> Volver</a>
     </div>
     <div class="col margin-tb">
         <div class="pull-left">
