@@ -1,14 +1,14 @@
-@extends('layouts.app')
+ @extends('layouts.app')
 @section('title', 'Nuevo comprobante')
 
 @section('content')
 <div class="row">
     <div class="col-md-2">
-        
+        <a class="btn btn-primary" href="{{ route('Comprobantes.index') }}"> <i class="fa fa-arrow-circle-left"></i> Volver</a>
     </div>
     <div class="col margin-tb">
         <div class="pull-left">
-            <h2>Agregar nuevo comprobante</h2>
+            <h2>Agregar nuevo asd comprobante</h2>
         </div>
     </div>
 </div>

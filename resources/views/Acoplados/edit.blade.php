@@ -1,5 +1,6 @@
 @extends('layouts.app')
-   
+@section('title', 'Editando '.$acoplado->id_simple_acoplado)
+
 @section('content')
 <div class="row">
     <div class="col-md-2">
@@ -12,21 +13,21 @@
     </div>
 </div>
 <hr>
-   
+
     @if ($errors->any())
-        <div class="alert alert-danger">
+    <div class="alert alert-danger">
             <strong>Whoops!</strong> Tenemos problemas con los datos cargados.<br><br>
             <ul>
                 @foreach ($errors->all() as $error)
-                    <li>{{ $error }}</li>
+                <li>{{ $error }}</li>
                 @endforeach
             </ul>
         </div>
-    @endif
-  
-    <form action="{{ route('acoplados.update',$acoplado->id) }}" method="POST">
-        @csrf
-        @method('PUT')
+        @endif
+        
+        <form action="{{ route('acoplados.update',$acoplado->id) }}" method="POST">
+            @csrf
+            @method('PUT')
    
         <div class="row">
             <div class="col-sm-12 col-md-6 lg-3">
@@ -48,13 +49,13 @@
                     <input value="{{$acoplado->vtv_vencimiento}}" min="2020-01-01" max="2040-12-31" type="date" class="form-control" name="vtv_vencimiento" placeholder="">
                 </div>
             </div>
-            <div class="col-xs-12 col-sm-12 col-md-12">
+            <div class="col-sm-12 col-md-6">
                 <div class="form-group">
                     <strong>Vencimiento SENASA:</strong>
                     <input value="{{$acoplado->senasa_vencimiento}}" min="2020-01-01" max="2040-12-31" type="date" class="form-control" name="senasa_vencimiento" placeholder="">
                 </div>
             </div>
-            <div class="col-xs-12 col-sm-12 col-md-12">
+            <div class="col-sm-12 col-md-6">
                 <div class="form-group">
                     <strong>Vencimiento Seguro:</strong>
                     <input value="{{$acoplado->seguro_vencimiento}}" min="2020-01-01" max="2040-12-31" type="date" class="form-control" name="seguro_vencimiento" placeholder="">

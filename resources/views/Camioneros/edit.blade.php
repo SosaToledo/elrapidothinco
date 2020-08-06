@@ -29,7 +29,13 @@
     @csrf
     @method('PUT')
      <div class="row">
-     <div class="col-sm-12 col-md-4 lg-4">
+        <div class="col-sm-12 col-md-4 lg-3">
+        <div class="form-group">
+            <strong>CODIGO:</strong>
+            <input type="text" value="{{$camionero->id_simple_camioneros}}" max=10 name="id_simple" class="form-control" readonly>
+        </div>
+        </div>
+        <div class="col-sm-12 col-md-4 lg-4">
             <div class="form-group">
                 <strong>DNI:</strong>
                 <input type="text" max=10 name="dni" class="form-control" placeholder="" value="{{$camionero->DNI}}">
@@ -53,13 +59,13 @@
                 <input type="text" class="form-control" name="apellido" placeholder="" value="{{$camionero->apellido}}">
             </div>
         </div>
-        <div class="col-sm-12 col-md-6 lg-6">
+        <div class="col-sm-12 col-md-4 lg-6">
             <div class="form-group">
                 <strong>Dirección:</strong>
                 <input type="text" class="form-control" name="direccion" placeholder="" value="{{$camionero->direccion}}">
             </div>
         </div>
-        <div class="col-sm-12 col-md-6 lg-6">
+        <div class="col-sm-12 col-md-4 lg-6">
             <div class="form-group">
                 <strong>Teléfono:</strong>
                 <input type="text" class="form-control" name="telefono" placeholder="" value="{{$camionero->telefono}}">
