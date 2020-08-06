@@ -29,7 +29,7 @@ class SueldosController extends Controller
     public function create(Request $request)
     {
         $detalles_sueldo = DB::table('camioneros')
-        ->select('camioneros.nombre','viajes.id','viajes.idSimpleViaje', 'camioneros.apellido','viajes.ganancia_camionero', 'viajes.fecha', 'viajes.peajes')
+        ->select('camioneros.nombre','viajes.id','viajes.guia' ,'viajes.idSimpleViaje', 'camioneros.apellido','viajes.ganancia_camionero', 'viajes.fecha', 'viajes.peajes')
         ->rightJoin('viajes', 'camioneros.id', '=', 'viajes.id_camionero')
         ->where('camioneros.id', $request->camionero)
         ->whereBetween('viajes.fecha', [$request->fecha_inicio, $request->fecha_fin])

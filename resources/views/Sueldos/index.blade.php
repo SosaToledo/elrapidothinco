@@ -63,6 +63,7 @@
       <tr>
         <th>Fecha</th>
         <th>Cod Viaje</th>
+        <th>Guía</th>
         <th>Sueldo</th>
         <th>Viaticos</th>
       </tr>
@@ -70,6 +71,7 @@
         <tr>
           <td>{{$viajes->fecha}}</td>
           <td>{{$viajes->idSimpleViaje}}</td>
+          <td>{{$viajes->guia}}</td>
           <td>${{$viajes->ganancia_camionero}}</td>
             @php
               $sueldos = $sueldos + $viajes->ganancia_camionero

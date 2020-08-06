@@ -42,7 +42,7 @@
             <div class="form-group">
                 <strong>Camión:</strong>
                 <input type="hidden" id="camion" name="camion" >
-                <input type="text" id="camionAutocomplete" maxlength="7" name="camionVista" class="form-control" placeholder="Ingresar la patente">
+                <input type="text" id="camionAutocomplete" maxlength="7" name="camionVista" class="form-control" placeholder="Ingresar la patente" required>
             </div>
         </div>
         <div class="col-sm-12 col-md-6 lg-3">
@@ -56,14 +56,14 @@
             <div class="form-group">
                 <strong>Camionero:</strong>
                 <input type="hidden" id="camionero" name="camionero" >
-                <input type="text" id="camioneroAutocomplete" class="form-control" name="camioneroVista" placeholder="Ingresar Apellido" >
+                <input type="text" id="camioneroAutocomplete" class="form-control" name="camioneroVista" placeholder="Ingresar Apellido"  required>
             </div>
         </div>
         <div class="col-sm-12 col-md-6 lg-3">
             <div class="form-group">
                 <strong>Cliente:</strong>
                 <input type="hidden" id="cliente" name="cliente" >
-                <input type="text" id="clienteAutocomplete" class="form-control" name="clienteVista" placeholder="Ingresar razon social">
+                <input type="text" id="clienteAutocomplete" class="form-control" name="clienteVista" placeholder="Ingresar razon social"required>
             </div>
         </div>
         <div class="col-sm-12 col-md-6 lg-3">
@@ -87,15 +87,42 @@
         <div class="col-sm-12 col-md-6 lg-3">
             <div class="form-group">
                 <strong>Origen:</strong>
-                <input type="text" id="" class="form-control" name="origen" placeholder="Ingrese nombre de la cuidad">
+                <input type="text" id="" class="form-control" name="origen" placeholder="Ingrese nombre de la cuidad"required>
             </div>
         </div>
         <div class="col-sm-12 col-md-6 lg-3">
             <div class="form-group">
                 <strong>Destinos:</strong>
-                <input type="text" id="" class="form-control" name="destino" placeholder="Ingrese nombres de las ciudades">
+                <input type="text" id="" class="form-control" name="destino" placeholder="Ingrese nombres de las ciudades"required>
             </div>
         </div>
+
+        <!--TODO: agregarlos en el controller y model - remitos y carta de porte-->
+        <div class="col-sm-12 col-md-6 lg-3">
+            <div class="form-group">
+                <strong>Remitos:</strong>
+                <input type="text" class="form-control" name="remitos" id="remitos" >
+            </div>
+        </div>
+        <!-- <div class="col-sm-12 col-md-6 lg-3">
+            <div class="form-group">
+                <strong>Carta de porte:</strong>
+                <input type="text" class="form-control" name="carta_porte" id="carta_porte" >
+            </div>
+        </div> -->
+        <div class="col-sm-12 col-md-6 lg-3">
+            <div class="form-group">
+                <strong>cantidad:</strong>
+                <input type="text" class="form-control" name="cantidad" id="cantidad" >
+            </div>
+        </div>
+        <div class="col-sm-12 col-md-6 lg-3">
+            <div class="form-group">
+                <strong>precio:</strong>
+                <input type="text" class="form-control" name="precio" id="precio" >
+            </div>
+        </div>
+        <!--fin TODO-->
         <div class="col-sm-12 col-md-6 lg-3">
             <div class="form-group">
                 <strong>Valor:</strong>
@@ -113,19 +140,19 @@
                 <strong>Tipo:</strong>
                 <select class="form-control" name="tipoCamion" id="tipo">
                     <option value="Chasis">Chasis</option>
-                    <option value="Acoplado">Acoplado</option>
+                    <option value="Acoplado">Chasis y acoplado</option>
                 </select>
             </div>
         </div>
         <div class="col-sm-12 col-md-6 lg-3">
             <div class="form-group">
                 <strong>fecha:</strong>
-                <input min="2020-01-01" max="2040-12-31" type="date" class="form-control" name="fecha" >
+                <input min="2020-01-01" max="2040-12-31" type="date" class="form-control" name="fecha" required>
             </div>
         </div>
         <div class="col-sm-12 col-md-6 lg-3">
             <div class="form-group">
-                <strong>Peajes:</strong>
+                <strong>Viaticos:</strong>
                 <input type="text" class="form-control" name="peajes" >
             </div>
         </div>        
@@ -170,304 +197,284 @@
     </div>
    
 </form>
+<script src="{{ asset('js/autocomplete-calc.js')}}"></script>
+<script>
+    $(document).ready(function() {
 
-<script type="text/javascript">
-         
-        function calcularKmTotales() {
-            var inicio = $("#km_inicial").val();
-            var final = $("#km_final").val();
+    //Autocompletado para camiones
+    $( "#camionAutocomplete" ).autocomplete({
+        source: function(request, response) {
+            $.ajax({
+                url: "{{route('camiones.search')}}",
+                data: {
+                        term : request.term
+                },
+                dataType: "json",
+                success: function(data){
 
-            if (!(inicio == null && final ==null ) && inicio!=0 && final!=0 && final>inicio){
-                $("#distancia").val(final-inicio);
+                    if(!data.length){
+                        var result = [
+                            { label: 'Sin resultados', value: response.term }
+                        ];
+                        response(result);
+                    }
+                    else{
+                        var resp = $.map(data,function(obj){
+                            //console.log(obj);
+                            return {
+                                label: obj.patente,
+                                value: obj.id
+                            }
+                        });
+                        response(resp);
+                    }
+                }
+            });
+        },
+        minLength: 1,
+        select:function(event,ui){
+            if (ui.item.label == "Sin resultados") {
+                event.preventDefault(); 
+            } else {
+                $('#camionAutocomplete').val(ui.item.label); // display the selected text
+                $('#camion').val(ui.item.value); // save selected id to input
+                return false;
             }
+        },
+        focus: function(event, ui){
+            return false;
         }
-        
-        function calcularGananciaCamionero() {
-            var valorViaje = $("#valorViaje").val();
-            $("#gananciaCamionero").val(Math.floor((18*valorViaje)/100));
+    });
+
+    //Autocompletado para acoplados
+    $( "#acopladoAutocomplete" ).autocomplete({
+        source: function(request, response) {
+            $.ajax({
+                url: "{{route('acoplado.search')}}",
+                data: {
+                        term : request.term
+                },
+                dataType: "json",
+                success: function(data){
+
+                    if(!data.length){
+                        var result = [
+                            { label: 'Sin resultados', value: response.term }
+                        ];
+                        response(result);
+                    }
+                    else{
+                        var resp = $.map(data,function(obj){
+                            //console.log(obj);
+                            return {
+                                label: obj.patente,
+                                value: obj.id
+                            }
+                        });
+                        response(resp);
+                    }
+                }
+            });
+        },
+        minLength: 1,
+        select:function(event,ui){
+            if (ui.item.label == "Sin resultados") {
+                event.preventDefault(); 
+            } else {
+                $('#acopladoAutocomplete').val(ui.item.label); // display the selected text
+                $('#acoplado').val(ui.item.value); // save selected id to input
+                return false;
+            }
+        },
+        focus: function(event, ui){
+            return false;
         }
+    });
 
-        $(document).ready(function() {
-        
-            $("#km_inicial").change(calcularKmTotales);
-            $("#km_final").change(calcularKmTotales);
-            $("#valorViaje").change(calcularGananciaCamionero);
-
-        
-            //Autocompletado para camiones
-            $( "#camionAutocomplete" ).autocomplete({
-                source: function(request, response) {
-                    $.ajax({
-                        url: "{{route('camiones.search')}}",
-                        data: {
-                                term : request.term
-                        },
-                        dataType: "json",
-                        success: function(data){
-
-                            if(!data.length){
-                                var result = [
-                                    { label: 'Sin resultados', value: response.term }
-                                ];
-                                response(result);
-                            }
-                            else{
-                                var resp = $.map(data,function(obj){
-                                    //console.log(obj);
-                                    return {
-                                        label: obj.patente,
-                                        value: obj.id
-                                    }
-                                });
-                                response(resp);
-                            }
-                        }
-                    });
+    //camioneros autocomplete
+    $( "#camioneroAutocomplete" ).autocomplete({
+        source: function(request, response) {
+            $.ajax({
+                url: "{{route('camioneros.search')}}",
+                data: {
+                        term : request.term
                 },
-                minLength: 1,
-                select:function(event,ui){
-                    if (ui.item.label == "Sin resultados") {
-                        event.preventDefault(); 
-                    } else {
-                        $('#camionAutocomplete').val(ui.item.label); // display the selected text
-                        $('#camion').val(ui.item.value); // save selected id to input
-                        return false;
+                dataType: "json",
+                success: function(data){
+
+                    if(!data.length){
+                        var result = [
+                            { label: 'Sin resultados', value: response.term }
+                        ];
+                        response(result);
                     }
-                },
-                focus: function(event, ui){
-                    return false;
+                    else{
+                        var resp = $.map(data,function(obj){
+                            //console.log(obj);
+                            return {
+                                label: obj.apellido + " " + obj.nombre,
+                                value: obj.id
+                            }
+                        });
+                        response(resp);
+                    }
                 }
             });
+        },
+        minLength: 1,
+        select:function(event,ui){
+            if (ui.item.label == "Sin resultados") {
+                event.preventDefault(); 
+            } else {
+                $('#camioneroAutocomplete').val(ui.item.label); // display the selected text
+                $('#camionero').val(ui.item.value); // save selected id to input
+                return false;
+            }
+        },
+        focus: function(event, ui){
+            return false;
+        }
+    });
 
-            //Autocompletado para acoplados
-            $( "#acopladoAutocomplete" ).autocomplete({
-                source: function(request, response) {
-                    $.ajax({
-                        url: "{{route('acoplado.search')}}",
-                        data: {
-                                term : request.term
-                        },
-                        dataType: "json",
-                        success: function(data){
-
-                            if(!data.length){
-                                var result = [
-                                    { label: 'Sin resultados', value: response.term }
-                                ];
-                                response(result);
-                            }
-                            else{
-                                var resp = $.map(data,function(obj){
-                                    //console.log(obj);
-                                    return {
-                                        label: obj.patente,
-                                        value: obj.id
-                                    }
-                                });
-                                response(resp);
-                            }
-                        }
-                    });
+    //clientes autocomplete
+    $( "#clienteAutocomplete" ).autocomplete({
+        source: function(request, response) {
+            $.ajax({
+                url: "{{route('clientes.search')}}",
+                data: {
+                        term : request.term
                 },
-                minLength: 1,
-                select:function(event,ui){
-                    if (ui.item.label == "Sin resultados") {
-                        event.preventDefault(); 
-                    } else {
-                        $('#acopladoAutocomplete').val(ui.item.label); // display the selected text
-                        $('#acoplado').val(ui.item.value); // save selected id to input
-                        return false;
+                dataType: "json",
+                success: function(data){
+
+                    if(!data.length){
+                        var result = [
+                            { label: 'Sin resultados', value: response.term }
+                        ];
+                        response(result);
                     }
-                },
-                focus: function(event, ui){
-                    return false;
+                    else{
+                        var resp = $.map(data,function(obj){
+                            //console.log(obj);
+                            return {
+                                label: obj.nombre,
+                                value: obj.id
+                            }
+                        });
+                        response(resp);
+                    }
                 }
             });
+        },
+        minLength: 1,
+        select:function(event,ui){
+            if (ui.item.label == "Sin resultados") {
+                event.preventDefault(); 
+            } else {
+                $('#clienteAutocomplete').val(ui.item.label); // display the selected text
+                $('#cliente').val(ui.item.value); // save selected id to input
+                return false;
+            }
+        },
+        focus: function(event, ui){
+            return false;
+        }
+    });
 
-            //camioneros autocomplete
-            $( "#camioneroAutocomplete" ).autocomplete({
-                source: function(request, response) {
-                    $.ajax({
-                        url: "{{route('camioneros.search')}}",
-                        data: {
-                                term : request.term
-                        },
-                        dataType: "json",
-                        success: function(data){
-
-                            if(!data.length){
-                                var result = [
-                                    { label: 'Sin resultados', value: response.term }
-                                ];
-                                response(result);
-                            }
-                            else{
-                                var resp = $.map(data,function(obj){
-                                    //console.log(obj);
-                                    return {
-                                        label: obj.apellido + " " + obj.nombre,
-                                        value: obj.id
-                                    }
-                                });
-                                response(resp);
-                            }
-                        }
-                    });
+    //ciudades autocomplete
+    $( "#origenAutocomplete" ).autocomplete({
+        source: function(request, response) {
+            $.ajax({
+                url: "{{route('ciudades.search')}}",
+                data: {
+                        term : request.term
                 },
-                minLength: 1,
-                select:function(event,ui){
-                    if (ui.item.label == "Sin resultados") {
-                        event.preventDefault(); 
-                    } else {
-                        $('#camioneroAutocomplete').val(ui.item.label); // display the selected text
-                        $('#camionero').val(ui.item.value); // save selected id to input
-                        return false;
+                dataType: "json",
+                success: function(data){
+
+                    if(!data.length){
+                        var result = [
+                            { label: 'Sin resultados', value: response.term }
+                        ];
+                        response(result);
                     }
-                },
-                focus: function(event, ui){
-                    return false;
+                    else{
+                        var resp = $.map(data,function(obj){
+                            //console.log(obj);
+                            return {
+                                label: obj.nombre + " - " + obj.provincia,
+                                value: obj.id
+                            }
+                        });
+                        response(resp);
+                    }
                 }
             });
+        },
+        minLength: 1,
+        select:function(event,ui){
+            if (ui.item.label == "Sin resultados") {
+                event.preventDefault(); 
+            } else {
+                $('#origenAutocomplete').val(ui.item.label); // display the selected text
+                $('#origen').val(ui.item.value); // save selected id to input
+                return false;
+            }
+            
+        },
+        focus: function(event, ui){
+            return false;
+        }
+    });
 
-            //clientes autocomplete
-            $( "#clienteAutocomplete" ).autocomplete({
-                source: function(request, response) {
-                    $.ajax({
-                        url: "{{route('clientes.search')}}",
-                        data: {
-                                term : request.term
-                        },
-                        dataType: "json",
-                        success: function(data){
-
-                            if(!data.length){
-                                var result = [
-                                    { label: 'Sin resultados', value: response.term }
-                                ];
-                                response(result);
-                            }
-                            else{
-                                var resp = $.map(data,function(obj){
-                                    //console.log(obj);
-                                    return {
-                                        label: obj.nombre,
-                                        value: obj.id
-                                    }
-                                });
-                                response(resp);
-                            }
-                        }
-                    });
+    //ciudades autocomplete
+    $( "#destinoAutocomplete" ).autocomplete({
+        source: function(request, response) {
+            $.ajax({
+                url: "{{route('ciudades.search')}}",
+                data: {
+                        term : request.term
                 },
-                minLength: 1,
-                select:function(event,ui){
-                    if (ui.item.label == "Sin resultados") {
-                        event.preventDefault(); 
-                    } else {
-                        $('#clienteAutocomplete').val(ui.item.label); // display the selected text
-                        $('#cliente').val(ui.item.value); // save selected id to input
-                        return false;
+                dataType: "json",
+                success: function(data){
+
+                    if(!data.length){
+                        var result = [
+                            { label: 'Sin resultados', value: response.term }
+                        ];
+                        response(result);
                     }
-                },
-                focus: function(event, ui){
-                    return false;
+                    else{
+                        var resp = $.map(data,function(obj){
+                            return {
+                                label: obj.id + " | " + obj.nombre + " - " + obj.provincia,
+                                value: obj.id
+                            }
+                        });
+                        response(resp);
+                    }
                 }
             });
-
-            //ciudades autocomplete
-             $( "#origenAutocomplete" ).autocomplete({
-                source: function(request, response) {
-                    $.ajax({
-                        url: "{{route('ciudades.search')}}",
-                        data: {
-                                term : request.term
-                        },
-                        dataType: "json",
-                        success: function(data){
-
-                            if(!data.length){
-                                var result = [
-                                    { label: 'Sin resultados', value: response.term }
-                                ];
-                                response(result);
-                            }
-                            else{
-                                var resp = $.map(data,function(obj){
-                                    //console.log(obj);
-                                    return {
-                                        label: obj.nombre + " - " + obj.provincia,
-                                        value: obj.id
-                                    }
-                                });
-                                response(resp);
-                            }
-                        }
-                    });
-                },
-                minLength: 1,
-                select:function(event,ui){
-                    if (ui.item.label == "Sin resultados") {
-                        event.preventDefault(); 
-                    } else {
-                        $('#origenAutocomplete').val(ui.item.label); // display the selected text
-                        $('#origen').val(ui.item.value); // save selected id to input
-                        return false;
-                    }
-                    
-                },
-                focus: function(event, ui){
-                    return false;
-                }
-            });
-
-            //ciudades autocomplete
-            $( "#destinoAutocomplete" ).autocomplete({
-                source: function(request, response) {
-                    $.ajax({
-                        url: "{{route('ciudades.search')}}",
-                        data: {
-                                term : request.term
-                        },
-                        dataType: "json",
-                        success: function(data){
-
-                            if(!data.length){
-                                var result = [
-                                    { label: 'Sin resultados', value: response.term }
-                                ];
-                                response(result);
-                            }
-                            else{
-                                var resp = $.map(data,function(obj){
-                                    return {
-                                        label: obj.id + " | " + obj.nombre + " - " + obj.provincia,
-                                        value: obj.id
-                                    }
-                                });
-                                response(resp);
-                            }
-                        }
-                    });
-                },
-                minLength: 1,
-                select:function(event,ui){
-                    if (ui.item.label == "Sin resultados") {
-                        event.preventDefault(); 
-                    } else {
-                        $('#destinoAutocomplete').val(""); 
-                        $('#destinoTag').tagsinput('add', ui.item.label,true,true );
-                        console.log($("#destinoTag").val());
-                        return false;
-                    }
-                    
-                },
-                focus: function(event, ui){
-                    return false;
-                }
-            });
-            //Terminan los auto complete aca --------------
+        },
+        minLength: 1,
+        select:function(event,ui){
+            if (ui.item.label == "Sin resultados") {
+                event.preventDefault(); 
+            } else {
+                $('#destinoAutocomplete').val(""); 
+                $('#destinoTag').tagsinput('add', ui.item.label,true,true );
+                console.log($("#destinoTag").val());
+                return false;
+            }
+            
+        },
+        focus: function(event, ui){
+            return false;
+        }
+    });
+    //Terminan los auto complete aca --------------
 
 
-        });
+    });
 </script>
 @endsection

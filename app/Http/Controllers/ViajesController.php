@@ -53,39 +53,25 @@ class ViajesController extends Controller
      */
     public function store(Request $request)
     {
-        $request->validate([
-            'camion' => 'required',
-            'camionero' => 'required',
-            'cliente' => 'required',
-            'km_inicial' => 'required',
-            'km_final' => 'required',
-            'distancia' => 'required',
-            'origen' => 'required',
-            'destino' => 'required',
-            'valor' => 'required',
-            'ganancia_camionero' => 'required',
-            'tipoCamion' => 'required',
-            'fecha' => 'required',
-            'estado' => 'required'
-        ]);
-
-        
         $viaje = new Viaje;
         $viaje->idSimpleViaje = $request->idSimpleViajes;
         $viaje->id_camiones = $request->camion;
         $viaje->id_acoplado = $request->acoplado;
         $viaje->id_camionero = $request->camionero;
         $viaje->id_cliente = $request->cliente;
-        $viaje->km_inicial = $request->km_inicial;
-        $viaje->km_final = $request->km_final;
-        $viaje->distancia = $request->distancia;
+        $viaje->km_inicial = $request->km_inicial ?? 0;
+        $viaje->km_final = $request->km_final ?? 0;
+        $viaje->distancia = $request->distancia ?? 0;
         $viaje->origen = $request->origen;
         $viaje->destino = $request->destino;
-        $viaje->valor = $request->valor;
-        $viaje->ganancia_camionero = $request->ganancia_camionero;
+        $viaje->remitos = $request->remitos ?? 0;
+        $viaje->carta_porte = $request->carta_porte ?? 0;
+        $viaje->cantidad = $request->cantidad ?? 0;
+        $viaje->precio = $request->precio ?? 0;
+        $viaje->valor = $request->valor ?? 0;
+        $viaje->ganancia_camionero = $request->ganancia_camionero ?? 0;
         $viaje->tipoCamion = $request->tipoCamion;
         $viaje->fecha = $request->fecha;
-        /* dd($request->peaje ?? 0); */
         $viaje->peajes = $request->peaje ?? 0;
         $viaje->gasoil_litros = $request->gasoil_litros ?? 0 ;
         $viaje->gasoil_precio = $request->gasoil_precio ?? 0;

@@ -42,7 +42,7 @@
             <div class="form-group">
                 <strong>Camión:</strong>
                 <input type="hidden" id="camion" name="camion" value="{{$viaje[0]->id_camiones}}">
-                <input type="text" id="camionAutocomplete" maxlength="7" value="{{$viaje[0]->id_simple_camiones}}" name="camionVista" class="form-control" placeholder="Ingresar la patente">
+                <input type="text" id="camionAutocomplete" maxlength="7" value="{{$viaje[0]->id_simple_camiones}}" name="camionVista" class="form-control" placeholder="Ingresar la patente" required>
          
             </div>
         </div>
@@ -58,57 +58,81 @@
             <div class="form-group">
                 <strong>Camionero:</strong>
                 <input type="hidden" id="camionero" name="camionero" value="{{$viaje[0]->id_camionero}}">
-                <input type="text" id="camioneroAutocomplete" class="form-control" value="{{$viaje[0]->apellido.' '.$viaje[0]->nombre}}" name="camioneroVista" placeholder="Ingresar Apellido" >
+                <input type="text" id="camioneroAutocomplete" class="form-control" value="{{$viaje[0]->apellido.' '.$viaje[0]->nombre}}" name="camioneroVista" placeholder="Ingresar Apellido" required>
             </div>
         </div>
         <div class="col-sm-12 col-md-6 lg-3">
             <div class="form-group">
                 <strong>Cliente:</strong>
                 <input type="hidden" id="cliente" name="cliente" value="{{$viaje[0]->id_cliente}}">
-                <input type="text" id="clienteAutocomplete" value="{{$viaje[0]->clienteNombre}}" class="form-control" name="clienteVista" placeholder="Ingresar razon social">
+                <input type="text" id="clienteAutocomplete" value="{{$viaje[0]->clienteNombre}}" class="form-control" name="clienteVista" placeholder="Ingresar razon social" required>
             </div>
         </div>
         <div class="col-sm-12 col-md-6 lg-3">
             <div class="form-group">
                 <strong>Km inicial:</strong>
-                <input type="text" class="form-control" name="km_inicial" value="{{$viaje[0]->km_inicial}}">
+                <input type="text" class="form-control" name="km_inicial" id="km_inicial" value="{{$viaje[0]->km_inicial}}">
             </div>
         </div>
         <div class="col-sm-12 col-md-6 lg-3">
             <div class="form-group">
                 <strong>Km final:</strong>
-                <input type="text" class="form-control" name="km_final" value="{{$viaje[0]->km_final}}">
+                <input type="text" class="form-control" name="km_final" id="km_final" value="{{$viaje[0]->km_final}}">
             </div>
         </div>
         <div class="col-sm-12 col-md-6 lg-3">
             <div class="form-group">
                 <strong>Distancia:</strong>
-                <input type="text" class="form-control" name="distancia" value="{{$viaje[0]->distancia}}">
+                <input type="text" class="form-control" name="distancia" id="distancia" value="{{$viaje[0]->distancia}}">
             </div>
         </div>
         <div class="col-sm-12 col-md-6 lg-3">
             <div class="form-group">
                 <strong>Origen:</strong>
                 <input type="hidden" id="origen" name="origen"  value="{{$viaje[0]->origen}}">
-                <input type="text" id="origenAutocomplete" class="form-control" value="{{$viaje[0]->origen}}" name="origenVista" placeholder="Ingrese nombre de la cuidad">
+                <input type="text" id="origenAutocomplete" class="form-control" value="{{$viaje[0]->origen}}" name="origenVista" placeholder="Ingrese nombre de la cuidad" required>
             </div>
         </div>
         <div class="col-sm-12 col-md-6 lg-3">
             <div class="form-group">
                 <strong>Destinos:</strong>
-                <input type="text" class="form-control" name="destino" value="{{$viaje[0]->destino}}">
+                <input type="text" class="form-control" name="destino" value="{{$viaje[0]->destino}}" required>
+            </div>
+        </div>
+        <div class="col-sm-12 col-md-6 lg-3">
+            <div class="form-group">
+                <strong>Remitos:</strong>
+                <input type="text" class="form-control" value="{{$viaje[0]->remitos}}" name="remitos" id="remitos" >
+            </div>
+        </div>
+        <!-- <div class="col-sm-12 col-md-6 lg-3">
+            <div class="form-group">
+                <strong>Carta de porte:</strong>
+                <input type="text" class="form-control" name="carta_porte" id="carta_porte" >
+            </div>
+        </div> -->
+        <div class="col-sm-12 col-md-6 lg-3">
+            <div class="form-group">
+                <strong>cantidad:</strong>
+                <input type="text" class="form-control" value="{{$viaje[0]->cantidad}}" name="cantidad" id="cantidad" >
+            </div>
+        </div>
+        <div class="col-sm-12 col-md-6 lg-3">
+            <div class="form-group">
+                <strong>precio:</strong>
+                <input type="text" class="form-control" value="{{$viaje[0]->precio}}" name="precio" id="precio" >
             </div>
         </div>
         <div class="col-sm-12 col-md-6 lg-3">
             <div class="form-group">
                 <strong>Valor:</strong>
-                <input type="text" class="form-control" name="valor" value="{{$viaje[0]->valor}}">
+                <input type="text" class="form-control" name="valor" value="{{$viaje[0]->valor}}" id="valorViaje">
             </div>
         </div>
         <div class="col-sm-12 col-md-6 lg-3">
             <div class="form-group">
                 <strong>18% del camionero:</strong>
-                <input type="text" class="form-control" name="ganancia_camionero" value="{{$viaje[0]->ganancia_camionero}}">
+                <input type="text" class="form-control" name="ganancia_camionero" id="gananciaCamionero" value="{{$viaje[0]->ganancia_camionero}}">
             </div>
         </div>
         <div class="col-sm-12 col-md-6 lg-3">
@@ -127,7 +151,7 @@
         <div class="col-sm-12 col-md-6 lg-3">
             <div class="form-group">
                 <strong>fecha:</strong>
-                <input min="2020-01-01" max="2040-12-31" type="date" class="form-control" name="fecha" value="{{$viaje[0]->fecha}}">
+                <input min="2020-01-01" max="2040-12-31" type="date" class="form-control" name="fecha" value="{{$viaje[0]->fecha}}" required>
             </div>
         </div>
         <div class="col-sm-12 col-md-6 lg-3">
@@ -181,7 +205,7 @@
     </div>
    
 </form>
-
+<script src="{{ asset('js/autocomplete-calc.js')}}"></script>
 <script type="text/javascript">
         
         $(document).ready(function() {
