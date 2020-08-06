@@ -31,12 +31,7 @@ class ClientesController extends Controller
      */
     public function create()
     {
-        $ultimo = DB::table('clientes')->orderByDesc('created_at')->first();
-        if($ultimo == null)
-            $ultimo = FuncionesComunes::rellenarNum(1);
-        else
-            $ultimo = FuncionesComunes::rellenarNum($ultimo->id + 1);
-        
+        $ultimo = FuncionesComunes::rellenarNum('clientes');
         return view('Clientes.create', compact('ultimo'));
     }
 

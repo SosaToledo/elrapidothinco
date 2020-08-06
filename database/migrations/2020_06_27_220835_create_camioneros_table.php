@@ -14,7 +14,7 @@ class CreateCamionerosTable extends Migration
     public function up()
     {
         Schema::create('camioneros', function (Blueprint $table) {
-            $table->id("id");
+            $table->id();
             $table->string("id_simple_camioneros");
             $table->bigInteger("DNI");
             $table->string("password")->nullable();

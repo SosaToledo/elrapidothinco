@@ -31,10 +31,7 @@ class camionerosController extends Controller
      */
     public function create()
     {
-        $id=DB::select("SHOW TABLE STATUS LIKE 'camioneros'");
-        $next_id=$id[0]->Auto_increment;
-
-        $ultimo = FuncionesComunes::rellenarNum($next_id);
+        $ultimo = FuncionesComunes::rellenarNum('camioneros');
         return view('Camioneros.create', compact('ultimo'));
     }
 
@@ -135,7 +132,7 @@ class camionerosController extends Controller
             $camionero->delete(); 
         } catch (\Throwable $th) {
             return redirect()->route('camioneros.index')
-                        ->with('error','El camionero no fue eliminado por tener viajes realizados');
+                        ->with('error','El camionero no fue eliminado por tener viajes/comprobantes');
         }
         
         return redirect()->route('camioneros.index')

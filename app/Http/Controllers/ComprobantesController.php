@@ -36,11 +36,7 @@ class ComprobantesController extends Controller
      */
     public function create()
     {
-        $ultimo = DB::table('comprobantes')->orderByDesc('created_at')->first();
-        if($ultimo == null)
-            $ultimo = FuncionesComunes::rellenarNum(1);
-        else
-            $ultimo = FuncionesComunes::rellenarNum($ultimo->id + 1);
+        $ultimo = FuncionesComunes::rellenarNum('comprobantes');
         return view('Comprobantes.create', compact('ultimo'));
     }
 
@@ -152,8 +148,12 @@ class ComprobantesController extends Controller
     public function destroy($id)
     {
         $comprobante = Comprobante::find($id);
-        $comprobante->delete();
-        return redirect()->route('Comprobantes.index')
-                        ->with('success','Comprobante eliminado');
+        try {
+            $comprobante->delete();
+            return redirect()->route('comprobantes.index')
+                            ->with('success','Comprobante eliminado');
+        } catch (\Throwable $th) {
+            dd ($th);            
+        }
     }
 }
