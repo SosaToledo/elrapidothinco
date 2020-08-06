@@ -39,25 +39,31 @@
             <div class="col-sm-12 col-md-6 lg-3">
                 <div class="form-group">
                     <strong>Patente:</strong>
-                    <input type="text" maxlength="7" name="patente" class="form-control" value="{{$acoplado->patente}}">
+                    <input type="text" maxlength="7" name="patente" class="form-control" value="{{$acoplado->patente}}" autofocus required>
                 </div>
             </div>
             <div class="col-sm-12 col-md-6 lg-3">
                 <div class="form-group">
                     <strong>Vencimiento VTV:</strong>
-                    <input value="{{$acoplado->vtv_vencimiento}}" min="2020-01-01" max="2040-12-31" type="date" class="form-control" name="vtv_vencimiento" placeholder="">
+                    <input value="{{$acoplado->vtv_vencimiento}}" min="2020-01-01" max="2040-12-31" type="date" class="form-control" name="vtv_vencimiento" placeholder="" required>
                 </div>
             </div>
             <div class="col-sm-12 col-md-6">
                 <div class="form-group">
                     <strong>Vencimiento SENASA:</strong>
-                    <input value="{{$acoplado->senasa_vencimiento}}" min="2020-01-01" max="2040-12-31" type="date" class="form-control" name="senasa_vencimiento" placeholder="">
+                    <input value="{{$acoplado->senasa_vencimiento}}" min="2020-01-01" max="2040-12-31" type="date" class="form-control" name="senasa_vencimiento" placeholder="" required>
                 </div>
             </div>
             <div class="col-sm-12 col-md-6">
                 <div class="form-group">
                     <strong>Vencimiento Seguro:</strong>
-                    <input value="{{$acoplado->seguro_vencimiento}}" min="2020-01-01" max="2040-12-31" type="date" class="form-control" name="seguro_vencimiento" placeholder="">
+                    <input value="{{$acoplado->seguro_vencimiento}}" min="2020-01-01" max="2040-12-31" type="date" class="form-control" name="seguro_vencimiento" placeholder="" required>
+                </div>
+            </div>
+            <div class="col-sm-12 col-md-6">
+                <div class="form-group">
+                    <strong>Vencimiento Ruta:</strong>
+                    <input value="{{$acoplado->ruta_vencimiento}}" min="2020-01-01" max="2040-12-31" type="date" class="form-control" name="ruta_vencimiento" placeholder="" required>
                 </div>
             </div>
             <div class="col-sm-12 col-md-12 lg-12">

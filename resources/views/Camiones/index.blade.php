@@ -11,15 +11,7 @@
         </div>
     </div>
    
-    @if ($message = Session::get('success'))
-        <div id="success-alert" class="alert alert-success alert-dimissible fade show" role="alert">
-            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-                <span aria-hidden="true">&times;</span>
-            </button>
-            <p>{{ $message }}</p>
-        </div>
-    @endif
-   
+    @include('alertSessions')
 
     @if($camiones->isEmpty())
     <div class="text-center">
@@ -36,6 +28,7 @@
                 <th>Venc VTV</th>
                 <th>Venc SENASA</th>
                 <th>Venc Seguro</th>
+                <th>Venc Ruta</th>
                 <th width="280px">Acciones</th>
             </tr>
             @foreach ($camiones as $camion)
@@ -45,6 +38,7 @@
                     <td>{{ $camion->vtv_vencimiento }}</td>
                     <td>{{ $camion->senasa_vencimiento }}</td>
                     <td>{{ $camion->seguro_vencimiento }}</td>
+                    <td>{{ $camion->ruta_vencimiento }}</td>
                     <td>
                         <form id="formBorrar{{$camion->id}}" action="{{ route('camiones.destroy',$camion->id) }}" method="POST">
                             <a class="btn btn-primary" href="{{ route('camiones.edit',$camion->id) }}"><i class="fa fa-edit"></i> Editar</a>

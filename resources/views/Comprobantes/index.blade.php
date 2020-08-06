@@ -12,16 +12,9 @@
             <a class="btn btn-success float-right" href="{{ route('comprobantes.create') }}"> <i class="fa fa-plus"></i> Nuevo Comprobante</a>
         </div>
     </div>
-   
-    @if ($message = Session::get('success'))
-        <div id="success-alert" class="alert alert-success alert-dimissible fade show" role="alert">
-            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-                <span aria-hidden="true">&times;</span>
-            </button>
-            <p>{{ $message }}</p>
-        </div>
-    @endif
-   
+
+    @include('alertSessions')
+       
     @if($comprobantes->isEmpty())
     <div class="text-center">
         <img style="max-height: 50vh" src="img/noResults.png" alt="Sin resultados">
@@ -35,19 +28,19 @@
                 <th>CODIGO</th>
                 <th>Viaje</th>
                 <th>Camionero</th>
-                <th>Detalle</th>
                 <th>Tipo</th>
                 <th>Monto</th>
+                <th>Detalle</th>
                 <th width="280px">Acciones</th>
             </tr>
             @foreach ($comprobantes as $comprobante)
                 <tr>
                     <td>{{ $comprobante->id_simple_comprobante }}</td>
                     <td>{{ $comprobante->idSimpleViaje }}</td>
-                    <td>{{ $comprobante->nombre }}</td>
-                    <td>{{ $comprobante->detalles }}</td>
-                    <td>{{ $comprobante->tipo }}</td>
+                    <td>{{ ucfirst($comprobante->nombre) }}</td>
+                    <td>{{ ucfirst($comprobante->tipo) }}</td>
                     <td>${{ $comprobante->monto }}</td>
+                    <td>{{ $comprobante->detalles}}</td>
                     <td>
                         <form id="formBorrar{{$comprobante->id}}" action="{{ route('comprobantes.destroy',$comprobante->id) }}" method="POST">
                             <a class="btn btn-primary" href="{{ route('comprobantes.edit',$comprobante->id) }}"><i class="fa fa-edit"></i> Editar</a>

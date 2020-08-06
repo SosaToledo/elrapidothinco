@@ -1,5 +1,7 @@
 @extends('layouts.app')
 
+@section('title', 'Editando '.$comprobante[0]->id_simple_comprobante)
+
 @section('content')
 <div class="row">
     <div class="col-md-2">
@@ -28,29 +30,34 @@
     @csrf
     @method('PUT')
     <div class="row">
-    <!-- TODO falta agregar el input del codigo de comprobante para que se visualice -->
-
-    <div class="col-sm-12 col-md-6 lg-3">
+    
+    <div class="col-sm-12 col-md-4">
+        <div class="form-group">
+            <strong>CODIGO:</strong>
+            <input type="text"  value="{{$comprobante[0]->id_simple_comprobante}}" max=10 name="id_simple" class="form-control" placeholder="" readonly>
+        </div>
+    </div>
+    <div class="col-sm-12 col-md-4">
             <div class="form-group">
                 <strong>Viaje:</strong>
                 <input type="hidden" id="viaje" value="{{$comprobante[0]->id_viaje}}" name="viaje">
-                <input type="text" id="viajeAutocomplete" value="{{$comprobante[0]->idSimpleViaje }}" maxlength="7" name="viajeVista" class="form-control" placeholder="Ingrese el código del viaje">
+                <input type="text" id="viajeAutocomplete" value="{{$comprobante[0]->idSimpleViaje }}" maxlength="7" name="viajeVista" class="form-control" placeholder="Ingrese el código del viaje" autofocus required>
             </div>
         </div>
-        <div class="col-sm-12 col-md-4 lg-4">
+        <div class="col-sm-12 col-md-4">
             <div class="form-group">
                 <strong>Fecha:</strong>
-                <input type="date" class="form-control" name="fecha" placeholder="" value="{{$comprobante[0]->fecha}}">
+                <input type="date" class="form-control" name="fecha" placeholder="" value="{{$comprobante[0]->fecha}}" required>
             </div>
         </div>
-        <div class="col-sm-12 col-md-4 lg-4">
+        <div class="col-sm-12 col-md-4">
             <div class="form-group">
                 <strong>Camionero:</strong>
                 <input type="hidden" id="camionero" name="camionero" value="{{$comprobante[0]->id_camioneros}}">
-                <input type="text" id="camioneroAutocomplete" class="form-control" value="{{$comprobante[0]->apellido.' '.$comprobante[0]->nombre}}" name="camioneroVista" placeholder="Ingrese Apellido">
+                <input type="text" id="camioneroAutocomplete" class="form-control" value="{{$comprobante[0]->apellido.' '.$comprobante[0]->nombre}}" name="camioneroVista" placeholder="Ingrese Apellido" required>
             </div>
         </div>
-        <div class="col-sm-12 col-md-6 lg-3">
+        <div class="col-sm-12 col-md-4">
             <div class="form-group">
                 <strong>Tipo:</strong>
                 <select class="form-control" name="tipo" id="tipo">
@@ -60,16 +67,21 @@
                 <!-- <input type="text" class="form-control" name="tipo" placeholder=""> -->
             </div>
         </div>
-        <div class="col-sm-12 col-md-6 lg-3">
+        <div class="col-sm-12 col-md-4">
             <div class="form-group">
                 <strong>Monto:</strong>
-                <input type="text" class="form-control" name="monto" placeholder="" value="{{$comprobante[0]->monto}}">
+                <div class="input-group mb-3">
+                    <div class="input-group-prepend">
+                        <span class="input-group-text" id="basic-addon1">$</span>
+                    </div>
+                    <input type="float" name="monto" class="form-control" placeholder="00.00" value="{{$comprobante[0]->monto}}" required>
+                </div>
             </div>
         </div>
         <div class="col-xs-12 col-sm-12 col-md-12">
             <div class="form-group">
                 <strong>Detalles:</strong>
-                <textarea required rows="3" class="form-control" name="detalles" placeholder="">{{$comprobante[0]->detalles}}</textarea>
+                <textarea rows="3" class="form-control" name="detalles" placeholder="">{{$comprobante[0]->detalles}}</textarea>
             </div>
         </div>
         <div class="col-sm-12 col-md-12 lg-12">

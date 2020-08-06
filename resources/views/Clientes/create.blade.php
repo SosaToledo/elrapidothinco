@@ -4,7 +4,7 @@
 @section('content')
 <div class="row">
     <div class="col-md-2">
-        <a class="btn btn-primary" href="{{ route('clientes.index') }}"><i class="fa fa-arrow-circle-left"></i> Volver</a>
+        <a class="btn btn-success" href="{{ route('clientes.index') }}"><i class="fa fa-arrow-circle-left"></i> Volver</a>
     </div>
     <div class="col margin-tb">
         <div class="pull-left">
@@ -37,7 +37,7 @@
 
         <div class="col-sm-12 col-md-6 lg-3">
             <div class="form-group">
-                <strong>CUIL:</strong>
+                <strong>CUIT:</strong>
                 <input type="text" max=10 name="cuil" class="form-control" placeholder="Sin guiones ni espacios">
             </div>
         </div>
@@ -66,7 +66,7 @@
             </div>
         </div>
         <div class="col-sm-12 ">
-            <button type="submit" class="btn btn-primary btn-block"><i class="fa fa-save"></i> Guardar</button>
+            <button type="submit" class="btn btn-success btn-block"><i class="fa fa-save"></i> Guardar</button>
         </div>
     </div>
 

@@ -13,15 +13,7 @@
         </div>
     </div>
 
-    @if ($message = Session::get('success'))
-    <div id="success-alert" class="alert alert-success alert-dimissible fade show" role="alert">
-        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-            <span aria-hidden="true">&times;</span>
-        </button>
-        <p>{{ $message }}</p>
-    </div>
-    @endif
-
+    @include('alertSessions')
 
     @if($acoplados->isEmpty())
     <div class="text-center">
@@ -38,6 +30,7 @@
                 <th>Venc VTV</th>
                 <th>Venc SENASA</th>
                 <th>Venc Seguro</th>
+                <th>Venc Ruta</th>
                 <th width="280px">Acciones</th>
             </tr>
             @foreach ($acoplados as $acoplado)
@@ -47,6 +40,7 @@
                 <td>{{ $acoplado->vtv_vencimiento }}</td>
                 <td>{{ $acoplado->senasa_vencimiento }}</td>
                 <td>{{ $acoplado->seguro_vencimiento }}</td>
+                <td>{{ $acoplado->ruta_vencimiento }}</td>
                 <td>
                     <form id="formBorrar{{$acoplado->id}}" action="{{ route('acoplados.destroy',$acoplado->id) }}" method="POST">
                         <a class="btn btn-primary" href="{{ route('acoplados.edit',$acoplado->id) }}"><i class="fa fa-edit"></i> Editar</a>

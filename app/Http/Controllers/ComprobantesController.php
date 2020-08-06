@@ -49,23 +49,14 @@ class ComprobantesController extends Controller
      */
     public function store(Request $request )
     {
-        $request->validate([
-            'fecha' => 'required',
-            'camionero' => 'required',
-            'tipo' => 'required',
-            'monto' => 'required',
-            'detalles' => 'required'
-        ]);
 
-        $id=DB::select("SHOW TABLE STATUS LIKE 'comprobantes'");
-        $next_id=$id[0]->Auto_increment;
-
+       
         $comprobante = new Comprobante;
-        $comprobante->id_simple_comprobante = $next_id;
+        $comprobante->id_simple_comprobante = $request->id_simple;
         $comprobante->fecha = $request->fecha;
         $comprobante->id_viaje = $request->viaje;
         $comprobante->id_camioneros = $request->camionero;
-        $comprobante->detalles = $request->detalles;
+        $comprobante->detalles = $request->detalles ?? '';
         $comprobante->tipo = $request->tipo;
         $comprobante->monto = $request->monto;
         $comprobante->created_at = Carbon::now();
@@ -119,18 +110,12 @@ class ComprobantesController extends Controller
      */
     public function update(Request $request, $id)
     {
-        $request->validate([
-            'fecha' => 'required',
-            'camionero' => 'required',
-            'tipo' => 'required',
-            'monto' => 'required'
-        ]);
 
         $comprobante = Comprobante::find($id);
         $comprobante->id_viaje = $request->viaje;
         $comprobante->fecha = $request->fecha;
         $comprobante->id_camioneros = $request->camionero;
-        $comprobante->detalles = $request->detalles;
+        $comprobante->detalles = $request->detalles ?? '';
         $comprobante->tipo = $request->tipo;
         $comprobante->monto = $request->monto;
         $comprobante->save(['timestamps' => false]);

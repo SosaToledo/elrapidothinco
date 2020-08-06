@@ -4,11 +4,11 @@
 @section('content')
 <div class="row">
     <div class="col-md-2">
-        <a class="btn btn-primary" href="{{ route('comprobantes.index') }}"> <i class="fa fa-arrow-circle-left"></i> Volver</a>
+        <a class="btn btn-success" href="{{ route('comprobantes.index') }}"> <i class="fa fa-arrow-circle-left"></i> Volver</a>
     </div>
     <div class="col margin-tb">
         <div class="pull-left">
-            <h2>Agregar nuevo asd comprobante</h2>
+            <h2>Agregar nuevo comprobante</h2>
         </div>
     </div>
 </div>
@@ -28,28 +28,34 @@
 <form action="{{ route('comprobantes.store') }}" method="POST">
     @csrf
      <div class="row">
-        <div class="col-sm-12 col-md-4 lg-4">
+        <div class="col-sm-12 col-md-4">
+            <div class="form-group">
+                <strong>CODIGO:</strong>
+                <input type="text"  value="CP{{$ultimo}}" max=10 name="id_simple" class="form-control" placeholder="" readonly>
+            </div>
+        </div>
+        <div class="col-sm-12 col-md-4">
              <div class="form-group">
                  <strong>Viaje:</strong>
                  <input type="hidden" id="viaje" name="viaje" >
-                 <input type="text" id="viajeAutocomplete" maxlength="7" name="viajeVista" class="form-control" placeholder="Ingrese el código del viaje">
+                 <input type="text" id="viajeAutocomplete" maxlength="7" name="viajeVista" class="form-control" placeholder="Ingrese el código del viaje" autofocus required>
             </div>
         </div>
         <div class="col-sm-12 col-md-4 lg-4">
             <div class="form-group">
                 <strong>Fecha:</strong>
-                <input type="date" class="form-control" name="fecha" placeholder="">
+                <input type="date" class="form-control" name="fecha" placeholder="" required>
             </div>
         </div>
         <div class="col-sm-12 col-md-4 lg-4">
             <div class="form-group">
                 <strong>Camionero:</strong>
                 <input type="hidden" id="camionero" name="camionero">
-                <input type="text" id="camioneroAutocomplete" class="form-control" name="camioneroVista" placeholder="Ingrese Apellido" >
+                <input type="text" id="camioneroAutocomplete" class="form-control" name="camioneroVista" placeholder="Ingrese Apellido"  required>
             </div>
         </div>
 
-        <div class="col-sm-12 col-md-6 lg-3">
+        <div class="col-sm-12 col-md-4">
             <div class="form-group">
                 <strong>Tipo:</strong>
                 <select class="form-control" name="tipo" id="tipo">
@@ -58,14 +64,14 @@
                 </select>
             </div>
         </div>
-        <div class="col-sm-12 col-md-6 lg-3">
+        <div class="col-sm-12 col-md-4">
             <div class="form-group">
                 <strong>Monto:</strong>
                 <div class="input-group mb-3">
                     <div class="input-group-prepend">
                         <span class="input-group-text" id="basic-addon1">$</span>
                     </div>
-                    <input type="float" name="monto" class="form-control" placeholder="00.00" >
+                    <input type="float" name="monto" class="form-control" placeholder="00.00"  required>
                 </div>
             </div>
         </div>
@@ -79,7 +85,7 @@
 
         <div class="col-sm-12 col-md-12 lg-12">
             <div class="text-center">
-                <button type="submit" class="btn btn-primary btn-block"> <i class="fa fa-save"></i> Guardar</button>
+                <button type="submit" class="btn btn-success btn-block"> <i class="fa fa-save"></i> Guardar</button>
             </div>
         </div>
     </div>

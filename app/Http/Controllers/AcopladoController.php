@@ -42,13 +42,6 @@ class AcopladoController extends Controller
      */
     public function store(Request $request)
     {
-        $request->validate([
-            'patente' => 'required',
-            'id_simple' => 'required',
-            'vtv_vencimiento' => 'required',
-            'senasa_vencimiento' => 'required',
-            'seguro_vencimiento' => 'required',
-        ]);
    
         $acoplado = new Acoplado;
         $acoplado->id_simple_acoplado = $request->id_simple;
@@ -56,15 +49,12 @@ class AcopladoController extends Controller
         $acoplado->vtv_vencimiento = $request->vtv_vencimiento;
         $acoplado->senasa_vencimiento = $request->senasa_vencimiento;
         $acoplado->seguro_vencimiento = $request->seguro_vencimiento;
-        
+        $acoplado->ruta_vencimiento = $request->ruta_vencimiento;
+
         $acoplado->created_at = Carbon::now();
         $acoplado->updated_at = Carbon::now();
         $acoplado->save(['timestamps' => false]);
-        /* $acoplado->updated_at = DB::raw('CURRENT_TIMESTAMP(0)');
-        $acoplado->created_at = DB::raw('CURRENT_TIMESTAMP(0)'); */
-        //$acoplado->save();
-
-
+        
         return redirect()->route('acoplados.index')
                         ->with('success','Acoplado ingresado correctamente.');
     }
@@ -103,18 +93,12 @@ class AcopladoController extends Controller
      */
     public function update(Request $request, $id)
     {
-        $request->validate([
-            'patente' => 'required',
-            'vtv_vencimiento' => 'required',
-            'senasa_vencimiento' => 'required',
-            'seguro_vencimiento' => 'required',
-            ]);
-            
         $acoplado = Acoplado::find($id);
         $acoplado->patente = $request->get('patente');
         $acoplado->vtv_vencimiento = $request->get('vtv_vencimiento');
         $acoplado->senasa_vencimiento = $request->get('senasa_vencimiento');
         $acoplado->seguro_vencimiento = $request->get('seguro_vencimiento');
+        $acoplado->ruta_vencimiento = $request->get('ruta_vencimiento');
         $acoplado->save();
           
         return redirect()->route('acoplados.index')

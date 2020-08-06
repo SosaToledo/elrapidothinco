@@ -32,16 +32,6 @@ class CamionesController extends Controller
      */
     public function create()
     {
-        // $id = DB::select("SHOW TABLE STATUS LIKE 'camiones'");
-        // $ultimo = $id[0]->Auto_increment;
-        
-        // ->orderByDesc('created_at')->first();
-        // if($ultimo == null){
-        //     $ultimo = FuncionesComunes::rellenarNum(1);
-        //     return view('Camiones.create', compact('ultimo'));
-        // }
-        // $ultimo = FuncionesComunes::rellenarNum($ultimo->id + 1);
-
         $ultimo = FuncionesComunes::rellenarNum('camiones');
         return view('Camiones.create', compact('ultimo'));
     }
@@ -53,21 +43,14 @@ class CamionesController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function store(Request $request)
-    {
-        $request->validate([
-            'patente' => 'required',
-            'idSimple' => 'required',
-            'vtv_vencimiento' => 'required',
-            'senasa_vencimiento' => 'required',
-            'seguro_vencimiento' => 'required',
-        ]);
-  
+    {  
         $camion = new Camion;
         $camion->id_simple_camiones = $request->idSimple;
         $camion->patente = $request->patente;
         $camion->vtv_vencimiento = $request->vtv_vencimiento;
         $camion->senasa_vencimiento = $request->senasa_vencimiento;
         $camion->seguro_vencimiento = $request->seguro_vencimiento;
+        $camion->ruta_vencimiento = $request->ruta_vencimiento;
         $camion->created_at = Carbon::now();
         $camion->updated_at = Carbon::now();
         $camion->save(['timestamps' => false]);
@@ -108,21 +91,13 @@ class CamionesController extends Controller
      */
     public function update(Request $request, $id)
     {
-        
-        //echo (dd($camion));
-        $request->validate([
-            'patente' => 'required',
-            'vtv_vencimiento' => 'required',
-            'senasa_vencimiento' => 'required',
-            'seguro_vencimiento' => 'required',
-            ]);
-        
-        
+               
         $camion = Camion::find($id);
         $camion->patente = $request->get('patente');
         $camion->vtv_vencimiento = $request->get('vtv_vencimiento');
         $camion->senasa_vencimiento = $request->get('senasa_vencimiento');
         $camion->seguro_vencimiento = $request->get('seguro_vencimiento');
+        $camion->ruta_vencimiento = $request->get('ruta_vencimiento');
         $camion->save();
             
         return redirect()->route('camiones.index')
@@ -143,7 +118,7 @@ class CamionesController extends Controller
             $camion->delete();
         } catch (\Throwable $thh) {
             return redirect()->route('camiones.index')
-                        ->with('success','El camión no fue eliminado por tener viajes realizados');
+                        ->with('error','El camión no fue eliminado por tener viajes asociados');
         }
      
         return redirect()->route('camiones.index')

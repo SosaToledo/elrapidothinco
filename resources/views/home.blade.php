@@ -2,14 +2,13 @@
 
 @section('title', 'Dashboard')
 
+@section('content')
 @if($viajes->isEmpty())
     <div class="text-center">
-        <img style="max-height: 50vh" src="img/noResults.png" alt="Sin resultados">
-        <p>No se encontraron resultados.</p>
+        <p>No hay viajes en curso actualmente.</p>
     </div>                                      
 @else
 
-@section('content')
 <div class="container">
     <div class="table-responsive mt-3">
         <table class="table table-hover">
@@ -38,6 +37,6 @@
         </table>
     </div>
 </div>
-
 @endif
+
 @endsection

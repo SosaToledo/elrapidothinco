@@ -4,7 +4,7 @@
 @section('content')
 <div class="row">
     <div class="col-md-2">
-        <a class="btn btn-primary" href="{{ route('camioneros.index') }}"><i class="fa fa-arrow-circle-left"></i> Volver</a>
+        <a class="btn btn-success" href="{{ route('camioneros.index') }}"><i class="fa fa-arrow-circle-left"></i> Volver</a>
     </div>
     <div class="col margin-tb">
         <div class="pull-left">
@@ -36,8 +36,8 @@
         </div>
         <div class="col-sm-12 col-md-4 lg-4">
             <div class="form-group">
-                <strong>DNI:</strong>
-                <input type="text" max=10 name="dni" class="form-control" placeholder="">
+                <strong>CUIL:</strong>
+                <input type="text" max=15 name="dni" class="form-control" placeholder="Sin guiones ni espacios" autofocus required>
             </div>
         </div>
         <!-- <div class="col-xs-12 col-sm-12 col-md-12">
@@ -49,30 +49,42 @@
         <div class="col-sm-12 col-md-4 lg-4">
             <div class="form-group">
                 <strong>Nombre:</strong>
-                <input type="text" class="form-control" name="nombre" placeholder="">
+                <input type="text" class="form-control" name="nombre" placeholder="" required>
             </div>
         </div>
         <div class="col-sm-12 col-md-4 lg-4">
             <div class="form-group">
                 <strong>Apellido:</strong>
-                <input type="text" class="form-control" name="apellido" placeholder="">
+                <input type="text" class="form-control" name="apellido" placeholder="" required>
             </div>
         </div>
         <div class="col-sm-12 col-md-4 lg-3">
             <div class="form-group">
                 <strong>Dirección:</strong>
-                <input type="text" class="form-control" name="direccion" placeholder="">
+                <input type="text" class="form-control" name="direccion" placeholder="" required>
             </div>
         </div>
         <div class="col-sm-12 col-md-4 lg-3">
             <div class="form-group">
                 <strong>Teléfono:</strong>
-                <input type="text" class="form-control" name="telefono" placeholder="Ingresar sin 0 & 15. Por ej: 2477 123456">
+                <input type="text" class="form-control" name="telefono" placeholder="Ingresar sin 0 & 15. Por ej: 2477 123456" required>
+            </div>
+        </div>
+        <div class="col-sm-12 col-md-4 lg-3">
+            <div class="form-group">
+                <strong>Fecha alta temprana:</strong>
+                <input type="date" class="form-control" name="fecha_alta_temprana" placeholder="" required>
+            </div>
+        </div>
+        <div class="col-sm-12 col-md-4 lg-3">
+            <div class="form-group">
+                <strong>CBU:</strong>
+                <input type="text" class="form-control" name="cbu" placeholder="Ingrese numero de cuenta" required>
             </div>
         </div>
         <div class="col-sm-12 col-md-12 lg-12">
             <div class="text-center">
-                <button type="submit" class="btn btn-primary btn-block"> <i class="fa fa-save"></i> Guardar</button>
+                <button type="submit" class="btn btn-success btn-block"> <i class="fa fa-save"></i> Guardar</button>
             </div>
         </div>
     </div>

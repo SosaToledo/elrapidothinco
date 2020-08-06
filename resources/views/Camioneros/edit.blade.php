@@ -37,8 +37,8 @@
         </div>
         <div class="col-sm-12 col-md-4 lg-4">
             <div class="form-group">
-                <strong>DNI:</strong>
-                <input type="text" max=10 name="dni" class="form-control" placeholder="" value="{{$camionero->DNI}}">
+                <strong>CUIL:</strong>
+                <input type="text" max=10 name="dni" class="form-control" placeholder="" value="{{$camionero->DNI}}" autofocus required>
             </div>
         </div>
         <!-- <div class="col-xs-12 col-sm-12 col-md-12">
@@ -50,25 +50,37 @@
         <div class="col-sm-12 col-md-4 lg-4">
             <div class="form-group">
                 <strong>Nombre:</strong>
-                <input type="text" class="form-control" name="nombre" placeholder="" value="{{$camionero->nombre}}">
+                <input type="text" class="form-control" name="nombre" placeholder="" value="{{$camionero->nombre}}" required>
             </div>
         </div>
         <div class="col-sm-12 col-md-4 lg-4">
             <div class="form-group">
                 <strong>Apellido:</strong>
-                <input type="text" class="form-control" name="apellido" placeholder="" value="{{$camionero->apellido}}">
+                <input type="text" class="form-control" name="apellido" placeholder="" value="{{$camionero->apellido}}" required>
             </div>
         </div>
         <div class="col-sm-12 col-md-4 lg-6">
             <div class="form-group">
                 <strong>Dirección:</strong>
-                <input type="text" class="form-control" name="direccion" placeholder="" value="{{$camionero->direccion}}">
+                <input type="text" class="form-control" name="direccion" placeholder="" value="{{$camionero->direccion}}" required>
             </div>
         </div>
         <div class="col-sm-12 col-md-4 lg-6">
             <div class="form-group">
                 <strong>Teléfono:</strong>
-                <input type="text" class="form-control" name="telefono" placeholder="" value="{{$camionero->telefono}}">
+                <input type="text" class="form-control" name="telefono" placeholder="" value="{{$camionero->telefono}}" required>
+            </div>
+        </div>
+        <div class="col-sm-12 col-md-4 lg-3">
+            <div class="form-group">
+                <strong>Fecha alta temprana:</strong>
+            <input type="date" class="form-control" name="fecha_alta_temprana" value="{{$camionero->fecha_alta_temprana}}" required>
+            </div>
+        </div>
+        <div class="col-sm-12 col-md-4 lg-3">
+            <div class="form-group">
+                <strong>CBU:</strong>
+            <input type="text" class="form-control" name="cbu" placeholder="Ingrese numero de cuenta" value="{{$camionero->cbu}}" required>
             </div>
         </div>
         <div class="col-sm-12 col-md-12 lg-12">

@@ -38,7 +38,7 @@
         
         <div class="col-sm-12 col-md-6 lg-3">
             <div class="form-group">
-                <strong>CUIL:</strong>
+                <strong>CUIT:</strong>
                 <input type="text" max=10 name="cuil" class="form-control" placeholder="" value="{{$cliente->CUIL}}">
             </div>
         </div>

@@ -11,14 +11,8 @@
         </div>
     </div>
    
-    @if ($message = Session::get('success'))
-    <div id="success-alert" class="alert alert-success alert-dimissible fade show" role="alert">
-        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-            <span aria-hidden="true">&times;</span>
-        </button>
-        <p>{{ $message }}</p>
-    </div>
-    @endif
+
+    @include('alertSessions')
    
     
     @if($clientes->isEmpty())
@@ -32,7 +26,7 @@
         <table class="table table-hover">
             <tr class="">
                 <th>CODIGO</th>
-                <th>CUIL</th>
+                <th>CUIT</th>
                 <th>Razón social</th>
                 <th>Dirección</th>
                 <th>Teléfono</th>
@@ -50,7 +44,7 @@
                     <td>
                         <form id="formBorrar{{$cliente->id}}" action="{{ route('clientes.destroy',$cliente->id) }}" method="POST">
                             <a class="btn btn-primary" href="{{ route('clientes.edit',$cliente->id) }}"><i class="fa fa-edit"></i> Editar</a>
-                            <!-- <a target="_blank" href="https://api.whatsapp.com/send?phone={{ $cliente->telefono}}"> <button type="button" class="btn btn-success"><i class="fa fa-whatsapp"></i></button></a> -->
+                            <a target="_blank" href="https://api.whatsapp.com/send?phone={{ $cliente->telefono}}"> <button type="button" class="btn btn-success"><i class="fa fa-whatsapp"></i></button></a>
                             @csrf
                             @method('DELETE')
                             <button type="button" idParaBorrar="{{$cliente->id}}" codigoSimple="{{$cliente->id_simple_clientes}}" name="btn" class="btn btn-danger submitBtn" id="submitBtn" data-toggle="modal" data-target="#confirm-submit"> <i class="fa fa-trash"></i> Borrar</button>

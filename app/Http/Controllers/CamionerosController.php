@@ -43,14 +43,7 @@ class camionerosController extends Controller
      */
     public function store(Request $request)
     {
-        $request->validate([
-            'dni' => 'required',
-            'telefono' => 'required',
-            'nombre' => 'required',
-            'apellido' => 'required',
-        ]);
-
-        
+            
         $camionero = new Camionero;
         
         $camionero->telefono = $request->telefono;
@@ -59,6 +52,8 @@ class camionerosController extends Controller
         $camionero->apellido = $request->apellido;
         $camionero->direccion = $request->direccion;
         $camionero->dni = $request->dni;
+        $camionero->cbu = $request->cbu;
+        $camionero->fecha_alta_temprana = $request->fecha_alta_temprana;
         $camionero->created_at = Carbon::now();
         $camionero->updated_at = Carbon::now();
         $camionero->save(['timestamps' => false]);
@@ -99,19 +94,14 @@ class camionerosController extends Controller
      */
     public function update(Request $request, $id)
     {
-        $request->validate([
-            'dni' => 'required',
-            'telefono' => 'required',
-            'nombre' => 'required',
-            'apellido' => 'required',
-        ]);
-        
         $camionero = Camionero::find($id);
         $camionero->telefono = $request->telefono;
         $camionero->nombre = $request->nombre;
         $camionero->apellido = $request->apellido;
         $camionero->direccion = $request->direccion;
         $camionero->dni = $request->dni;
+        $camionero->cbu = $request->cbu;
+        $camionero->fecha_alta_temprana = $request->fecha_alta_temprana;
         $camionero->save();
 
         return redirect()->route('camioneros.index')

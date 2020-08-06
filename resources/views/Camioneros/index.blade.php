@@ -12,23 +12,7 @@
         </div>
     </div>
    
-    @if ($message = Session::get('success'))
-        <div id="success-alert" class="alert alert-success alert-dimissible fade show" role="alert">
-            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-                <span aria-hidden="true">&times;</span>
-            </button>
-            <p>{{ $message }}</p>
-        </div>
-    @endif
-
-    @if ($message = Session::get('error'))
-        <div id="success-alert" class="alert alert-danger alert-dimissible fade show" role="alert">
-            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-                <span aria-hidden="true">&times;</span>
-            </button>
-            <p>{{ $message }}</p>
-        </div>
-    @endif
+    @include('alertSessions')
    
     @if($camioneros->isEmpty())
     <div class="text-center">
@@ -41,7 +25,7 @@
         <table class="table table-hover">
             <tr class="">
                 <th>CODIGO</th>
-                <th>DNI</th>
+                <th>CUIL</th>
                 <th>Apellido y Nombre </th>
                 <th>Dirección</th>
                 <th>Teléfono</th>
@@ -60,7 +44,7 @@
                         <form id="formBorrar{{$camionero->id}}" action="{{ route('camioneros.destroy',$camionero->id) }}" method="POST">
                             <a class="btn btn-primary" href="{{ route('camioneros.edit',$camionero->id) }}"><i class="fa fa-edit"></i> Editar</a>
                             <a class="btn btn-info" href="{{ route('comprobantes.show',2)}}"><i class="fa fa-money"></i> Adelanto</a>
-                            <!-- <a target="_blank" href="https://api.whatsapp.com/send?phone={{ $camionero->telefono}}"> <button type="button" class="btn btn-success"><i class="fa fa-whatsapp"></i></button></a> -->
+                            <a target="_blank" href="https://api.whatsapp.com/send?phone={{ $camionero->telefono}}"> <button type="button" class="btn btn-success"><i class="fa fa-whatsapp"></i></button></a>
                             @csrf
                             @method('DELETE')
                             <button type="button"  idParaBorrar="{{$camionero->id}}" codigoSimple="{{$camionero->id_simple_camioneros}}"  name="btn" class="btn btn-danger submitBtn" id="submitBtn" data-toggle="modal" data-target="#confirm-submit"> <i class="fa fa-trash"></i> Borrar</button>
