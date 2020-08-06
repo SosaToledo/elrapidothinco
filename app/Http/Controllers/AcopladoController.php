@@ -30,12 +30,7 @@ class AcopladoController extends Controller
      */
     public function create()
     {
-      $ultimo = DB::table('acoplado')->orderByDesc('created_at')->first();
-      if($ultimo == null){
-        $ultimo = FuncionesComunes::rellenarNum(1);
-        return view('Acoplados.create', compact('ultimo'));
-      }
-      $ultimo = FuncionesComunes::rellenarNum($ultimo->id + 1);
+      $ultimo = FuncionesComunes::rellenarNum('acoplado');
       return view('Acoplados.create', compact('ultimo'));
     }
 

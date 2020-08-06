@@ -32,12 +32,17 @@ class CamionesController extends Controller
      */
     public function create()
     {
-        $ultimo = DB::table('camiones')->orderByDesc('created_at')->first();
-        if($ultimo == null){
-            $ultimo = FuncionesComunes::rellenarNum(1);
-            return view('Camiones.create', compact('ultimo'));
-        }
-        $ultimo = FuncionesComunes::rellenarNum($ultimo->id + 1);
+        // $id = DB::select("SHOW TABLE STATUS LIKE 'camiones'");
+        // $ultimo = $id[0]->Auto_increment;
+        
+        // ->orderByDesc('created_at')->first();
+        // if($ultimo == null){
+        //     $ultimo = FuncionesComunes::rellenarNum(1);
+        //     return view('Camiones.create', compact('ultimo'));
+        // }
+        // $ultimo = FuncionesComunes::rellenarNum($ultimo->id + 1);
+
+        $ultimo = FuncionesComunes::rellenarNum('camiones');
         return view('Camiones.create', compact('ultimo'));
     }
 
@@ -144,8 +149,6 @@ class CamionesController extends Controller
         return redirect()->route('camiones.index')
                         ->with('success','Camión eliminado');
             
-        
-        
     }
 
 

@@ -41,11 +41,7 @@ class ViajesController extends Controller
      */
     public function create()
     {
-        $ultimo = DB::table('viajes')->orderByDesc('created_at')->first();
-        if($ultimo == null)
-            $ultimo = FuncionesComunes::rellenarNum(1);
-        else
-            $ultimo = FuncionesComunes::rellenarNum($ultimo->id + 1);
+        $ultimo = FuncionesComunes::rellenarNum('viajes');
         return view('Viajes.create', compact('ultimo'));
     }
 
@@ -70,11 +66,6 @@ class ViajesController extends Controller
             'ganancia_camionero' => 'required',
             'tipoCamion' => 'required',
             'fecha' => 'required',
-            'peajes' => 'required',
-            'gasoil_litros' => 'required',
-            'gasoil_precio' => 'required',
-            'notaViaje' => 'required',
-            'guia' => 'required',
             'estado' => 'required'
         ]);
 
@@ -94,11 +85,12 @@ class ViajesController extends Controller
         $viaje->ganancia_camionero = $request->ganancia_camionero;
         $viaje->tipoCamion = $request->tipoCamion;
         $viaje->fecha = $request->fecha;
-        $viaje->peajes = $request->peajes;
-        $viaje->gasoil_litros = $request->gasoil_litros;
-        $viaje->gasoil_precio = $request->gasoil_precio;
-        $viaje->notaViaje = $request->notaViaje;
-        $viaje->guia = $request->guia;
+        /* dd($request->peaje ?? 0); */
+        $viaje->peajes = $request->peaje ?? 0;
+        $viaje->gasoil_litros = $request->gasoil_litros ?? 0 ;
+        $viaje->gasoil_precio = $request->gasoil_precio ?? 0;
+        $viaje->notaViaje = $request->notaViaje ?? 0;
+        $viaje->guia = $request->guia ?? 0;
         $viaje->estados = $request->estado;
         $viaje->created_at = Carbon::now();
         $viaje->updated_at = Carbon::now();

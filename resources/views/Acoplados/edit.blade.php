@@ -34,8 +34,7 @@
                     <strong>CODIGO:</strong>
                     <input type="text" readonly value="{{$acoplado->id_simple_acoplado}}" max=10 name="" class="form-control">
                 </div>
-            </div>
-            
+            </div> 
             <div class="col-sm-12 col-md-6 lg-3">
                 <div class="form-group">
                     <strong>Patente:</strong>

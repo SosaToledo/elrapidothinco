@@ -53,7 +53,7 @@
                             <a class="btn btn-primary" href="{{ route('comprobantes.edit',$comprobante->id) }}"><i class="fa fa-edit"></i> Editar</a>
                             @csrf
                             @method('DELETE')
-                            <button type="button" idParaBorrar="{{$comprobante->id}}" name="btn" class="btn btn-danger" id="submitBtn" data-toggle="modal" data-target="#confirm-submit"> <i class="fa fa-trash"></i> Borrar</button>
+                            <button type="button" idParaBorrar="{{$comprobante->id}}" name="btn" class="submitBtn btn btn-danger" id="submitBtn" data-toggle="modal" data-target="#confirm-submit"> <i class="fa fa-trash"></i> Borrar</button>
                         </form>
                     </td>
                 </tr>
