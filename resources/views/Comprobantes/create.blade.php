@@ -38,7 +38,13 @@
              <div class="form-group">
                  <strong>Viaje:</strong>
                  <input type="hidden" id="viaje" name="viaje" >
-                 <input type="text" id="viajeAutocomplete" maxlength="7" name="viajeVista" class="form-control" placeholder="Ingrese el código del viaje" autofocus required>
+                 <input type="text" id="viajeAutocomplete" maxlength="7" name="viajeVista" class="form-control" placeholder="Ingrese el código del viaje" autofocus required
+                    value="
+                        {{
+                            !empty($viaje) ? $viaje->idSimpleViaje : ''
+                        }}
+                    "
+                 >
             </div>
         </div>
         <div class="col-sm-12 col-md-4 lg-4">
@@ -51,7 +57,13 @@
             <div class="form-group">
                 <strong>Camionero:</strong>
                 <input type="hidden" id="camionero" name="camionero">
-                <input type="text" id="camioneroAutocomplete" class="form-control" name="camioneroVista" placeholder="Ingrese Apellido"  required>
+                <input type="text" id="camioneroAutocomplete" class="form-control" name="camioneroVista" placeholder="Ingrese Apellido"  required
+                    value="
+                        {{
+                            !empty($camionero) ? $camionero->id_simple_camioneros : ''
+                        }}
+                    "
+                >
             </div>
         </div>
 

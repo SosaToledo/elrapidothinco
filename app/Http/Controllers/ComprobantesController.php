@@ -3,6 +3,8 @@
 namespace App\Http\Controllers;
 
 use App\Comprobante;
+use App\Viaje;
+use App\Camionero;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Carbon\Carbon;
@@ -34,10 +36,26 @@ class ComprobantesController extends Controller
      * 
      * @return \Illuminate\Http\Response
      */
-    public function create()
+    public function create($idViaje=null, $idCamionero=null)
     {
+        $viaje ="";
+        $Camionero = "";
+        if($idViaje != null){
+            $viaje = Viaje::select('viajes.id','viajes.idSimpleViaje')
+            ->where('viajes.id','=',$idViaje)
+            ->get();
+
+        }
+
+        if($idCamionero != null){
+            $Camionero = Camionero::select('camioneros.id','camioneros.id_simple_camioneros')
+            ->where('camioneros.id','=',$idCamionero)
+            ->get();
+            dd($Camionero);
+        }
+
         $ultimo = FuncionesComunes::rellenarNum('comprobantes');
-        return view('Comprobantes.create', compact('ultimo'));
+        return view('Comprobantes.create')->with('ultimo', $ultimo)->with('viaje', $viaje)->with('camionero', $Camionero);
     }
 
     /**
@@ -75,10 +93,10 @@ class ComprobantesController extends Controller
      */
     public function show($id)
     {
-        $comprobante = 'adelanto';
-        if($id == 1) $comprobante = 'nafta';
-        
-        return view('Comprobantes.create', compact('comprobante'));
+        // $comprobante = 'adelanto';
+        // if($id == 1) $comprobante = 'nafta';
+
+        // return view('Comprobantes.create', compact('comprobante'));
     }
 
     /**

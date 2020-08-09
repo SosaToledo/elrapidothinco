@@ -28,6 +28,7 @@ Route::resource('acoplados','AcopladoController')->middleware('role:admin');
 Route::resource('camiones','CamionesController')->middleware('role:admin');
 Route::resource('camioneros','CamionerosController')->middleware('role:admin');
 Route::resource('comprobantes','ComprobantesController')->middleware('role:admin');
+Route::resource('comprobantes/create/{idViaje}/{idCamionero}','ComprobantesController@create')->middleware('role:admin');
 Route::resource('clientes','ClientesController')->middleware('role:admin');
 Route::resource('viajes','ViajesController')->middleware('role:admin');
 Route::resource('sueldos','SueldosController')->middleware('role:admin');

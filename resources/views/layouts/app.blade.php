@@ -67,12 +67,12 @@
                 @guest
                 @else
                 <ul class="navbar-nav mr-auto">
-                    <li class="{{ (request()->is('acoplados*')) ? 'active' : '' }} nav-item"><a class="nav-link" href="{{route('acoplados.index')}}">Acoplados</a></li>
+                    <li class="{{ (request()->is('viajes*')) ? 'active' : '' }} nav-item"><a class="nav-link" href="{{route('viajes.index')}}">Viajes</a></li>
+                    <li class="{{ (request()->is('clientes*')) ? 'active' : '' }} nav-item"><a class="nav-link" href="{{route('clientes.index')}}">Clientes</a></li>
                     <li class="{{ (request()->is('camiones*')) ? 'active' : '' }} nav-item"><a class="nav-link" href="{{route('camiones.index')}}">Camiones</a></li>
+                    <li class="{{ (request()->is('acoplados*')) ? 'active' : '' }} nav-item"><a class="nav-link" href="{{route('acoplados.index')}}">Acoplados</a></li>
                     <li class="{{ (request()->is('camioneros*')) ? 'active' : '' }} nav-item"><a class="nav-link" href="{{route('camioneros.index')}}">Camioneros</a></li>
                     <li class="{{ (request()->is('comprobantes*')) ? 'active' : '' }} nav-item"><a class="nav-link" href="{{route('comprobantes.index')}}">Comprobantes</a></li>
-                    <li class="{{ (request()->is('clientes*')) ? 'active' : '' }} nav-item"><a class="nav-link" href="{{route('clientes.index')}}">Clientes</a></li>
-                    <li class="{{ (request()->is('viajes*')) ? 'active' : '' }} nav-item"><a class="nav-link" href="{{route('viajes.index')}}">Viajes</a></li>
                     <li class="{{ (request()->is('sueldos*')) ? 'active' : '' }} nav-item"><a class="nav-link" href="{{route('sueldos.index')}}">Liquidación de sueldos</a></li>
                 </ul>
                 @endguest

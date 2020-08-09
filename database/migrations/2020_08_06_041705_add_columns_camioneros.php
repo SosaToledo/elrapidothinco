@@ -15,7 +15,7 @@ class AddColumnsCamioneros extends Migration
     {
         Schema::table('camioneros', function (Blueprint $table) {
             $table->string('cbu');
-            $table->date('fecha_alta_temprana');
+            $table->date('fecha_alta_temprana')->nulleable();
         });
     }
 
