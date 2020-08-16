@@ -10,7 +10,7 @@
 
         @if (isset($viajesIniciados))
             <div class="card border-primary " style="width: 18rem;">
-                <div class="card-header text-center">Viajes Iniciados</div>
+                <div class="card-header bg-primary text-white text-center">Viajes Iniciados</div>
                 <div class="card-body text-center">
                     <h1> {{ $viajesIniciados[0]->CantViajes }}</h2>
                 </div>
