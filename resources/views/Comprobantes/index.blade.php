@@ -9,7 +9,7 @@
             <h2>Comprobantes.</h2>
         </div>
         <div class="col-md-6">
-            <a class="btn btn-success float-right" href="{{ route('comprobantes.create') }}"> <i class="fa fa-plus"></i> Nuevo Comprobante</a>
+            <a class="btn btn-success float-right" href="{{ route('comprobantes.create',['id'=>'new','viaje'=>'new']) }}"> <i class="fa fa-plus"></i> Nuevo Comprobante</a>
         </div>
     </div>
 
@@ -30,7 +30,6 @@
                 <th>Camionero</th>
                 <th>Tipo</th>
                 <th>Monto</th>
-                <th>Detalle</th>
                 <th width="280px">Acciones</th>
             </tr>
             @foreach ($comprobantes as $comprobante)
@@ -40,7 +39,6 @@
                     <td>{{ ucfirst($comprobante->nombre) }}</td>
                     <td>{{ ucfirst($comprobante->tipo) }}</td>
                     <td>${{ $comprobante->monto }}</td>
-                    <td>{{ $comprobante->detalles}}</td>
                     <td>
                         <form id="formBorrar{{$comprobante->id}}" action="{{ route('comprobantes.destroy',$comprobante->id) }}" method="POST">
                             <a class="btn btn-primary" href="{{ route('comprobantes.edit',$comprobante->id) }}"><i class="fa fa-edit"></i> Editar</a>

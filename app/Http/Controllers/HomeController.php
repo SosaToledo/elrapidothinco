@@ -28,6 +28,8 @@ class HomeController extends Controller
      */
     public function index(Request $request)
     {
+        $viajesIniciados = DB::select("Select count(*) as CantViajes from viajes where estados = 'Iniciado' ");
+        //dd($viajesIniciados);
         $viajes = Viaje::orderby('id','asc')
                 ->select('viajes.id','viajes.idSimpleViaje','viajes.fecha','clientes.nombre','camioneros.apellido','camiones.id_simple_camiones', 'viajes.estados')
                 ->join('clientes','viajes.id_cliente','=','clientes.id')
@@ -37,7 +39,9 @@ class HomeController extends Controller
                 ->get();
 
         $request -> user()->authorizeRoles(['user','admin']);
-        return view('home')->with(compact('viajes'));
+        return view('home')
+            ->with(compact('viajes'))
+            ->with(compact('viajesIniciados'));
     }
 
     /*

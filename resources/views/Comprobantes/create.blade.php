@@ -31,14 +31,19 @@
         <div class="col-sm-12 col-md-4">
             <div class="form-group">
                 <strong>CODIGO:</strong>
-                <input type="text"  value="CP{{$ultimo}}" max=10 name="id_simple" class="form-control" placeholder="" readonly>
+                <input type="text"  value="CP{{$ultimo }}" max=10 name="id_simple" class="form-control" placeholder="" readonly>
             </div>
         </div>
         <div class="col-sm-12 col-md-4">
              <div class="form-group">
                  <strong>Viaje:</strong>
-                 <input type="hidden" id="viaje" name="viaje" >
-                 <input type="text" id="viajeAutocomplete" maxlength="7" name="viajeVista" class="form-control" placeholder="Ingrese el código del viaje" autofocus required>
+                @if( ! empty($viajeFinal[0]))   {{-- Con esto comprobamos cuando viene con un viaje, entonces cargamos los datos del viaje. --}}
+                    <input type="hidden" id="viaje" name="viaje" value="{{$viajeFinal[0]->id}}">
+                    <input type="text" id="viajeAutocomplete" value="{{$viajeFinal[0]->idSimpleViaje}}" maxlength="7" name="viajeVista" class="form-control" placeholder="Ingrese el código del viaje" autofocus required>
+                    @else
+                    <input type="hidden" id="viaje" name="viaje" value="">
+                    <input type="text" id="viajeAutocomplete" value="" maxlength="7" name="viajeVista" class="form-control" placeholder="Ingrese el código del viaje" autofocus required>
+                @endif
             </div>
         </div>
         <div class="col-sm-12 col-md-4 lg-4">
@@ -50,8 +55,13 @@
         <div class="col-sm-12 col-md-4 lg-4">
             <div class="form-group">
                 <strong>Camionero:</strong>
-                <input type="hidden" id="camionero" name="camionero">
-                <input type="text" id="camioneroAutocomplete" class="form-control" name="camioneroVista" placeholder="Ingrese Apellido"  required>
+                @if( ! empty($camioneroFinal[0]))   {{-- Con esto comprobamos cuando viene con un camionero, entonces cargamos los datos del camionero. --}}
+                    <input type="hidden" id="camionero" name="camionero" value="{{$camioneroFinal[0]->id}}">
+                    <input type="text" id="camioneroAutocomplete" value="{{$camioneroFinal[0]->apellido.' '.$camioneroFinal[0]->nombre}}" class="form-control" name="camioneroVista" placeholder="Ingrese Apellido"  required>
+                @else
+                    <input type="hidden" id="camionero" name="camionero" value="">
+                    <input type="text" id="camioneroAutocomplete" value="" class="form-control" name="camioneroVista" placeholder="Ingrese Apellido"  required>
+                @endif
             </div>
         </div>
 
@@ -60,7 +70,7 @@
                 <strong>Tipo:</strong>
                 <select class="form-control" name="tipo" id="tipo">
                     <option value="combustible">Combustible</option>
-                    <option value="adelanto">Adelanto</option>
+                    <option value="adelanto" {{ isset($camioneroFinal[0]) ? 'selected' : ''  }}>Adelanto</option>
                 </select>
             </div>
         </div>
@@ -79,7 +89,7 @@
         <div class="col-xs-12 col-sm-12 col-md-12">
             <div class="form-group">
                 <strong>Detalles:</strong>
-                <textarea required rows="3" class="form-control" name="detalles" placeholder=""></textarea>
+                <textarea rows="3" class="form-control" name="detalles" placeholder=""></textarea>
             </div>
         </div>
 
@@ -116,7 +126,7 @@
                                 var resp = $.map(data,function(obj){
                                     //console.log(obj);
                                     return {
-                                        label: obj.id_viaje_simple,
+                                        label: obj.idSimpleviaje,
                                         value: obj.id
                                     }
                                 });

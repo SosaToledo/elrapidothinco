@@ -33,7 +33,7 @@
                 <th>Camion</th>
                 <th>Fecha</th>
                 <th>Estado</th>
-                <th width="320px">Acciones</th>
+                <th width="380px">Acciones</th>
             </tr>
             @foreach ($viajes as $viaje)
             <tr>
@@ -45,8 +45,8 @@
                 <td>{{ $viaje->estados}}</td>
                 <td>
                     <form id="formBorrar{{$viaje->id}}" action="{{ route('viajes.destroy',$viaje->id) }}" method="POST">
-                        <a class="btn btn-info" href="{{ route('comprobantes.show',1) }}"> <i class=""></i>Comp</a>
-                        <a class="btn btn-primary" href="{{ route('viajes.edit',$viaje->id) }}"> <i class="fa fa-edit"></i>/<i class="fa fa-eye"></i></a>
+                        <a class="btn btn-info" href="{{ route('createWithData',['camionero'=>'new','viaje'=>$viaje->id]) }}"> <i class="fa fa-plus"></i> Comprobante</a>
+                        <a class="btn btn-primary" href="{{ route('viajes.edit',$viaje->id) }}"> <i class="fa fa-edit"></i> Editar</i></a>
                         @csrf
                         @method('DELETE')
                         <button type="button" idParaBorrar="{{$viaje->id}}" codigoSimple="{{$viaje->idSimpleViaje}}" name="btn" class="btn btn-danger submitBtn" id="submitBtn" data-toggle="modal" data-target="#confirm-submit"> <i class="fa fa-trash"></i> Borrar</button>

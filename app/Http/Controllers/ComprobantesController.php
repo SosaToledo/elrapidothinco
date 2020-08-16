@@ -3,6 +3,8 @@
 namespace App\Http\Controllers;
 
 use App\Comprobante;
+use App\Camionero;
+use App\Viaje;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Carbon\Carbon;
@@ -34,10 +36,24 @@ class ComprobantesController extends Controller
      * 
      * @return \Illuminate\Http\Response
      */
-    public function create()
+    public function create($camionero = 'new', $viaje = 'new')
     {
+        $camioneroFinal = new Camionero;
+        $viajeFinal = new Viaje;
+        if ($camionero != 'new'){
+            $camioneroFinal = Camionero::where('id','=',$camionero)->get();
+        }
+        if ($viaje != 'new'){
+            $viajeFinal = Viaje::where('id','=',$viaje)->get();
+        }
+        
+        //dd($camioneroFinal[0],$camionero,$viajeFinal,$viaje);
+
         $ultimo = FuncionesComunes::rellenarNum('comprobantes');
-        return view('Comprobantes.create', compact('ultimo'));
+        return view('Comprobantes.create')
+            ->with(compact('ultimo'))
+            ->with(compact('camioneroFinal'))
+            ->with(compact('viajeFinal'));
     }
 
     /**

@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Viaje;
+use App\Comprobante;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Carbon\Carbon;
@@ -136,8 +137,16 @@ class ViajesController extends Controller
                         ->where('viajes.id','=',$id)
                         ->get();
 
+                            //Codigo, camionero, tipo, monto
+        $comprobantes = Comprobante::select('comprobantes.id','comprobantes.id_simple_comprobante',
+                            'comprobantes.id_camioneros','comprobantes.tipo','comprobantes.monto',
+                            'camioneros.apellido','camioneros.nombre')
+                            ->join('camioneros','comprobantes.id_camioneros','camioneros.id')
+                            ->where('comprobantes.id_viaje','=',$viaje[0]->id)
+                            ->get();
         
-        return view('Viajes.edit',compact('viaje'));
+                            //dd($comprobantes);
+        return view('Viajes.edit')->with(compact('viaje'))->with(compact('comprobantes'));
     }
 
     /**

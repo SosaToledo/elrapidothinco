@@ -27,7 +27,11 @@ Route::get('/newTravel', 'travelController@index')->name('travel');
 Route::resource('acoplados','AcopladoController')->middleware('role:admin');
 Route::resource('camiones','CamionesController')->middleware('role:admin');
 Route::resource('camioneros','CamionerosController')->middleware('role:admin');
+
 Route::resource('comprobantes','ComprobantesController')->middleware('role:admin');
+Route::get('/comprobantes/{camionero}/{viaje}', 'ComprobantesController@create')->name('createWithData');
+
+Route::resource('payments', 'PaymentsController', ['except' => 'create']);
 Route::resource('clientes','ClientesController')->middleware('role:admin');
 Route::resource('viajes','ViajesController')->middleware('role:admin');
 Route::resource('sueldos','SueldosController')->middleware('role:admin');
