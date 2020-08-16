@@ -49,7 +49,6 @@
                             @method('DELETE')
                             <button type="button"  idParaBorrar="{{$camionero->id}}" codigoSimple="{{$camionero->id_simple_camioneros}}"  name="btn" class="btn btn-danger submitBtn" id="submitBtn" data-toggle="modal" data-target="#confirm-submit"> <i class="fa fa-trash"></i> Borrar</button>
                         </form>
-
                     </td>
                 </tr>
             @endforeach

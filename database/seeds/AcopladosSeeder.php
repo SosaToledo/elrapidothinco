@@ -2,9 +2,10 @@
 
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\DB;
+use App\Http\Controllers\FuncionesComunes;
 use Carbon\Carbon;
 
-class CamionesSeeder extends Seeder
+class AcopladosSeeder extends Seeder
 {
     /**
      * Run the database seeds.
@@ -18,15 +19,15 @@ class CamionesSeeder extends Seeder
         /* Estos son los id que generamos y borramos */
         $ids=[1,2,3,4,5,6,7,8,9];
 
-        DB::table('camiones')
-        ->whereIn('camiones.id',$ids)
+        DB::table('Acoplado')
+        ->whereIn('Acoplado.id',$ids)
         ->delete();
 
         /* Con los id borrados  */
         foreach ($ids as $id) {
-            DB::table('camiones')->insert([
+            DB::table('acoplado')->insert([
                 'id'=>$id,
-                'id_simple_camiones' => 'CA00'.$id,
+                'id_simple_acoplado' => 'AC00'.$id,
                 'patente' => $faker->numerify('########'),
                 'vtv_vencimiento' => $faker->dateTimeBetween('+0 days','+2 years'),
                 'senasa_vencimiento' => $faker->dateTimeBetween('+0 days','+2 years'),

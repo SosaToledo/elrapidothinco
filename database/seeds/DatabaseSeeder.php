@@ -22,6 +22,6 @@ class DatabaseSeeder extends Seeder
         $this->call(ClientesSeeder::class);
         $this->call(CamionesSeeder::class);
         $this->call(CamionerosSeeder::class);
-        
+        $this->call(AcopladosSeeder::class);
     }
 }

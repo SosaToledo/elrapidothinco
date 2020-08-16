@@ -13,26 +13,28 @@ class ClientesSeeder extends Seeder
      */
     public function run()
     {
-        DB::table('clientes')->insert([
-            'id_simple_clientes' => 'CL1',
-            'CUIL' => 20352094189,
-            'nombre' => 'Luciano Sosa',
-            'direccion' => 'por ahi',
-            'telefono' => 152200,
-            'correo' => 'lcuainos@gmail.com',
-            'created_at' => Carbon::now(),
-            'updated_at' => Carbon::now(),
-        ]);
+        $faker = Faker\Factory::create();
 
-        DB::table('clientes')->insert([
-            'id_simple_clientes' => 'CL2',
-            'CUIL' => 20452001529,
-            'nombre' => 'Frank Toledo',
-            'direccion' => 'casa fea',
-            'telefono' => 15267200,
-            'correo' => 'elfrankie@gmail.com',
-            'created_at' => Carbon::now(),
-            'updated_at' => Carbon::now(),
-        ]);
+        /* Estos son los id que generamos y borramos */
+        $ids=[1,2,3,4,5,6,7,8,9];
+
+        DB::table('clientes')
+        ->whereIn('clientes.id',$ids)
+        ->delete();
+
+        /* Con los id borrados  */
+        foreach ($ids as $id) {
+            DB::table('clientes')->insert([
+                'id'=>$id,
+                'id_simple_clientes' => 'CL00'.$id,
+                'CUIL' => $faker->numerify('###########'),
+                'nombre' => $faker->firstName(),
+                'direccion' => $faker->sentence(2).' '.$faker->numerify('##'),
+                'telefono' => $faker->numerify('##########'),
+                'correo' => $faker->email(),
+                'created_at' => Carbon::now(),
+                'updated_at' => Carbon::now(),
+                ]);
+        }
     }
 }
