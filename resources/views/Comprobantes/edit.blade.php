@@ -3,7 +3,15 @@
 @section('title', 'Editando '.$comprobante[0]->id_simple_comprobante)
 
 @section('content')
-<div class="row">
+
+<style>
+  @media print {     .no-print, .no-print * {         display: none !important;     } .solo-imprimible{ display: flex !important;}}
+  .solo-imprimible{
+      display: none;
+  }
+</style>
+
+<div class="row no-print">
     <div class="col-md-2">
         <a class="btn btn-primary" href="{{ route('comprobantes.index') }}"> <i class="fa fa-arrow-circle-left"></i> Volver</a>
     </div>
@@ -11,9 +19,10 @@
         <div class="pull-left">
             <h2>Editar Comprobante</h2>
         </div>
+        <a href="#" id="imprimirDiv" class="btn btn-danger float-right no-print"> <i class="fa fa-print"></i> Imprimir Recibo</a>
     </div>
 </div>
-<hr>
+<hr class="no-print">
 
 @if ($errors->any())
 <div class="alert alert-danger">
@@ -26,7 +35,7 @@
 </div>
 @endif
 
-<form action="{{ route('comprobantes.update', $comprobante[0]->id) }}" method="POST">
+<form action="{{ route('comprobantes.update', $comprobante[0]->id) }}" class="no-print" method="POST">
     @csrf
     @method('PUT')
     <div class="row">
@@ -92,8 +101,12 @@
     </div>
 </form>
 
+
 <script type="text/javascript">
     $(document).ready(function() {
+        $('#imprimirDiv').click(function(){
+            window.print();
+        });
         //Autocompletado para camiones
         $("#viajeAutocomplete").autocomplete({
             source: function(request, response) {
@@ -189,5 +202,21 @@
     });
 </script>
 
+<div class="card mt-3 solo-imprimible">
+    <div class="card-header">
+        Recibo de adelanto de sueldo
+    </div>
+    <div class="card-body">
+        En el dia {{ date("d/m/Y", strtotime($comprobante[0]->fecha)) }} se deja constancia que {{ $comprobante[0]->apellido.' '.$comprobante[0]->nombre}} documento {{ $comprobante[0]->dni }} recibió ${{$comprobante[0]->monto}} en concepto de adelanto.
+    </div>
+    <div class="row m-3">
+        <div class="col"></div>
+        <div class="col"></div>
+        <div class="col text-center mt-5 pt-3">
+            <hr>
+            {{$comprobante[0]->apellido.' '.$comprobante[0]->nombre}}
+        </div>
+    </div>    
+</div>
 
 @endsection

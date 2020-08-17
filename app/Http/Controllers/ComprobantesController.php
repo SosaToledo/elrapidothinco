@@ -22,7 +22,7 @@ class ComprobantesController extends Controller
     {
         // $comprobantes = Comprobante::latest()->paginate(10);
         $comprobantes = Comprobante::orderby('fecha','asc')
-        ->select('comprobantes.id','comprobantes.id_simple_comprobante','viajes.idSimpleViaje','comprobantes.fecha', 'camioneros.nombre','comprobantes.tipo', 'comprobantes.monto','comprobantes.detalles')
+        ->select('comprobantes.id','comprobantes.id_simple_comprobante','viajes.idSimpleViaje','comprobantes.fecha','camioneros.apellido','camioneros.nombre','comprobantes.tipo', 'comprobantes.monto','comprobantes.detalles')
         ->leftJoin('camioneros','comprobantes.id_camioneros','=','camioneros.id')
         ->leftJoin('viajes','comprobantes.id_viaje','=','viajes.id')
         ->get();
@@ -108,7 +108,7 @@ class ComprobantesController extends Controller
         
         $comprobante = Comprobante::select('comprobantes.id','comprobantes.id_simple_comprobante','comprobantes.id_viaje','comprobantes.fecha'
         ,'comprobantes.id_camioneros', 'comprobantes.tipo', 'comprobantes.monto','comprobantes.detalles'
-        ,'viajes.idSimpleViaje','camioneros.apellido','camioneros.nombre')
+        ,'viajes.idSimpleViaje','camioneros.apellido','camioneros.nombre','camioneros.dni')
         ->leftJoin('camioneros','comprobantes.id_camioneros','=','camioneros.id')
         ->leftJoin('viajes','comprobantes.id_viaje','=','viajes.id')
         ->where('comprobantes.id','=',$id)

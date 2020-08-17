@@ -35,8 +35,9 @@
             @foreach ($comprobantes as $comprobante)
                 <tr>
                     <td>{{ $comprobante->id_simple_comprobante }}</td>
-                    <td>{{ $comprobante->idSimpleViaje }}</td>
-                    <td>{{ ucfirst($comprobante->nombre) }}</td>
+                    <td>{{ isset($comprobante->idSimpleViaje) ? $comprobante->idSimpleViaje : '-' }}</td>
+                    
+                    <td>{{ ucfirst($comprobante->apellido).' '.ucfirst($comprobante->nombre) }}</td>
                     <td>{{ ucfirst($comprobante->tipo) }}</td>
                     <td>${{ $comprobante->monto }}</td>
                     <td>

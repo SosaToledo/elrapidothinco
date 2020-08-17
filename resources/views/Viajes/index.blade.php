@@ -39,7 +39,7 @@
             <tr>
                 <td>{{ $viaje->idSimpleViaje }}</td>
                 <td>{{ $viaje->nombre }}</td>
-                <td>{{ $viaje->apellido }}</td>
+                <td>{{ $viaje->apellido .' '. $viaje->nombreCamionero }}</td>
                 <td>{{ $viaje->id_simple_camiones }}</td>
                 <td>{{ $viaje->fecha }}</td>
                 <td>{{ $viaje->estados}}</td>

@@ -5,31 +5,37 @@
 
 <link href="{{ asset('css/style.css') }}" rel="stylesheet" type="text/css">
 
+<style>
+  @media print {     .no-print, 	.no-print * {         display: none !important;     } }
+</style>
+
   @php
     $sueldos = 0;
     $viaticos = 0; 
     $adelantos = 0;
   @endphp
-  <div class="container">
-    <form action="{{ route('sueldos.create')}}" method="GET" class="row">
-      @csrf
-      @method('GET')
+  <div class="no-print">
 
+    <div class="container">
+      <form action="{{ route('sueldos.create')}}" method="GET" class="row">
+        @csrf
+      @method('GET')
+      
       <div class="form-group col-4 ">
         <label for="camionero" >Seleccione camionero: </label>
         <select class="form-control" class="" name="camionero" id="camionero">
           @foreach ($camioneros as $camionero)
-            <option value='{{$camionero->id}}'>
+          <option value='{{$camionero->id}}'>
             {{$camionero->apellido.' '.$camionero->nombre}}
-            </option>
+          </option>
           @endforeach
         </select>
       </div>
       <div class="form-group col-6">
         <label for="">Rango de fechas: </label>
         <div class="form-inline">
-          <input class="form-control mr-3" type="date" name="fecha_inicio" placeholder="Fecha de inicio">
-          <input class="form-control" type="date" name="fecha_fin" placeholder="Fecha final">
+          <input class="form-control mr-3" id="desdeFecha" type="date" name="fecha_inicio" placeholder="Fecha de inicio" >
+          <input class="form-control" id="hastaFecha" type="date" name="fecha_fin" placeholder="Fecha final">
         </div>
       </div>
       <div class="form-group col-2">
@@ -41,44 +47,51 @@
     </form>
   </div>
   
-
+  
   @if(count($detalles_sueldo ?? '')==0)
   
-    <div class="alert alert-primary alert-dimissible fade show" role="alert">
-        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-            <span aria-hidden="true">&times;</span>
-        </button>
-        <p>Sin resultados.</p>
-    </div>        
-
+  <div class="alert alert-primary alert-dimissible fade show" role="alert">
+    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+      <span aria-hidden="true">&times;</span>
+    </button>
+    <p>Sin resultados.</p>
+  </div>        
+  
   @else
-   <hr>
-  <div class="table-responsive mt-3">
-    <div class="text-center" >
-      <h3><i class="fa fa-users"></i> {{$detalles_sueldo[0]->apellido." ".$detalles_sueldo[0]->nombre}}</h3>
+  <hr>
+  </div>
+  
+  <div id="ResumenEmpleado">
+    <div class="table-responsive mt-3">
+      <div class="text-center" >
+        <h3><i class="fa fa-users"></i> {{$detalles_sueldo[0]->apellido." ".$detalles_sueldo[0]->nombre}}
+        <a href="#" id="imprimirDiv" class="btn btn-danger float-right no-print"> <i class="fa fa-print"></i> Imprimir</a>
+      </h3>
     </div>
     <br>
     <h4><i class="fa fa-bus"></i> Viajes</h4>
     <table class="table table-hover">
-      <tr>
-        <th>Fecha</th>
-        <th>Cod Viaje</th>
-        <th>Guía</th>
-        <th>Sueldo</th>
-        <th>Viaticos</th>
-      </tr>
+      <thead class="thead-light">
+        <tr>
+          <th style="width: 150px">Fecha</th>
+          <th style="width: 150px;">COD Viaje</th>
+          <th style="width: 150px;">Guía</th>
+          <th style="width: 150px;">Sueldo</th>
+          <th style="width: 150px;">Viaticos</th>
+          <th style="width: 50px;">Detalle</th>
+        </tr>
+      </thead>
       @foreach($detalles_sueldo as $viajes)
         <tr>
           <td>{{$viajes->fecha}}</td>
           <td>{{$viajes->idSimpleViaje}}</td>
           <td>{{$viajes->guia}}</td>
           <td>${{$viajes->ganancia_camionero}}</td>
-            @php
-              $sueldos = $sueldos + $viajes->ganancia_camionero
-            @endphp
           <td>${{$viajes->peajes}}</td>
+          <td><a href="{{ route('viajes.edit',$viajes->id) }}" class="btn btn-primary"><i class="fa fa-eye"></i></a></td>
             @php
-              $viaticos = $viaticos + $viajes->peajes
+              $sueldos = $sueldos + $viajes->ganancia_camionero;
+              $viaticos = $viaticos + $viajes->peajes;
             @endphp
         </tr>
       @endforeach
@@ -95,19 +108,27 @@
       </div>                                    
     @else
     <div id="adelantos" class="table-responsive mt-3">
-    <h4><i class="fa fa-cash"></i> Adelantos</h4>
+    <h4><i class="fa fa-money"></i> Adelantos</h4>
     <table class="table table-hover">
-      <tr>
-        <th>Fecha</th>
-        <th>Id del viaje</th>
-        <th>Monto</th>
-      </tr>
+      <thead class="thead-light">
+        <tr>
+          <th style="width: 80px;">Fecha</th>
+          <th style="width: 80px;">COD Viaje</th>
+          <th style="width: 80px;">Monto</th>
+          <th style="width: 150px;">Detalle</th>
+          <th style="width: 50px;"></th>
+        </tr>
+      </thead>
   
       @foreach($detalles_adelanto as $adelanto)
         <tr>
           <td>{{$adelanto->fecha}}</td>
-          <td>{{$adelanto->id_viaje}}</td>
-          <td>{{$adelanto->monto}}</td>
+          <td>{{ isset($adelanto->idSimpleViaje) ? $adelanto->idSimpleViaje : '-' }}</td>
+          <td>${{$adelanto->monto}}</td>
+          <td>
+            {{ $adelanto->detalles==="" ? '-' : \Illuminate\Support\Str::limit($adelanto->detalles, 150, $end='...') }}
+          </td>
+          <td><a href="{{ route('comprobantes.edit',$adelanto->id) }}" class="btn btn-primary"><i class="fa fa-eye"></i></a></td>
           @php
             $adelantos = $adelantos + $adelanto->monto
           @endphp
@@ -138,5 +159,23 @@
     </table>
   </div>
   @endif
+  </div>
+
+<script>
+    
+    $(document).ready(function() {
+      
+      var d = new Date();
+      var firstDay =  new Date(d.getFullYear(), d.getMonth(), 1);
+      var lastDay =  new Date(d.getFullYear(), d.getMonth() + 1, 0);
+      $('#desdeFecha').val(firstDay.toISOString().split('T')[0]).trigger('change');
+      $('#hastaFecha').val(lastDay.toISOString().split('T')[0]).trigger('change');
+
+      $('#imprimirDiv').click(function(){
+        window.print();
+      });
+
+    });
+</script>
 
 @endsection
