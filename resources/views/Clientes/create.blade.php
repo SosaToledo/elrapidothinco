@@ -38,25 +38,25 @@
         <div class="col-sm-12 col-md-6 lg-3">
             <div class="form-group">
                 <strong>CUIT:</strong>
-                <input type="text" max=10 name="cuil" class="form-control" placeholder="Sin guiones ni espacios">
+                <input type="text" max=10 name="cuil" class="form-control" placeholder="Sin guiones ni espacios" pattern="[0-9]{0,12}" title="Solo numeros sin guiones ni espacios" autofocus required>
             </div>
         </div>
         <div class="col-sm-12 col-md-6 lg-3">
             <div class="form-group">
                 <strong>Razón social:</strong>
-                <input type="text" max="30" class="form-control" name="nombre" placeholder="">
+                <input type="text" max="30" class="form-control" name="nombre" placeholder="" required>
             </div>
         </div>
         <div class="col-sm-12 col-md-6 lg-3">
             <div class="form-group">
                 <strong>Dirección:</strong>
-                <input type="text" max="60" class="form-control" name="direccion" placeholder="">
+                <input type="text" max="60" class="form-control" name="direccion" placeholder="" required>
             </div>
         </div>
         <div class="col-sm-12 col-md-6 lg-3">
             <div class="form-group">
                 <strong>Teléfono:</strong>
-                <input type="text" class="form-control" name="telefono" placeholder="2477 123456">
+                <input type="text" class="form-control" name="telefono" placeholder="2477 123456" pattern="[0-9]{0,16}" title="Solo numeros sin guiones ni espacios" required>
             </div>
         </div>
         <div class="col-sm-12 col-md-6 lg-3">

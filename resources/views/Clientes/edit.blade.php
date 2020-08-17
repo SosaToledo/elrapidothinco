@@ -39,31 +39,31 @@
         <div class="col-sm-12 col-md-6 lg-3">
             <div class="form-group">
                 <strong>CUIT:</strong>
-                <input type="text" max=10 name="cuil" class="form-control" placeholder="" value="{{$cliente->CUIL}}">
+                <input type="text" max=10 name="cuil" class="form-control" placeholder="" value="{{$cliente->CUIL}}" pattern="[0-9]{0,12}" title="Solo numeros sin guiones ni espacios" autofocus required>
             </div>
         </div>
         <div class="col-sm-12 col-md-6 lg-3">
             <div class="form-group">
                 <strong>Razón social:</strong>
-                <input type="text" class="form-control" name="nombre" placeholder="" value="{{$cliente->nombre}}">
+                <input type="text" class="form-control" name="nombre" placeholder="" value="{{$cliente->nombre}}" required>
             </div>
         </div>
         <div class="col-sm-12 col-md-6 lg-3">
             <div class="form-group">
                 <strong>Dirección:</strong>
-                <input type="text" class="form-control" name="direccion" placeholder="" value="{{$cliente->direccion}}">
+                <input type="text" class="form-control" name="direccion" placeholder="" value="{{$cliente->direccion}}" required>
             </div>
         </div>
         <div class="col-sm-12 col-md-6 lg-3">
             <div class="form-group">
                 <strong>Teléfono:</strong>
-                <input type="text" class="form-control" name="telefono" placeholder="" value="{{$cliente->telefono}}">
+                <input type="text"  class="form-control" name="telefono" placeholder="" value="{{$cliente->telefono}}" pattern="[0-9]{0,16}" title="Solo numeros sin guiones ni espacios" required>
             </div>
         </div>
         <div class="col-sm-12 col-md-6 lg-3">
             <div class="form-group">
                 <strong>Correo:</strong>
-                <input type="text" class="form-control" name="correo" placeholder="" value="{{$cliente->correo}}">
+                <input type="text" class="form-control" name="correo" placeholder="" value="{{$cliente->correo}}" >
             </div>
         </div>
         <div class="col-sm-12 ">
