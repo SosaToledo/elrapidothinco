@@ -26,7 +26,7 @@ class AddColumnsAcoplado extends Migration
     public function down()
     {
         Schema::table('acoplado', function (Blueprint $table) {
-            //
+            $table->dropColumn('ruta_vencimiento');
         });
     }
 }

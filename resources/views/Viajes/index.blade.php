@@ -29,7 +29,7 @@
             <tr class="">
                 <th>CODIGO</th>
                 <th>Cliente</th>
-                <th>Camionero</th>
+                <th>Chofer</th>
                 <th>Camion</th>
                 <th>Fecha</th>
                 <th>Estado</th>
@@ -41,7 +41,7 @@
                 <td>{{ $viaje->nombre }}</td>
                 <td>{{ $viaje->apellido .' '. $viaje->nombreCamionero }}</td>
                 <td>{{ $viaje->id_simple_camiones }}</td>
-                <td>{{ $viaje->fecha }}</td>
+                <td>{{ date("d/m/Y", strtotime($viaje->fecha)) }}</td>
                 <td>{{ $viaje->estados}}</td>
                 <td>
                     <form id="formBorrar{{$viaje->id}}" action="{{ route('viajes.destroy',$viaje->id) }}" method="POST">

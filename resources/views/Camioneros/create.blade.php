@@ -8,7 +8,7 @@
     </div>
     <div class="col margin-tb">
         <div class="pull-left">
-            <h2>Agregar nuevo camionero</h2>
+            <h2>Agregar nuevo chofer CM{{$ultimo}} </h2>
         </div>
     </div>
 </div>

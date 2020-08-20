@@ -21,11 +21,14 @@ class ComprobantesController extends Controller
     public function index()
     {
         // $comprobantes = Comprobante::latest()->paginate(10);
-        $comprobantes = Comprobante::orderby('fecha','asc')
-        ->select('comprobantes.id','comprobantes.id_simple_comprobante','viajes.idSimpleViaje','comprobantes.fecha','camioneros.apellido','camioneros.nombre','comprobantes.tipo', 'comprobantes.monto','comprobantes.detalles')
-        ->leftJoin('camioneros','comprobantes.id_camioneros','=','camioneros.id')
-        ->leftJoin('viajes','comprobantes.id_viaje','=','viajes.id')
-        ->get();
+        $comprobantes = Comprobante::orderby('id_simple_comprobante','desc')
+            ->select('comprobantes.id','comprobantes.id_simple_comprobante',
+                    'viajes.idSimpleViaje','comprobantes.fecha','camioneros.apellido',
+                    'camioneros.nombre','comprobantes.tipo', 'comprobantes.monto',
+                    'comprobantes.detalles')        
+            ->leftJoin('camioneros','comprobantes.id_camioneros','=','camioneros.id')
+            ->leftJoin('viajes','comprobantes.id_viaje','=','viajes.id')
+            ->get();
         
         return view('Comprobantes.index',compact('comprobantes'))
             ->with('i', (request()->input('page', 1) - 1) * 10);
@@ -66,7 +69,6 @@ class ComprobantesController extends Controller
     public function store(Request $request )
     {
 
-       
         $comprobante = new Comprobante;
         $comprobante->id_simple_comprobante = $request->id_simple;
         $comprobante->fecha = $request->fecha;
@@ -74,6 +76,9 @@ class ComprobantesController extends Controller
         $comprobante->id_camioneros = $request->camionero;
         $comprobante->detalles = $request->detalles ?? '';
         $comprobante->tipo = $request->tipo;
+        $comprobante->ltsgasoil = $request->ltsgasoil;
+        $comprobante->medioPago = $request->medioPago;
+
         $comprobante->monto = $request->monto;
         $comprobante->created_at = Carbon::now();
         $comprobante->updated_at = Carbon::now();
@@ -107,8 +112,8 @@ class ComprobantesController extends Controller
     {
         
         $comprobante = Comprobante::select('comprobantes.id','comprobantes.id_simple_comprobante','comprobantes.id_viaje','comprobantes.fecha'
-        ,'comprobantes.id_camioneros', 'comprobantes.tipo', 'comprobantes.monto','comprobantes.detalles'
-        ,'viajes.idSimpleViaje','camioneros.apellido','camioneros.nombre','camioneros.dni')
+        ,'comprobantes.id_camioneros', 'comprobantes.tipo','comprobantes.ltsgasoil','comprobantes.medioPago', 'comprobantes.monto','comprobantes.detalles'
+        ,'viajes.idSimpleViaje','camioneros.apellido','camioneros.nombre','camioneros.dni','camioneros.cbu')
         ->leftJoin('camioneros','comprobantes.id_camioneros','=','camioneros.id')
         ->leftJoin('viajes','comprobantes.id_viaje','=','viajes.id')
         ->where('comprobantes.id','=',$id)
@@ -133,6 +138,8 @@ class ComprobantesController extends Controller
         $comprobante->id_camioneros = $request->camionero;
         $comprobante->detalles = $request->detalles ?? '';
         $comprobante->tipo = $request->tipo;
+        $comprobante->ltsgasoil = $request->ltsgasoil;
+        $comprobante->medioPago = $request->medioPago;
         $comprobante->monto = $request->monto;
         $comprobante->save(['timestamps' => false]);
 

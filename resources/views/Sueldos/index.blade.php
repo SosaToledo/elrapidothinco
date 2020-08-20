@@ -22,7 +22,7 @@
       @method('GET')
       
       <div class="form-group col-4 ">
-        <label for="camionero" >Seleccione camionero: </label>
+        <label for="camionero" >Seleccione chofer: </label>
         <select class="form-control" class="" name="camionero" id="camionero">
           @foreach ($camioneros as $camionero)
           <option value='{{$camionero->id}}'>
@@ -74,7 +74,7 @@
       <thead class="thead-light">
         <tr>
           <th style="width: 150px">Fecha</th>
-          <th style="width: 150px;">COD Viaje</th>
+          <th style="width: 150px;">COD</th>
           <th style="width: 150px;">Guía</th>
           <th style="width: 150px;">Sueldo</th>
           <th style="width: 150px;">Viaticos</th>
@@ -83,7 +83,7 @@
       </thead>
       @foreach($detalles_sueldo as $viajes)
         <tr>
-          <td>{{$viajes->fecha}}</td>
+          <td>{{ date("d/m/Y", strtotime($viajes->fecha)) }}</td>
           <td>{{$viajes->idSimpleViaje}}</td>
           <td>{{$viajes->guia}}</td>
           <td>${{$viajes->ganancia_camionero}}</td>
@@ -113,7 +113,8 @@
       <thead class="thead-light">
         <tr>
           <th style="width: 80px;">Fecha</th>
-          <th style="width: 80px;">COD Viaje</th>
+          <th style="width: 80px;">COD</th>
+          <th style="width: 80px;">Viaje</th>
           <th style="width: 80px;">Monto</th>
           <th style="width: 150px;">Detalle</th>
           <th style="width: 50px;"></th>
@@ -122,7 +123,8 @@
   
       @foreach($detalles_adelanto as $adelanto)
         <tr>
-          <td>{{$adelanto->fecha}}</td>
+          <td>{{ date("d/m/Y", strtotime($adelanto->fecha)) }}</td>
+          <td>{{$adelanto->id_simple_comprobante}}</td>
           <td>{{ isset($adelanto->idSimpleViaje) ? $adelanto->idSimpleViaje : '-' }}</td>
           <td>${{$adelanto->monto}}</td>
           <td>

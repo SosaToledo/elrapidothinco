@@ -16,9 +16,10 @@ class SueldosController extends Controller
      */
     public function index()
     {
-        $camioneros = Camionero::All();
+        $camioneros = Camionero::orderBy('apellido','ASC')->get();
         $detalles_sueldo = [];
-        return view('Sueldos.index',compact('camioneros'))->with(compact('detalles_sueldo'));
+        return view('Sueldos.index',compact('camioneros'))
+                ->with(compact('detalles_sueldo'));
     }
 
     /**
@@ -33,16 +34,18 @@ class SueldosController extends Controller
         ->rightJoin('viajes', 'camioneros.id', '=', 'viajes.id_camionero')
         ->where('camioneros.id', $request->camionero)
         ->whereBetween('viajes.fecha', [$request->fecha_inicio, $request->fecha_fin])
+        ->orderBy('viajes.idSimpleViaje')
         ->get();
 
         $detalles_adelanto = DB::table('comprobantes')
-        ->select('comprobantes.fecha', 'comprobantes.monto','comprobantes.id' ,'comprobantes.id_viaje','comprobantes.detalles','viajes.idSimpleViaje')
+        ->select('comprobantes.fecha','comprobantes.id_simple_comprobante', 'comprobantes.monto','comprobantes.id' ,'comprobantes.id_viaje','comprobantes.detalles','viajes.idSimpleViaje')
         ->leftjoin('viajes','comprobantes.id_viaje','=','viajes.id')
         ->where('tipo', 'adelanto')
         ->whereBetween('comprobantes.fecha', [$request->fecha_inicio, $request->fecha_fin])
+        ->orderBy('comprobantes.id_simple_comprobante')
         ->get();
 
-        $camioneros = Camionero::All();
+        $camioneros = Camionero::orderBy('apellido','ASC')->get();
 
         return view('Sueldos.index')
         ->with(compact('detalles_adelanto'))

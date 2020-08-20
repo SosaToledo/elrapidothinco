@@ -8,7 +8,7 @@
     </div>
     <div class="col margin-tb">
         <div class="pull-left">
-            <h2>Editar Camionero</h2>
+            <h2>Editando chofer: {{$camionero->apellido.' '.$camionero->nombre}}</h2>
         </div>
     </div>
 </div>

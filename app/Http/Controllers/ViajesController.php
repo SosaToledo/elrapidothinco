@@ -19,11 +19,11 @@ class ViajesController extends Controller
      */
     public function index()
     {
-        $viajes = Viaje::orderby('fecha','asc')
+        $viajes = Viaje::orderby('idSimpleViaje','desc')
                 ->select('viajes.id','viajes.idSimpleViaje','viajes.fecha','clientes.nombre','camioneros.apellido','camioneros.nombre as nombreCamionero','camiones.id_simple_camiones', 'viajes.estados')
-                ->join('clientes','viajes.id_cliente','=','clientes.id')
-                ->join('camioneros','viajes.id_camionero','=','camioneros.id')
-                ->join('camiones','viajes.id_camiones','=','camiones.id')
+                ->leftjoin('clientes','viajes.id_cliente','=','clientes.id')
+                ->leftjoin('camioneros','viajes.id_camionero','=','camioneros.id')
+                ->leftjoin('camiones','viajes.id_camiones','=','camiones.id')
                 ->get();
 
         return view('Viajes.index',compact('viajes'));
@@ -70,6 +70,7 @@ class ViajesController extends Controller
         $viaje->cantidad = $request->cantidad ?? 0;
         $viaje->precio = $request->precio ?? 0;
         $viaje->valor = $request->valor ?? 0;
+        $viaje->comision = $request->comision ?? 0;
         $viaje->ganancia_camionero = $request->ganancia_camionero ?? 0;
         $viaje->tipoCamion = $request->tipoCamion;
         $viaje->fecha = $request->fecha;
@@ -123,7 +124,7 @@ class ViajesController extends Controller
         $viaje = Viaje::select('viajes.id','viajes.idSimpleViaje','viajes.id_camiones','viajes.id_acoplado','viajes.id_camionero',
                                 'viajes.id_cliente','viajes.km_inicial','viajes.km_final',
                                 'viajes.distancia','viajes.origen','viajes.valor',
-                                'viajes.cantidad', 'viajes.precio', 'viajes.remitos',
+                                'viajes.cantidad', 'viajes.precio', 'viajes.remitos','viajes.comision',
                                 'viajes.ganancia_camionero','viajes.tipoCamion','viajes.fecha',
                                 'viajes.peajes','viajes.gasoil_litros','viajes.gasoil_precio',
                                 'viajes.notaViaje','viajes.guia', 'viajes.destino',
@@ -174,6 +175,7 @@ class ViajesController extends Controller
         $viaje->cantidad = $request->cantidad ?? 0;
         $viaje->precio = $request->precio ?? 0;
         $viaje->valor = $request->valor;
+        $viaje->comision = $request->comision;
         $viaje->ganancia_camionero = $request->ganancia_camionero ?? 0;
         $viaje->tipoCamion = $request->tipoCamion;
         $viaje->fecha = $request->fecha;

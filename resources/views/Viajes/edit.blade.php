@@ -1,5 +1,5 @@
 @extends('layouts.app')
-@section('title','Editar viaje')
+@section('title','Editar viaje '.$viaje[0]->idSimpleViaje)
 
 @section('content')
 <div class="row">
@@ -9,7 +9,7 @@
     </div>
     <div class="col margin-tb">
         <div class="pull-left">
-            <h2>Editar Viaje</h2>
+            <h2>Editando Viaje {{$viaje[0]->idSimpleViaje}}</h2>
         </div>
     </div>
 </div>
@@ -61,7 +61,7 @@
         </div>
         <div class="col-sm-12 col-md-4 lg-3">
             <div class="form-group">
-                <strong>Camionero:</strong>
+                <strong>Chofer:</strong>
                 <input type="hidden" id="camionero" name="camionero" value="{{$viaje[0]->id_camionero}}">
                 <input type="text" id="camioneroAutocomplete" class="form-control" value="{{$viaje[0]->apellido.' '.$viaje[0]->nombre}}" name="camioneroVista" placeholder="Ingresar Apellido" required>
             </div>
@@ -128,25 +128,31 @@
         </div>
      </div>
      <div class="row">
-        <div class="col-sm-12 col-md-3 lg-3">
+        <div class="col-sm-12 col-md-1">
             <div class="form-group">
                 <strong>Cantidad:</strong>
                 <input type="text" class="form-control" value="{{$viaje[0]->cantidad}}" name="cantidad" id="cantidad" >
             </div>
         </div>
-        <div class="col-sm-12 col-md-3 lg-3">
+        <div class="col-sm-12 col-md-3">
             <div class="form-group">
                 <strong>Precio:</strong>
                 <input type="text" class="form-control" value="{{$viaje[0]->precio}}" name="precio" id="precio" >
             </div>
         </div>
-        <div class="col-sm-12 col-md-3 lg-3">
+        <div class="col-sm-12 col-md-3">
             <div class="form-group">
                 <strong>Valor:</strong>
                 <input type="text" class="form-control" name="valor" value="{{$viaje[0]->valor}}" id="valorViaje">
             </div>
         </div>
-        <div class="col-sm-12 col-md-3 lg-3">
+        <div class="col-sm-12 col-md-2">
+            <div class="form-group">
+                <strong>Comisión:</strong>
+                <input type="text" class="form-control" name="comision" value="{{$viaje[0]->comision}}" id="comision">
+            </div>
+        </div>
+        <div class="col-sm-12 col-md-3">
             <div class="form-group">
                 <strong>18% del camionero:</strong>
                 <input type="text" class="form-control" name="ganancia_camionero" id="gananciaCamionero" value="{{$viaje[0]->ganancia_camionero}}">
@@ -163,39 +169,6 @@
                 </select>
             </div>
         </div>
-
-        <div class="col-sm-12 col-md-6 lg-3">
-            <div class="form-group">
-                <strong>Remitos:</strong>
-                <input type="text" class="form-control" value="{{$viaje[0]->remitos}}" name="remitos" id="remitos" >
-            </div>
-        </div>
-        <!-- <div class="col-sm-12 col-md-6 lg-3">
-            <div class="form-group">
-                <strong>Carta de porte:</strong>
-                <input type="text" class="form-control" name="carta_porte" id="carta_porte" >
-            </div>
-        </div> -->
-        <div class="col-sm-12 col-md-3 lg-3">
-            <div class="form-group">
-                <strong>Viáticos:</strong>
-                <input type="text" class="form-control" name="peajes" value="{{$viaje[0]->peajes}}">
-            </div>
-        </div>    
-     </div>
-     <div class="row">
-        <div class="col-sm-12 col-md-3 lg-3">
-            <div class="form-group">
-                <strong>Gasoil (litros):</strong>
-                <input type="text" class="form-control" name="gasoil_litros" value="{{$viaje[0]->gasoil_litros}}">
-            </div>
-        </div>
-        <div class="col-sm-12 col-md-3 lg-3">
-            <div class="form-group">
-                <strong>Gasoil (precio):</strong>
-                <input type="text" class="form-control" name="gasoil_precio" value="{{$viaje[0]->gasoil_precio}}">
-            </div>
-        </div>
         <div class="col-sm-12 col-md-3 lg-3">
             <div class="form-group">
                 <strong>Nota de viaje:</strong>
@@ -206,6 +179,20 @@
             <div class="form-group">
                 <strong>Guía:</strong>
                 <input type="text" class="form-control" name="guia" value="{{$viaje[0]->guia}}">
+            </div>
+        </div>
+        <div class="col-sm-12 col-md-3 lg-3">
+            <div class="form-group">
+                <strong>Viáticos:</strong>
+                <input type="text" class="form-control" name="peajes" value="{{$viaje[0]->peajes}}">
+            </div>
+        </div>    
+    </div>
+    <div class="row">
+        <div class="col-sm-12 col-md-12 lg-3">
+            <div class="form-group">
+                <strong>Remitos:</strong>
+                <input type="text" class="form-control" value="{{$viaje[0]->remitos}}" name="remitos" id="remitos" >
             </div>
         </div>
        
@@ -251,7 +238,7 @@
         <i>No hay comprobantes asociados a este viaje.</i>
     </div>
 @endif
-    
+
 <script src="{{ asset('js/autocomplete-calc.js')}}"></script>
 <script type="text/javascript">
         

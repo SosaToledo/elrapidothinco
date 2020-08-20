@@ -27,7 +27,9 @@ class AddColumnsCamioneros extends Migration
     public function down()
     {
         Schema::table('camioneros', function (Blueprint $table) {
-            //
+            $table->dropColumn('cbu');
+            $table->dropColumn('fecha_alta_temprana');
+
         });
     }
 }

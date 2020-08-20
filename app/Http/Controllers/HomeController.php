@@ -32,12 +32,12 @@ class HomeController extends Controller
         //dd($viajesIniciados);
         $viajes = Viaje::orderby('id','asc')
                 ->select('viajes.id','viajes.idSimpleViaje','viajes.fecha','clientes.nombre','camioneros.apellido','camiones.id_simple_camiones', 'viajes.estados')
-                ->join('clientes','viajes.id_cliente','=','clientes.id')
-                ->join('camioneros','viajes.id_camionero','=','camioneros.id')
-                ->join('camiones','viajes.id_camiones','=','camiones.id')
+                ->leftjoin('clientes','viajes.id_cliente','=','clientes.id')
+                ->leftjoin('camioneros','viajes.id_camionero','=','camioneros.id')
+                ->leftjoin('camiones','viajes.id_camiones','=','camiones.id')
                 ->where('viajes.estados', 'Iniciado')
                 ->get();
-
+        /* dd($viajes); */
         $request -> user()->authorizeRoles(['user','admin']);
         return view('home')
             ->with(compact('viajes'))

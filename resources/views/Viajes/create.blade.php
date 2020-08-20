@@ -60,7 +60,7 @@
         </div>
         <div class="col-sm-12 col-md-4 lg-3">
             <div class="form-group">
-                <strong>Camionero:</strong>
+                <strong>Chofer:</strong>
                 <input type="hidden" id="camionero" name="camionero" >
                 <input type="text" id="camioneroAutocomplete" class="form-control" name="camioneroVista" placeholder="Ingresar Apellido"  required>
             </div>
@@ -127,29 +127,35 @@
         </div>
     </div>
     <div class="row">
-        <div class="col-sm-12 col-md-3 lg-3">
+        <div class="col-sm-12 col-md-1">
             <div class="form-group">
                 <strong>Cantidad:</strong>
                 <input type="text" class="form-control" name="cantidad" id="cantidad" value="1">
             </div>
         </div>
-        <div class="col-sm-12 col-md-3 lg-3">
+        <div class="col-sm-12 col-md-3">
             <div class="form-group">
                 <strong>Precio:</strong>
                 <input type="text" class="form-control" name="precio" id="precio" >
             </div>
         </div>
         <!--fin TODO-->
-        <div class="col-sm-12 col-md-3 lg-3">
+        <div class="col-sm-12 col-md-3">
             <div class="form-group">
                 <strong>Valor:</strong>
                 <input type="text" class="form-control" name="valor" id="valorViaje" placeholder="Cantidad x Precio" >
             </div>
         </div>
-        <div class="col-sm-12 col-md-3 lg-3">
+        <div class="col-sm-12 col-md-2">
+            <div class="form-group">
+                <strong>Comisión:</strong>
+                <input type="text" class="form-control" name="comision" id="comision" placeholder="" value="0"  required>
+            </div>
+        </div>
+        <div class="col-sm-12 col-md-3">
             <div class="form-group">
                 <strong>18% del camionero:</strong>
-                <input type="text" class="form-control" name="ganancia_camionero" id="gananciaCamionero" placeholder="Calculado sobre valor">
+                <input type="text" class="form-control" name="ganancia_camionero" id="gananciaCamionero" placeholder="(Valor-Comision)*18%">
             </div>
         </div>
     </div>
@@ -161,39 +167,6 @@
                     <option value="Chasis">Chasis</option>
                     <option value="Acoplado">Chasis y acoplado</option>
                 </select>
-            </div>
-        </div>
-         <!--TODO: agregarlos en el controller y model - remitos y carta de porte-->
-         <div class="col-sm-12 col-md-6 lg-3">
-            <div class="form-group">
-                <strong>Remitos:</strong>
-                <input type="text" class="form-control" name="remitos" id="remitos" placeholder="Ingrese separados por coma">
-            </div>
-        </div>
-        <!-- <div class="col-sm-12 col-md-6 lg-3">
-            <div class="form-group">
-                <strong>Carta de porte:</strong>
-                <input type="text" class="form-control" name="carta_porte" id="carta_porte" >
-            </div>
-        </div> -->
-        <div class="col-sm-12 col-md-3 lg-3">
-            <div class="form-group">
-                <strong>Viaticos:</strong>
-                <input type="text" class="form-control" name="peajes" >
-            </div>
-        </div>        
-    </div>
-    <div class="row">
-        <div class="col-sm-12 col-md-3 lg-3">
-            <div class="form-group">
-                <strong>Gasoil (litros):</strong>
-                <input type="text" class="form-control" name="gasoil_litros" >
-            </div>
-        </div>
-        <div class="col-sm-12 col-md-3 lg-3">
-            <div class="form-group">
-                <strong>Gasoil (precio):</strong>
-                <input type="text" class="form-control" name="gasoil_precio" >
             </div>
         </div>
         <div class="col-sm-12 col-md-3 lg-3">
@@ -208,6 +181,20 @@
                 <input type="text" class="form-control" name="guia" >
             </div>
         </div>
+        <div class="col-sm-12 col-md-3 lg-3">
+            <div class="form-group">
+                <strong>Viaticos:</strong>
+                <input type="text" class="form-control" name="peajes" >
+            </div>
+        </div>        
+    </div>
+    <div class="row">
+        <div class="col-sm-12 col-md-12 lg-3">
+            <div class="form-group">
+                <strong>Remitos:</strong>
+                <input type="text" class="form-control" name="remitos" id="remitos" placeholder="Ingrese valores separados por coma">
+            </div>
+        </div>
         <div class="col-sm-12 col-md-12 lg-12">
             <div class="text-center">
                 <button type="submit" class="btn btn-success btn-block"> <i class="fa fa-save"></i> Guardar</button>
@@ -217,6 +204,7 @@
    
 </form>
 <script src="{{ asset('js/autocomplete-calc.js')}}"></script>
+
 <script>
     $(document).ready(function() {
 

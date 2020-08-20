@@ -8,7 +8,7 @@ function calcularKmTotales() {
 }
 
 function calcularGananciaCamionero() {
-  var valorViaje = $("#valorViaje").val();
+  var valorViaje = $("#valorViaje").val() - $("#comision").val();
   $("#gananciaCamionero").val(Math.floor((18*valorViaje)/100));
 }
 
@@ -29,10 +29,9 @@ $(document).ready(function() {
 
   $("#km_inicial").change(calcularKmTotales);
   $("#km_final").change(calcularKmTotales);
-  $("#valorViaje").change(calcularGananciaCamionero);
   $("#cantidad").change(calcularValor);
   $("#precio").change(calcularValor);
-
-
+  $("#valorViaje").change(calcularGananciaCamionero);
+  $("#comision").change(calcularGananciaCamionero);
 
 });

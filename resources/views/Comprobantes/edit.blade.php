@@ -17,9 +17,10 @@
     </div>
     <div class="col margin-tb">
         <div class="pull-left">
-            <h2>Editar Comprobante</h2>
+            <h2>Editar Comprobante {{$comprobante[0]->id_simple_comprobante}}</h2>
         </div>
-        <a href="#" id="imprimirDiv" class="btn btn-danger float-right no-print"> <i class="fa fa-print"></i> Imprimir Recibo</a>
+
+        <a href="#" id="imprimirDiv" class="{{ $comprobante[0]->tipo ==  'adelanto' ? '' : 'd-none'  }} btn btn-danger float-right no-print"> <i class="fa fa-print"></i> Imprimir Recibo</a>
     </div>
 </div>
 <hr class="no-print">
@@ -59,14 +60,14 @@
                 <input type="date" class="form-control" name="fecha" placeholder="" value="{{$comprobante[0]->fecha}}" required>
             </div>
         </div>
-        <div class="col-sm-12 col-md-4">
+        <div class="col-sm-12 col-md-3">
             <div class="form-group">
-                <strong>Camionero:</strong>
+                <strong>Chofer:</strong>
                 <input type="hidden" id="camionero" name="camionero" value="{{$comprobante[0]->id_camioneros}}">
                 <input type="text" id="camioneroAutocomplete" class="form-control" value="{{$comprobante[0]->apellido.' '.$comprobante[0]->nombre}}" name="camioneroVista" placeholder="Ingrese Apellido" required>
             </div>
         </div>
-        <div class="col-sm-12 col-md-4">
+        <div class="col-sm-12 col-md-3">
             <div class="form-group">
                 <strong>Tipo:</strong>
                 <select class="form-control" name="tipo" id="tipo">
@@ -76,14 +77,25 @@
                 <!-- <input type="text" class="form-control" name="tipo" placeholder=""> -->
             </div>
         </div>
-        <div class="col-sm-12 col-md-4">
+        <div class="col-md-3">
+            <div class="form-group">
+                <strong id="lblGasoil" class="{{ $comprobante[0]->tipo=='combustible' ? '' : 'd-none' }}">Lts Gasoil:</strong>
+                <strong id="lblMedioPago" class="{{ $comprobante[0]->tipo=='combustible' ? 'd-none' : '' }}">Medio de pago:</strong>
+                <input type="number" id="inputGasoil" name="ltsgasoil" class="form-control {{ $comprobante[0]->tipo=='combustible' ? '' : 'd-none' }}" placeholder="0" value="{{$comprobante[0]->ltsgasoil}}" required>
+                <select class="form-control {{ $comprobante[0]->tipo=='combustible' ? 'd-none' : '' }}" name="medioPago" id="selectMedioPago">
+                    <option value="Efectivo" {{ old('tipo',$comprobante[0]->medioPago)=='Efectivo' ? 'selected' : ''  }}>Efectivo</option>
+                    <option value="Transferencia" {{ old('tipo',$comprobante[0]->medioPago)=='Transferencia' ? 'selected' : ''  }}>Transferencia</option>
+                </select>
+            </div>
+        </div>
+        <div class="col-sm-12 col-md-3">
             <div class="form-group">
                 <strong>Monto:</strong>
                 <div class="input-group mb-3">
                     <div class="input-group-prepend">
                         <span class="input-group-text" id="basic-addon1">$</span>
                     </div>
-                    <input type="float" name="monto" class="form-control" placeholder="00.00" value="{{$comprobante[0]->monto}}" required>
+                    <input type="float" name="monto" class="form-control" placeholder="0" value="{{$comprobante[0]->monto}}" required>
                 </div>
             </div>
         </div>
@@ -107,6 +119,12 @@
         $('#imprimirDiv').click(function(){
             window.print();
         });
+
+        $(document).on('change','#tipo',function(){
+            $("#lblGasoil,#inputGasoil").toggleClass("d-none");
+            $("#lblMedioPago,#selectMedioPago").toggleClass("d-none");
+        });
+
         //Autocompletado para camiones
         $("#viajeAutocomplete").autocomplete({
             source: function(request, response) {
@@ -204,10 +222,35 @@
 
 <div class="card mt-3 solo-imprimible">
     <div class="card-header">
-        Recibo de adelanto de sueldo
+        <h5> Transporte y logistica M.Fanucchi SA</h5>
+        <div class="row">
+            <div class="col-sm-9 ml-3">
+                <p>
+                    Pedro Ugarte 74 - 2700 Pergamino<br>
+                    IVA Responsable Inscripto <br>
+                    CUIT: 30-71596758-4 <br>
+                    CUIT: 20-27121501-1                     
+                </p>
+            </div>
+            <div class="col">
+                <p>
+                    Comprobante: {{$comprobante[0]->id_simple_comprobante}} <br>
+                    Fecha: {{ date("d/m/Y", strtotime(date("Y/m/d"))) }}
+                </p>
+            </div>
+        </div>
     </div>
     <div class="card-body">
-        En el dia {{ date("d/m/Y", strtotime($comprobante[0]->fecha)) }} se deja constancia que {{ $comprobante[0]->apellido.' '.$comprobante[0]->nombre}} documento {{ $comprobante[0]->dni }} recibió ${{$comprobante[0]->monto}} en concepto de adelanto.
+        El dia {{ date("d/m/Y", strtotime($comprobante[0]->fecha)) }} el chofer
+        {{ $comprobante[0]->apellido.' '.$comprobante[0]->nombre}} 
+        con cuil {{ $comprobante[0]->dni }} recibió ${{$comprobante[0]->monto}} en concepto de 
+        adelanto. 
+        Forma de pago 
+        {{$comprobante[0]->medioPago==='Transferencia' ? 
+            $comprobante[0]->medioPago." depositado en la cuenta ".$comprobante[0]->cbu : 'Efectivo'}}  <!--  pagado en <strong>Agregar medio de pago, efectivo o transferencia</strong> -->
+        <br>
+        <br>
+        <cite>{{$comprobante[0]->detalles}}</cite>
     </div>
     <div class="row m-3">
         <div class="col"></div>

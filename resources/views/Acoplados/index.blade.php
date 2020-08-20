@@ -3,6 +3,19 @@
 
 @section('content')
 
+<style>
+    .casillaRoja::after{
+        content: " ☹";
+        color: red;
+        font-weight: bold;
+    }
+    .casillaAmarilla::after{
+        content: " ⚠";
+        color: yellowgreen;
+        font-weight: bold;
+    }
+</style>
+
 <div class="container">
     <div class="row">
         <div class="col-md-6 margin-tb">
@@ -37,10 +50,11 @@
             <tr>
                 <td>{{ $acoplado->id_simple_acoplado }}</td>
                 <td>{{ $acoplado->patente }}</td>
-                <td>{{ $acoplado->vtv_vencimiento }}</td>
-                <td>{{ $acoplado->senasa_vencimiento }}</td>
-                <td>{{ $acoplado->seguro_vencimiento }}</td>
-                <td>{{ $acoplado->ruta_vencimiento }}</td>
+                <!-- El calculo del vencimiento lo hace en utilities.js -->
+                <td class="fechaConVto">{{ date("d/m/Y", strtotime($acoplado->vtv_vencimiento)) }}</td>
+                <td class="fechaConVto">{{ date("d/m/Y", strtotime($acoplado->senasa_vencimiento)) }}</td>
+                <td class="fechaConVto">{{ date("d/m/Y", strtotime($acoplado->seguro_vencimiento)) }}</td>
+                <td class="fechaConVto">{{ date("d/m/Y", strtotime($acoplado->ruta_vencimiento)) }}</td>
                 <td>
                     <form id="formBorrar{{$acoplado->id}}" action="{{ route('acoplados.destroy',$acoplado->id) }}" method="POST">
                         <a class="btn btn-primary" href="{{ route('acoplados.edit',$acoplado->id) }}"><i class="fa fa-edit"></i> Editar</a>
@@ -62,5 +76,4 @@
 
 @include('Modal.confirmacionBorrado')
 <script src="{{ asset('js/utilities.js')}}"></script>
-
 @endsection

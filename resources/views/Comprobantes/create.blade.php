@@ -8,7 +8,7 @@
     </div>
     <div class="col margin-tb">
         <div class="pull-left">
-            <h2>Agregar nuevo comprobante</h2>
+            <h2>Agregar Nuevo Comprobante</h2>
         </div>
     </div>
 </div>
@@ -46,15 +46,15 @@
                 @endif
             </div>
         </div>
-        <div class="col-sm-12 col-md-4 lg-4">
+        <div class="col-sm-12 col-md-4">
             <div class="form-group">
                 <strong>Fecha:</strong>
                 <input type="date" class="form-control" name="fecha" placeholder="" required>
             </div>
         </div>
-        <div class="col-sm-12 col-md-4 lg-4">
+        <div class="col-sm-12 col-md-3">
             <div class="form-group">
-                <strong>Camionero:</strong>
+                <strong>Chofer:</strong>
                 @if( ! empty($camioneroFinal[0]))   {{-- Con esto comprobamos cuando viene con un camionero, entonces cargamos los datos del camionero. --}}
                     <input type="hidden" id="camionero" name="camionero" value="{{$camioneroFinal[0]->id}}">
                     <input type="text" id="camioneroAutocomplete" value="{{$camioneroFinal[0]->apellido.' '.$camioneroFinal[0]->nombre}}" class="form-control" name="camioneroVista" placeholder="Ingrese Apellido"  required>
@@ -65,7 +65,7 @@
             </div>
         </div>
 
-        <div class="col-sm-12 col-md-4">
+        <div class="col-sm-12 col-md-3">
             <div class="form-group">
                 <strong>Tipo:</strong>
                 <select class="form-control" name="tipo" id="tipo">
@@ -74,14 +74,25 @@
                 </select>
             </div>
         </div>
-        <div class="col-sm-12 col-md-4">
+        <div class="col-md-3">
+            <div class="form-group">
+                <strong id="lblGasoil">Lts Gasoil:</strong>
+                <strong id="lblMedioPago" class="d-none">Medio de pago:</strong>
+                <input type="number" id="inputGasoil" name="ltsgasoil" class="form-control" placeholder="0" value="0" required>
+                <select class="form-control d-none" name="medioPago" id="selectMedioPago">
+                    <option value="Efectivo">Efectivo</option>
+                    <option value="Transferencia">Transferencia</option>
+                </select>
+            </div>
+        </div>
+        <div class="col-sm-12 col-md-3">
             <div class="form-group">
                 <strong>Monto:</strong>
                 <div class="input-group mb-3">
                     <div class="input-group-prepend">
                         <span class="input-group-text" id="basic-addon1">$</span>
                     </div>
-                    <input type="float" name="monto" class="form-control" placeholder="00.00"  required>
+                    <input type="number" name="monto" class="form-control" placeholder="0"  required>
                 </div>
             </div>
         </div>
@@ -105,6 +116,13 @@
 <script type="text/javascript">
         
         $(document).ready(function() {
+
+            $(document).on('change','#tipo',function(){
+                $("#lblGasoil,#inputGasoil").toggleClass("d-none");
+                $("#lblMedioPago,#selectMedioPago").toggleClass("d-none");
+            });
+
+
             //Autocompletado para camiones
             $( "#viajeAutocomplete" ).autocomplete({
                 source: function(request, response) {

@@ -35,10 +35,11 @@
                 <tr>
                     <td>{{ $camion->id_simple_camiones }}</td>
                     <td>{{ $camion->patente }}</td>
-                    <td>{{ $camion->vtv_vencimiento }}</td>
-                    <td>{{ $camion->senasa_vencimiento }}</td>
-                    <td>{{ $camion->seguro_vencimiento }}</td>
-                    <td>{{ $camion->ruta_vencimiento }}</td>
+                    <!-- El calculo del vencimiento lo hace en utilities.js -->
+                    <td class="fechaConVto">{{ date("d/m/Y", strtotime($camion->vtv_vencimiento)) }}</td>
+                    <td class="fechaConVto">{{ date("d/m/Y", strtotime($camion->senasa_vencimiento)) }}</td>
+                    <td class="fechaConVto">{{ date("d/m/Y", strtotime($camion->seguro_vencimiento)) }}</td>
+                    <td class="fechaConVto">{{ date("d/m/Y", strtotime($camion->ruta_vencimiento)) }}</td>
                     <td>
                         <form id="formBorrar{{$camion->id}}" action="{{ route('camiones.destroy',$camion->id) }}" method="POST">
                             <a class="btn btn-primary" href="{{ route('camiones.edit',$camion->id) }}"><i class="fa fa-edit"></i> Editar</a>

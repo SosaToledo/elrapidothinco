@@ -28,6 +28,7 @@
                 <th>CODIGO</th>
                 <th>Viaje</th>
                 <th>Camionero</th>
+                <th>Fecha</th>
                 <th>Tipo</th>
                 <th>Monto</th>
                 <th width="280px">Acciones</th>
@@ -38,6 +39,7 @@
                     <td>{{ isset($comprobante->idSimpleViaje) ? $comprobante->idSimpleViaje : '-' }}</td>
                     
                     <td>{{ ucfirst($comprobante->apellido).' '.ucfirst($comprobante->nombre) }}</td>
+                    <td>{{ date("d/m/Y", strtotime($comprobante->fecha)) }}</td>
                     <td>{{ ucfirst($comprobante->tipo) }}</td>
                     <td>${{ $comprobante->monto }}</td>
                     <td>

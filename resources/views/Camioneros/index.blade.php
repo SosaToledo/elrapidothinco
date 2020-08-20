@@ -5,7 +5,7 @@
 @section('content')
 <div class="row">
         <div class="col-md-6 margin-tb">
-            <h2>Camioneros.</h2>
+            <h2>Choferes.</h2>
         </div>
         <div class="col-md-6">
             <a class="btn btn-success float-right" href="{{ route('camioneros.create') }}"> <i class="fa fa-plus"></i> Nuevo Camionero</a>
