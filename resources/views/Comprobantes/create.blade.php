@@ -25,7 +25,7 @@
     </div>
 @endif
    
-<form action="{{ route('comprobantes.store') }}" method="POST">
+<form id="formularioConLoading" action="{{ route('comprobantes.store') }}" method="POST">
     @csrf
      <div class="row">
         <div class="col-sm-12 col-md-4">
@@ -217,5 +217,5 @@
             
         });
 </script>
-
+<script src="{{ asset('js/utilities.js')}}"></script>
 @endsection

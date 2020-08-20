@@ -24,7 +24,7 @@
     @endif
   
 
-    <form action="{{ route('camiones.update',$camion->id) }}" method="POST">
+    <form id="formularioConLoading" action="{{ route('camiones.update',$camion->id) }}" method="POST">
         @csrf
         @method('PUT')
    

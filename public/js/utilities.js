@@ -33,6 +33,12 @@ $(document).on("click", ".submitBtn", function () {
     $("#modalHeader").text("Borrado de elemento " + idSimple);
 });
 
+$('#formularioConLoading').submit(function() {
+    /* $('#gif').css('visibility', 'visible'); */
+    console.log($(this));
+    $(this).find(':submit').prop('disabled',true);
+});
+
 $(document).ready(function() {
     // show the alert
     setTimeout(function() {

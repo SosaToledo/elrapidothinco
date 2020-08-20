@@ -32,7 +32,7 @@
     }
 </style>
 
-<form action="{{ route('viajes.update', $viaje[0]->id) }}" method="POST">
+<form id="formularioConLoading" action="{{ route('viajes.update', $viaje[0]->id) }}" method="POST">
     @csrf
     @method('PUT')
      <div class="row">
@@ -239,6 +239,7 @@
     </div>
 @endif
 
+<script src="{{ asset('js/utilities.js')}}"></script>
 <script src="{{ asset('js/autocomplete-calc.js')}}"></script>
 <script type="text/javascript">
         

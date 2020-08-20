@@ -36,7 +36,7 @@
 </div>
 @endif
 
-<form action="{{ route('comprobantes.update', $comprobante[0]->id) }}" class="no-print" method="POST">
+<form id="formularioConLoading" action="{{ route('comprobantes.update', $comprobante[0]->id) }}" class="no-print" method="POST">
     @csrf
     @method('PUT')
     <div class="row">
@@ -261,5 +261,6 @@
         </div>
     </div>    
 </div>
+<script src="{{ asset('js/utilities.js')}}"></script>
 
 @endsection

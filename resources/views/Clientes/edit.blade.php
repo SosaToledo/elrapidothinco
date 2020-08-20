@@ -25,7 +25,7 @@
     </div>
 @endif
    
-<form action="{{ route('clientes.update', $cliente->id) }}" method="POST">
+<form id="formularioConLoading" action="{{ route('clientes.update', $cliente->id) }}" method="POST">
     @csrf
     @method('PUT')
      <div class="row">
@@ -72,4 +72,8 @@
     </div>
    
 </form>
+
+<script src="{{ asset('js/utilities.js')}}"></script>
+
+
 @endsection

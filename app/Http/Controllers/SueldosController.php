@@ -38,9 +38,10 @@ class SueldosController extends Controller
         ->get();
 
         $detalles_adelanto = DB::table('comprobantes')
-        ->select('comprobantes.fecha','comprobantes.id_simple_comprobante', 'comprobantes.monto','comprobantes.id' ,'comprobantes.id_viaje','comprobantes.detalles','viajes.idSimpleViaje')
+        ->select('comprobantes.fecha','comprobantes.id_simple_comprobante', 'comprobantes.monto','comprobantes.id' ,'comprobantes.id_viaje','comprobantes.detalles','viajes.idSimpleViaje','comprobantes.id_camioneros')
         ->leftjoin('viajes','comprobantes.id_viaje','=','viajes.id')
         ->where('tipo', 'adelanto')
+        ->where('comprobantes.id_camioneros','=',$request->camionero)
         ->whereBetween('comprobantes.fecha', [$request->fecha_inicio, $request->fecha_fin])
         ->orderBy('comprobantes.id_simple_comprobante')
         ->get();

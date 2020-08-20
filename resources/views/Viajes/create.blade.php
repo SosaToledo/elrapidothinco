@@ -33,7 +33,7 @@
     }
 </style>
 
-<form action="{{ route('viajes.store') }}" method="POST">
+<form id="formularioConLoading" action="{{ route('viajes.store') }}" method="POST">
     @csrf
     
     <div class="row">
@@ -197,12 +197,13 @@
         </div>
         <div class="col-sm-12 col-md-12 lg-12">
             <div class="text-center">
-                <button type="submit" class="btn btn-success btn-block"> <i class="fa fa-save"></i> Guardar</button>
+                <button type="sumbit" class="triggerLoadingScreen btn btn-success btn-block"> <i class="fa fa-save"></i> Guardar</button>
             </div>
         </div>
     </div>
    
 </form>
+<script src="{{ asset('js/utilities.js')}}"></script>
 <script src="{{ asset('js/autocomplete-calc.js')}}"></script>
 
 <script>

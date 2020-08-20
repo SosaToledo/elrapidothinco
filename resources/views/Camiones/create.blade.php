@@ -24,7 +24,7 @@
     </div>
 @endif
    
-<form action="{{ route('camiones.store') }}" method="POST">
+<form id="formularioConLoading" action="{{ route('camiones.store') }}" method="POST">
     @csrf
     <div class="row">
         <div class="col-sm-12 col-md-6 lg-3">

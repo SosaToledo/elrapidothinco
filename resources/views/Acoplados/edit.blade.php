@@ -25,7 +25,7 @@
         </div>
         @endif
         
-        <form action="{{ route('acoplados.update',$acoplado->id) }}" method="POST">
+        <form id="formularioConLoading" action="{{ route('acoplados.update',$acoplado->id) }}" method="POST">
             @csrf
             @method('PUT')
    
@@ -73,4 +73,7 @@
             </div>
         </div>
     </form>
+
+<script src="{{ asset('js/utilities.js')}}"></script>
+
 @endsection

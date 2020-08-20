@@ -25,7 +25,7 @@
 </div>
 @endif
 
-<form action="{{ route('clientes.store') }}" method="POST">
+<form id="formularioConLoading" action="{{ route('clientes.store') }}" method="POST">
     @csrf
     <div class="row">
         <div class="col-sm-12 col-md-6 lg-3">
@@ -71,4 +71,7 @@
     </div>
 
 </form>
+
+<script src="{{ asset('js/utilities.js')}}"></script>
+
 @endsection
