@@ -47,7 +47,7 @@
             <div class="form-group">
                 <strong>Camión:</strong>
                 <input type="hidden" id="camion" name="camion" value="{{$viaje[0]->id_camiones}}">
-                <input type="text" id="camionAutocomplete" maxlength="7" value="{{$viaje[0]->id_simple_camiones}}" name="camionVista" class="form-control" placeholder="Ingresar la patente" required>
+                <input type="text" id="camionAutocomplete" maxlength="7" value="{{$viaje[0]->patente}}" name="camionVista" class="form-control" placeholder="Ingresar la patente" autofocus required>
          
             </div>
         </div>
@@ -55,7 +55,7 @@
             <div class="form-group">
                 <strong>Acoplado:</strong>
                 <input type="hidden" id="acoplado" name="acoplado" value="{{$viaje[0]->id_acoplado}}">
-                <input type="text" id="acopladoAutocomplete" value="{{$viaje[0]->id_simple_acoplado}}" class="form-control" name="acopladoVista" placeholder="Ingresar patente" >
+                <input type="text" id="acopladoAutocomplete" value="{{$viaje[0]->patenteAcoplado}}" class="form-control" name="acopladoVista" placeholder="Ingresar patente" >
           
             </div>
         </div>

@@ -49,7 +49,11 @@
         <div class="col-sm-12 col-md-4">
             <div class="form-group">
                 <strong>Fecha:</strong>
-                <input type="date" class="form-control" name="fecha" placeholder="" required>
+                @if( ! empty($viajeFinal[0]))   {{-- Con esto comprobamos cuando viene con un viaje, entonces cargamos los datos del viaje. --}}
+                    <input type="date" class="form-control" name="fecha" placeholder="" value="{{$viajeFinal[0]->fecha}}" required>
+                @else
+                    <input type="date" class="form-control" name="fecha" placeholder="" required>
+                @endif
             </div>
         </div>
         <div class="col-sm-12 col-md-3">

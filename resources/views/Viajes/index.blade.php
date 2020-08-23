@@ -45,7 +45,7 @@
                 <td>{{ $viaje->estados}}</td>
                 <td>
                     <form id="formBorrar{{$viaje->id}}" action="{{ route('viajes.destroy',$viaje->id) }}" method="POST">
-                        <a class="btn btn-info" href="{{ route('createWithData',['camionero'=>'new','viaje'=>$viaje->id]) }}"> <i class="fa fa-plus"></i> Comprobante</a>
+                        <a class="btn btn-info" href="{{ route('createWithData',['camionero'=>$viaje->camioneroId,'viaje'=>$viaje->id]) }}"> <i class="fa fa-plus"></i> Comprobante</a>
                         <a class="btn btn-primary" href="{{ route('viajes.edit',$viaje->id) }}"> <i class="fa fa-edit"></i> Editar</i></a>
                         @csrf
                         @method('DELETE')

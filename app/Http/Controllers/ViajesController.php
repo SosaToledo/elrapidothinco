@@ -20,7 +20,7 @@ class ViajesController extends Controller
     public function index()
     {
         $viajes = Viaje::orderby('idSimpleViaje','desc')
-                ->select('viajes.id','viajes.idSimpleViaje','viajes.fecha','clientes.nombre','camioneros.apellido','camioneros.nombre as nombreCamionero','camiones.id_simple_camiones', 'viajes.estados')
+                ->select('viajes.id','viajes.idSimpleViaje','viajes.fecha','clientes.nombre','camioneros.apellido','camioneros.nombre as nombreCamionero','camioneros.id as camioneroId','camiones.id_simple_camiones', 'viajes.estados')
                 ->leftjoin('clientes','viajes.id_cliente','=','clientes.id')
                 ->leftjoin('camioneros','viajes.id_camionero','=','camioneros.id')
                 ->leftjoin('camiones','viajes.id_camiones','=','camiones.id')
@@ -74,7 +74,7 @@ class ViajesController extends Controller
         $viaje->ganancia_camionero = $request->ganancia_camionero ?? 0;
         $viaje->tipoCamion = $request->tipoCamion;
         $viaje->fecha = $request->fecha;
-        $viaje->peajes = $request->peaje ?? 0;
+        $viaje->peajes = $request->peajes ?? 0;
         $viaje->gasoil_litros = $request->gasoil_litros ?? 0 ;
         $viaje->gasoil_precio = $request->gasoil_precio ?? 0;
         $viaje->notaViaje = $request->notaViaje ?? 0;
@@ -128,7 +128,7 @@ class ViajesController extends Controller
                                 'viajes.ganancia_camionero','viajes.tipoCamion','viajes.fecha',
                                 'viajes.peajes','viajes.gasoil_litros','viajes.gasoil_precio',
                                 'viajes.notaViaje','viajes.guia', 'viajes.destino',
-                                'acoplado.id_simple_acoplado','camiones.id_simple_camiones',
+                                'acoplado.patente as patenteAcoplado','camiones.patente',
                                 'camioneros.apellido','camioneros.nombre','clientes.nombre as clienteNombre', 
                                 'viajes.estados')
                         ->join('camioneros','viajes.id_camionero','camioneros.id')
