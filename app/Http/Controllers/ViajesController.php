@@ -55,7 +55,7 @@ class ViajesController extends Controller
     public function store(Request $request)
     {
         $viaje = new Viaje;
-        $viaje->idSimpleViaje = $request->idSimpleViajes;
+        $viaje->idSimpleViaje = 'VJ'.FuncionesComunes::rellenarNum('viajes');
         $viaje->id_camiones = $request->camion;
         $viaje->id_acoplado = $request->acoplado;
         $viaje->id_camionero = $request->camionero;
@@ -96,7 +96,7 @@ class ViajesController extends Controller
         $viaje->save(['timestamps' => false]);
 
         return redirect()->route('viajes.index')
-                        ->with('success','viaje ingresado correctamente.');
+                        ->with('success','Viaje '.$viaje->idSimpleViaje.' ingresado correctamente.');
     }
 
     /**

@@ -73,7 +73,7 @@
 <body>
     <div id="app">
         <nav class="navbar navbar-expand-md navbar-light bg-white shadow-sm">
-            <a class="navbar-brand" href="{{ url('/home') }}">
+            <a class="navbar-brand" href="{{ url('/') }}">
                 <strong> <i class="fa fa-truck"></i> TF</strong>
             </a>
             <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="{{ __('Toggle navigation') }}">
@@ -92,11 +92,21 @@
                     <li class="{{ (request()->is('camioneros*')) ? 'active' : '' }} nav-item"><a class="nav-link" href="{{route('camioneros.index')}}">Choferes</a></li>
                     <li class="{{ (request()->is('comprobantes*')) ? 'active' : '' }} nav-item"><a class="nav-link" href="{{route('comprobantes.index')}}">Comprobantes</a></li>
                     <li class="{{ (request()->is('sueldos*')) ? 'active' : '' }} nav-item"><a class="nav-link" href="{{route('sueldos.index')}}">Liquidación de sueldos</a></li>
+                    <!-- <li class="{{ (request()->is('informes*')) ? 'active' : '' }} nav-item"><a class="nav-link" href="{{route('informes.ventas')}}">Informes</a></li> -->
+                    <li class="nav-item dropdown {{ (request()->is('informes*')) ? 'active' : '' }} ">
+                        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        Informes
+                        </a>
+                        <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                        <a class="dropdown-item" href="{{route('informes.ventas')}}" >Ventas</a>
+                            <!-- <a class="dropdown-item" href="#"></a>
+                            <div class="dropdown-divider"></div>
+                            <a class="dropdown-item" href="#">Something else here</a> -->
+                        </div>
+                    </li>
                 </ul>
                 @endguest
-                <!-- Right Side Of Navbar -->
                 <ul class="navbar-nav ml-auto">
-                    <!-- Authentication Links -->
                     @guest
                     <li class="nav-item">
                         <a class="nav-link" href="{{ route('login') }}">{{ __('Ingresar') }}</a>
