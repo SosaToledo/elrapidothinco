@@ -44,7 +44,7 @@ class AcopladoController extends Controller
     {
    
         $acoplado = new Acoplado;
-        $acoplado->id_simple_acoplado = $request->id_simple;
+        $acoplado->id_simple_acoplado = 'AC'.FuncionesComunes::rellenarNum('acoplado');
         $acoplado->patente = $request->patente;
         $acoplado->vtv_vencimiento = $request->vtv_vencimiento;
         $acoplado->senasa_vencimiento = $request->senasa_vencimiento;

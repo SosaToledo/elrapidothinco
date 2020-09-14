@@ -45,7 +45,8 @@ class CamionesController extends Controller
     public function store(Request $request)
     {  
         $camion = new Camion;
-        $camion->id_simple_camiones = $request->idSimple;
+        /* $camion->id_simple_camiones = $request->idSimple; */
+        $camion->id_simple_camiones = 'CA'.FuncionesComunes::rellenarNum('camiones');
         $camion->patente = $request->patente;
         $camion->vtv_vencimiento = $request->vtv_vencimiento;
         $camion->senasa_vencimiento = $request->senasa_vencimiento;

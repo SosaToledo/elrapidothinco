@@ -70,7 +70,8 @@ class ComprobantesController extends Controller
     {
 
         $comprobante = new Comprobante;
-        $comprobante->id_simple_comprobante = $request->id_simple;
+        /* $comprobante->id_simple_comprobante = $request->id_simple; */
+        $comprobante->id_simple_comprobante = 'CP'.FuncionesComunes::rellenarNum('comprobantes');
         $comprobante->fecha = $request->fecha;
         $comprobante->id_viaje = $request->viaje;
         $comprobante->id_camioneros = $request->camionero;

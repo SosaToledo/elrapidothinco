@@ -52,12 +52,9 @@ class ClientesController extends Controller
             'telefono' => 'required',
         ]);
 
-        $id=DB::select("SHOW TABLE STATUS LIKE 'clientes'");
-        $next_id=$id[0]->Auto_increment;
-
         $cliente = new Cliente;
 
-        $cliente->id_simple_clientes = $request->idSimple;
+        $cliente->id_simple_clientes = 'CL'.FuncionesComunes::rellenarNum('clientes');
         $cliente->cuil = $request->cuil;
         $cliente->nombre = $request->nombre;
         $cliente->direccion = $request->direccion;

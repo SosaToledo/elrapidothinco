@@ -80,13 +80,16 @@
         </div>
         <div class="col-md-3">
             <div class="form-group">
-                <strong id="lblGasoil">Lts Gasoil:</strong>
-                <strong id="lblMedioPago" class="d-none">Medio de pago:</strong>
-                <input type="number" id="inputGasoil" name="ltsgasoil" class="form-control" placeholder="0" value="0" required>
-                <select class="form-control d-none" name="medioPago" id="selectMedioPago">
+                <!-- Opcion 1 -->
+                <strong id="lblGasoil" class="{{ isset($camioneroFinal[0]) ? 'd-none' : ''  }}">Lts Gasoil:</strong>
+                <input type="number" id="inputGasoil" name="ltsgasoil" class="form-control {{ isset($camioneroFinal[0]) ? 'd-none' : ''  }}" placeholder="0" value="0" required>
+                <!-- Opcion 2 -->
+                <strong id="lblMedioPago" class="{{ isset($camioneroFinal[0]) ? ' ' : 'd-none'  }} ">Medio de pago:</strong>
+                <select class="form-control {{ isset($camioneroFinal[0]) ? ' ' : 'd-none'  }}" name="medioPago" id="selectMedioPago">
                     <option value="Efectivo">Efectivo</option>
                     <option value="Transferencia">Transferencia</option>
                 </select>
+                <!--  -->
             </div>
         </div>
         <div class="col-sm-12 col-md-3">

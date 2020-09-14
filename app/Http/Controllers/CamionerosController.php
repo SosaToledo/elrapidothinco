@@ -47,7 +47,8 @@ class camionerosController extends Controller
         $camionero = new Camionero;
         
         $camionero->telefono = $request->telefono;
-        $camionero->id_simple_camioneros = $request->id_simple;
+        /* $camionero->id_simple_camioneros = $request->id_simple; */
+        $camionero->id_simple_camioneros = 'CM'.FuncionesComunes::rellenarNum('camioneros');
         $camionero->nombre = $request->nombre;
         $camionero->apellido = $request->apellido;
         $camionero->direccion = $request->direccion;
