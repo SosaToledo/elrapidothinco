@@ -59,4 +59,26 @@ $(document).ready(function() {
         
         $("ol").append("<li>append item</li>");
     });
+
+    $('#tableIndex').DataTable({
+        "info":false,
+        "lengthChange": false,
+        /* "sDom": 'lrtip', */
+        "order": [ 0, "desc" ],
+        "oLanguage": {
+          "sSearch": "Buscar:"
+        },
+        "language": {
+            "zeroRecords": "Sin resultados para esta busqueda",
+            "infoEmpty": "Sin registros disponibles",
+            "paginate": {
+            "previous": "Anterior",
+            "next":"Siguiente"
+            }
+        }
+    });
 });
+
+$('#SearchText').keyup(function(){
+    $('#tableIndex').DataTable().search($(this).val()).draw() ;
+})

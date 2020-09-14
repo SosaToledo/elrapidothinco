@@ -11,10 +11,18 @@
 
 <div class="">
     <div class="row">
-        <div class="col-md-6 margin-tb">
+        <div class="col-md-7 margin-tb">
             <h2>Viajes.</h2>
         </div>
-        <div class="col-md-6">
+        <div class="col-md-3">
+            <div class="input-group mb-3">
+                <div class="input-group-prepend">
+                    <span class="input-group-text" id="basic-addon1"> <i class="fa fa-search"></i></span>
+                </div>
+                <input type="search" id="SearchText" class="form-control float-right" placeholder="Buscar en la tabla">
+            </div>
+        </div>
+        <div class="col-md-2">
             <a class="btn btn-success float-right" href="{{ route('viajes.create') }}"> <i class="fa fa-plus"></i> Nuevo Viaje</a>
         </div>
     </div>
@@ -30,7 +38,7 @@
     @else
 
     <div class="table-responsive mt-3">
-        <table id="tableIndex"  class="table-hover table-striped">
+        <table id="tableIndex"  class="table table-hover table-striped">
                 <thead>
                     <tr class="">
                         <th>CODIGO</th>
@@ -68,16 +76,9 @@
     @endif
 </div>
 
+{{-- Style del boton search en el php del modal --}}
 @include('Modal.confirmacionBorrado')
+{{-- Inicio de la tabla en utilities.js --}}
 <script src="{{ asset('js/utilities.js')}}"></script>
-
-<script>
-    $(document).ready(function() {
-    $('#tableIndex').DataTable({
-        "order": [ 0, "desc" ],
-        "info":false
-    });
-} );
-</script>
 
 @endsection

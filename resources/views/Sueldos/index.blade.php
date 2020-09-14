@@ -1,6 +1,13 @@
 @extends('layouts.app')
 @section('title', 'Liquidación de sueldos')
 
+
+@section('styles')
+<script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.10.21/js/jquery.dataTables.js"></script>
+<link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.21/css/jquery.dataTables.css">
+@stop
+
+
 @section('content')
 
 <link href="{{ asset('css/style.css') }}" rel="stylesheet" type="text/css">
@@ -70,7 +77,7 @@
     </div>
     <br>
     <h4><i class="fa fa-bus"></i> Viajes</h4>
-    <table class="table table-hover">
+    <table class="table tablaDatatable table-hover">
       <thead class="thead-light">
         <tr>
           <th style="width: 150px">Fecha</th>
@@ -81,20 +88,22 @@
           <th style="width: 50px;">Detalle</th>
         </tr>
       </thead>
-      @foreach($detalles_sueldo as $viajes)
-        <tr>
-          <td>{{ date("d/m/Y", strtotime($viajes->fecha)) }}</td>
-          <td>{{$viajes->idSimpleViaje}}</td>
-          <td>{{$viajes->guia}}</td>
-          <td>${{$viajes->ganancia_camionero}}</td>
-          <td>${{$viajes->peajes}}</td>
-          <td><a href="{{ route('viajes.edit',$viajes->id) }}" class="btn btn-primary"><i class="fa fa-eye"></i></a></td>
-            @php
-              $sueldos = $sueldos + $viajes->ganancia_camionero;
-              $viaticos = $viaticos + $viajes->peajes;
-            @endphp
-        </tr>
-      @endforeach
+      <tbody>
+        @foreach($detalles_sueldo as $viajes)
+          <tr>
+            <td>{{ date("d/m/Y", strtotime($viajes->fecha)) }}</td>
+            <td>{{$viajes->idSimpleViaje}}</td>
+            <td>{{$viajes->guia}}</td>
+            <td>${{$viajes->ganancia_camionero}}</td>
+            <td>${{$viajes->peajes}}</td>
+            <td><a href="{{ route('viajes.edit',$viajes->id) }}" class="btn btn-primary"><i class="fa fa-eye"></i></a></td>
+              @php
+                $sueldos = $sueldos + $viajes->ganancia_camionero;
+                $viaticos = $viaticos + $viajes->peajes;
+              @endphp
+          </tr>
+        @endforeach
+      </tbody>
     </table>
   </div>
 
@@ -109,7 +118,7 @@
     @else
     <div id="adelantos" class="table-responsive mt-3">
     <h4><i class="fa fa-money"></i> Adelantos</h4>
-    <table class="table table-hover">
+    <table class="table tablaDatatable table-hover">
       <thead class="thead-light">
         <tr>
           <th style="width: 80px;">Fecha</th>
@@ -120,23 +129,23 @@
           <th style="width: 50px;"></th>
         </tr>
       </thead>
-  
-      @foreach($detalles_adelanto as $adelanto)
-        <tr>
-          <td>{{ date("d/m/Y", strtotime($adelanto->fecha)) }}</td>
-          <td>{{$adelanto->id_simple_comprobante}}</td>
-          <td>{{ isset($adelanto->idSimpleViaje) ? $adelanto->idSimpleViaje : '-' }}</td>
-          <td>${{$adelanto->monto}}</td>
-          <td>
-            {{ $adelanto->detalles==="" ? '-' : \Illuminate\Support\Str::limit($adelanto->detalles, 150, $end='...') }}
-          </td>
-          <td><a href="{{ route('comprobantes.edit',$adelanto->id) }}" class="btn btn-primary"><i class="fa fa-eye"></i></a></td>
-          @php
-            $adelantos = $adelantos + $adelanto->monto
-          @endphp
-        </tr>
-      @endforeach
-
+      <tbody>
+        @foreach($detalles_adelanto as $adelanto)
+          <tr>
+            <td>{{ date("d/m/Y", strtotime($adelanto->fecha)) }}</td>
+            <td>{{$adelanto->id_simple_comprobante}}</td>
+            <td>{{ isset($adelanto->idSimpleViaje) ? $adelanto->idSimpleViaje : '-' }}</td>
+            <td>${{$adelanto->monto}}</td>
+            <td>
+              {{ $adelanto->detalles==="" ? '-' : \Illuminate\Support\Str::limit($adelanto->detalles, 150, $end='...') }}
+            </td>
+            <td><a href="{{ route('comprobantes.edit',$adelanto->id) }}" class="btn btn-primary"><i class="fa fa-eye"></i></a></td>
+            @php
+              $adelantos = $adelantos + $adelanto->monto
+            @endphp
+          </tr>
+        @endforeach
+      </tbody>
       </table>
     </div>
     @endif
@@ -176,7 +185,15 @@
       $('#imprimirDiv').click(function(){
         window.print();
       });
-
+      
+      $('.tablaDatatable').DataTable({
+        "info":false,
+        "bFilter":false,
+        "paging":false,
+        "pageLength": 40,
+        "lengthChange": false,
+        "order": [ 0, "desc" ]
+      });
     });
 </script>
 

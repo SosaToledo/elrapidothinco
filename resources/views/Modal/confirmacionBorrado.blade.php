@@ -1,4 +1,8 @@
 
+<style>
+    .dataTables_filter, .dataTables_info { display: none; }
+</style>
+
 <div class="modal fade" id="confirm-submit" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
     <div class="modal-dialog">
         <div class="modal-content">
