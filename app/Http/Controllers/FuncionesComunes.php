@@ -35,6 +35,26 @@ class FuncionesComunes
         }
     }
     
+    public static function pasarIdACodSimple($id){
+        $numero = $id;
+        if ($numero < 10000){
+            if($numero < 1000){
+                if ($numero < 100){
+                    if ($numero < 10) {
+                        return "0000".$numero;
+                    }else{
+                        return "000".$numero;
+                    }
+                }else{
+                    return "00".$numero;
+                }
+            }else{
+                return "0".$numero;
+            }
+        }else{
+            return $numero;
+        }
+    }
 }
 
 ?>
